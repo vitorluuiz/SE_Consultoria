@@ -1,0 +1,19 @@
+import '../assets/css/styles.css'
+import '../assets/css/headerFooter.css'
+
+import logo from '../assets/img/logos/pretaSimples.png'
+
+export default function Footer() {
+    return (
+        <footer className="flex alinhado">
+            <div className="apoio_footer__div container row alinhado espacado">
+                <span>Copyright SE consultoria de imóveis 2022</span>
+                <img id="logo_footer__img" src={logo} alt="Logo SE Consultoria de Imóveis"/>
+                <nav className="apoioCreditos__nav">
+                    <span>Desenvolvido por </span>
+                    <a className="pressionavel" id="creditos__a" href="https://github.com/Vitor3101">Vitor Luiz de Carvalho</a>
+                </nav>
+            </div>
+        </footer>
+    )
+}

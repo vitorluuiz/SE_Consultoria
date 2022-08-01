@@ -1,0 +1,129 @@
+.fundoLogin {
+    background-image: url('../img/bannerHome.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+}
+
+.bloco_Login__div {
+    height: 88%;
+    margin-top: 2vw;
+    background-color: white;
+    border-radius: 10px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+#logo_Login {
+    width: 35%;
+    max-width: 160px;
+    height: auto;
+}
+
+.form_Login {
+    width: 80%;
+}
+
+.form_Login label {
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.input_Form{
+    height: 7vh;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-size: 1.5vw;
+    padding-left: 1vw;
+}
+
+.bloco_Login__div a {
+    margin-bottom: 5px;
+    color: black;
+    margin-top: 40px;
+}
+
+.apoioForm_Login__div {
+    width: 100%;
+}
+
+#btnEntrar__Login {
+    width: 40%;
+    height: 5vw;
+    min-height: 70px;
+    align-items: center;
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    margin-top: 30px;
+}
+
+@media (max-width: 1500px) {
+    .bloco_Login__div {
+        width: 50%;
+        height: 90%;
+    }
+
+    .bloco_Login__div a {
+        font-size: large;
+    }
+}
+
+@media (max-width: 900px) {
+    .bloco_Login__div {
+        width: 80vw;
+        height: 90%;
+    }
+}
+
+@media (max-width: 600px) {
+    .bloco_Login__div {
+        width: 95vw;
+        height: 82vh;
+    }
+
+    .form_Login {
+        width: 90%;
+    }
+
+    .form_Login label {
+        font-size: large;
+    }
+
+    .form_Login input {
+        font-size: medium;
+    }
+
+    .bloco_Login__div a {
+        font-size: larger;
+    }
+}
+
+@media (max-height: 400px) {
+
+    #logo_Login {
+        max-width: 110px;
+    }
+
+    .bloco_Login__div {
+        height: 100vh;
+    }
+
+    .apoioForm_Login__div input {
+        height: 15vw;
+        padding-left: 13px;
+    }
+
+    .bloco_Login__div a {
+        display: none;
+    }
+
+    #btnEntrar__Login {
+        display: none;
+    }
+}

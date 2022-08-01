@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,600;1,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.pressionavel:hover {
+  transition: color ease-in-out 150ms;
+  color: #F46D21 !important;
+}
+
+.btnPressionavel{
+  background-color: #F46D21 !important;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.btnPressionavel:hover{
+  transition: all linear 150ms;
+  background-color: white !important;
+  color: #F46D21 !important;
+}
+
+body {
+  background-color: black;
+}
+
+a {
+  font-size: 1.4vw;
+  color: white;
+  text-decoration: unset;
+}
+
+p {
+  color: white;
+}
+
+.container {
+  width: 84.375%;
+  margin: 0 auto;
+}
+
+.containerBox{
+  width: 50%;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.espacado {
+  justify-content: space-between;
+}
+
+.centrado {
+  justify-content: center;
+}
+
+.alinhado {
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 800px){
+  .container{
+    width: 95vw;
+  }
+}

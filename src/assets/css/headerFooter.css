@@ -1,0 +1,131 @@
+header {
+    background-color: black;
+    height: 7.8vw;
+}
+
+.apoioHeader__div {
+    height: 100%;
+}
+
+.infosLeft__div {
+    height: 100%;
+    width: 20vw;
+}
+
+#logoPrincipal {
+    height: 100%;
+    width: auto;
+}
+
+.infosCenter__div {
+    height: 100%;
+    width: 17vw;
+}
+
+.infosCenter__div hr {
+    width: 3.2vw;
+    border: 1.5px solid white;
+    rotate: 90deg;
+}
+
+.infosRight__nav {
+    height: 100%;
+    width: 20vw;
+    padding-left: 2vw;
+}
+
+#botaoEntrar {
+    width: 8.8vw;
+    height: 40%;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+/* Footer */
+footer {
+    border-top: 3px solid white;
+    height: 15vh;
+}
+
+.apoio_footer__div {
+    height: 92%;
+}
+
+#logo_footer__img {
+    height: 100%;
+    width: auto;
+}
+
+.apoioCreditos__nav span {
+    font-size: 1.2vw;
+}
+
+#creditos__a {
+    font-size: 1.2vw;
+}
+
+@media (max-width: 800px) {
+    header {
+        height: 18vw;
+        max-height: 70px;
+    }
+
+    .contato__div {
+        display: none;
+    }
+
+    .infosLeft__div {
+        width: fit-content;
+    }
+
+    .infosCenter__nav {
+        width: 50%;
+        max-width: 150px;
+        margin: auto;
+    }
+
+    .infosCenter__nav a {
+        font-size: medium;
+    }
+
+    .infosCenter__nav hr {
+        display: none;
+    }
+
+    .infosRight__nav {
+        width: fit-content;
+    }
+
+    #botaoEntrar {
+        width: 20vw;
+        height: 65%;
+        font-size: medium;
+    }
+
+    #cadastrar {
+        display: none;
+    }
+
+    /* Footer */
+    footer {
+        height: 20vw;
+        max-height: 70px;
+        border-top: 1.5px solid white;
+    }
+
+    .apoio_footer__div {
+        flex-direction: row-reverse;
+        width: 70%;
+    }
+
+    .apoio_footer__div span {
+        text-align: center;
+        width: 50%;
+        font-size: 0.6em;
+    }
+
+    .apoioCreditos__nav {
+        display: none;
+    }
+}
