@@ -1,129 +1,233 @@
-.fundoLogin {
+.fundo_login {
     background-image: url('../img/bannerHome.png');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
     width: 100%;
 }
 
-.bloco_Login__div {
-    height: 88%;
-    margin-top: 2vw;
+.bloco_login__div {
+    height: 85vh;
+    margin: 7vh auto;
     background-color: white;
-    border-radius: 10px;
-    padding-bottom: 30px;
-    padding-top: 10px;
-    display: flex;
-    justify-content: space-around;
+    border-radius: 8px;
 }
 
-#logo_Login {
-    width: 35%;
-    max-width: 160px;
-    height: auto;
+#logo_login {
+    height: 35%;
+    width: auto;
 }
 
-.form_Login {
-    width: 80%;
+form#login {
+    height: 65%;
 }
 
-.form_Login label {
-    font-size: 26px;
+form#cadastro {
+    height: 100%;
+}
+
+.inputs_apoio {
+    width: 100%;
+    height: 58.94538606403014%;
+}
+
+.input label {
+    font-size: 1.2vw;
     font-weight: 400;
     margin-bottom: 5px;
 }
 
-.input_Form{
+.input input {
     height: 7vh;
-    border: 1px solid black;
-    border-radius: 10px;
+    border: 1px solid #464646;
+    color: #464646;
+    border-radius: 6px;
     margin-bottom: 15px;
-    font-size: 1.5vw;
+    font-size: 1.4vw;
     padding-left: 1vw;
 }
 
-.bloco_Login__div a {
-    margin-bottom: 5px;
+form#login a {
+    margin-bottom: 10px;
     color: black;
-    margin-top: 40px;
 }
 
-.apoioForm_Login__div {
-    width: 100%;
-}
-
-#btnEntrar__Login {
-    width: 40%;
-    height: 5vw;
-    min-height: 70px;
+#btnEntrar_login {
+    width: 45%;
+    height: 4vw;
+    min-height: 60px;
     align-items: center;
     color: white;
-    font-size: 32px;
+    font-size: 2.1em;
     font-weight: 600;
-    margin-top: 30px;
 }
 
-@media (max-width: 1500px) {
-    .bloco_Login__div {
-        width: 50%;
-        height: 90%;
+#btnEntrar_cadastro {
+    width: 60%;
+    height: 4vw;
+    min-height: 60px;
+    align-items: center;
+    color: white;
+    font-size: 2.8em;
+    font-weight: 600;
+}
+
+@media (max-width: 1600px) {
+    .bloco_login__div {
+        width: 65%;
     }
 
-    .bloco_Login__div a {
-        font-size: large;
+    .input label {
+        font-size: 2vw;
+    }
+
+    .input input {
+        font-size: 1.6vw;
+    }
+
+    #btnEntrar_cadastro {
+        min-height: 55px;
     }
 }
 
-@media (max-width: 900px) {
-    .bloco_Login__div {
-        width: 80vw;
-        height: 90%;
-    }
-}
-
-@media (max-width: 600px) {
-    .bloco_Login__div {
-        width: 95vw;
-        height: 82vh;
+@media (max-width: 750px) {
+    .bloco_login__div {
+        width: 95%;
+        height: 75vh;
     }
 
-    .form_Login {
+    #logo_login {
+        height: 30%;
+    }
+
+    form#login {
         width: 90%;
     }
 
-    .form_Login label {
-        font-size: large;
+    .input#login {
+        height: 50%;
     }
 
-    .form_Login input {
+    .input#login label {
         font-size: medium;
     }
 
-    .bloco_Login__div a {
+    .input#login input {
+        height: 70%;
+        padding-left: 10px;
         font-size: larger;
+    }
+
+    form#login a {
+        font-size: medium;
+        margin-top: 3vh;
+    }
+
+    #btnEntrar_login{
+        font-size: 1.5em;
     }
 }
 
 @media (max-height: 400px) {
 
-    #logo_Login {
-        max-width: 110px;
+    .bloco_login__div {
+        height: 140vh;
+    }
+}
+
+/* Exclusivo de cadastro */
+
+.bloco_login__div#cadastro {
+    height: 80vh;
+}
+
+form#cadastro {
+    height: 100%;
+    padding: 5vh 0;
+}
+
+.inputs_apoio#cadastro {
+    height: 85%;
+}
+
+#btnEntrar_cadastro {
+    width: 40%;
+    font-size: 1.5em;
+}
+
+.boxInfo#cadastro {
+    padding: 3vh 4.5vh;
+    margin-bottom: 6vh;
+}
+
+.boxInfo#cadastro h2 {
+    font-weight: 500;
+    font-size: 2em;
+    color: black;
+}
+
+.boxInfo#cadastro p {
+    font-size: 20px;
+    font-weight: 400;
+    color: black;
+}
+
+@media (max-width: 750px) {
+
+    .bloco_login__div#cadastro {
+        height: 72vh;
+        padding: none;
     }
 
-    .bloco_Login__div {
-        height: 100vh;
+    form#cadastro {
+        width: 90%;
     }
 
-    .apoioForm_Login__div input {
-        height: 15vw;
-        padding-left: 13px;
+    .inputs_apoio#cadastro {
+        height: 85%;
     }
 
-    .bloco_Login__div a {
-        display: none;
+    .input#cadastro {
+        height: 23%;
     }
 
-    #btnEntrar__Login {
-        display: none;
+    .input#cadastro label {
+        font-size: medium;
+    }
+
+    .input#cadastro input {
+        font-size: medium;
+        padding-left: 4%;
+    }
+
+    #btnEntrar_cadastro {
+        width: 80%;
+        font-size: x-large;
+    }
+
+    .boxInfo#cadastro {
+        padding: 4vh 9vw;
+    }
+
+    .boxInfo#cadastro h2 {
+        font-size: x-large;
+        margin-bottom: 18px;
+    }
+
+    .boxInfo#cadastro p {
+        font-size: medium;
+    }
+}
+
+@media (max-height: 400px) {
+    .bloco_login__div#cadastro {
+        height: 130vh;
+    }
+
+    .inputs_apoio#cadastro {
+        height: 80%;
+    }
+
+    .input#cadastro input {
+        min-height: 45px;
     }
 }

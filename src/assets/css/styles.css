@@ -41,13 +41,17 @@ p {
   color: white;
 }
 
+form{
+  width: 76.55334114888629%;
+}
+
 .container {
   width: 84.375%;
   margin: 0 auto;
 }
 
 .containerBox{
-  width: 50%;
+  width: 45vw;
   margin: 0 auto;
 }
 
@@ -75,6 +79,11 @@ p {
 .column {
   display: flex;
   flex-direction: column;
+}
+
+.boxInfo{
+  background-color: white;
+  border-radius: 10px;
 }
 
 @media (max-width: 800px){
