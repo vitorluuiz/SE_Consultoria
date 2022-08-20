@@ -1,0 +1,52 @@
+.fundo_filtro {
+    /* background-color: whitesmoke; */
+    background-color: white;
+    padding-bottom: 2vh;
+}
+
+.apoio_filtro {
+    padding-top: 2vh;
+}
+
+.inputs#filtro .input {
+    width: 23%;
+}
+
+.inputs#filtro .input label {
+    font-size: 1.3em;
+}
+
+.inputs#filtro .input input {
+    margin-top: 4px;
+    width: 100%;
+}
+
+.barra_ordem{
+    height: 6vh;
+}
+
+.barra_ordem h2 {
+    color: black;
+    margin-bottom: 0;
+    font-size: xx-large;
+}
+
+.ordenador {
+    height: 100%;
+    width: 48.5%;
+}
+
+.ordem{
+    height: 100%;
+}
+
+.ordens span {
+    color: black;
+}
+
+.ordens img {
+    margin-left: 19px;
+    height: 30px;
+    width: auto;
+    color: black;
+}

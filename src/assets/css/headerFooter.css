@@ -22,9 +22,9 @@ header {
     width: 17vw;
 }
 
-.infosCenter__div hr {
-    width: 3.2vw;
-    border: 1.5px solid white;
+.linha_vertical#header {
+    width: 2.5vw;
+    border: 0.1vw solid white;
     rotate: 90deg;
 }
 
@@ -46,6 +46,8 @@ header {
 footer {
     border-top: 3px solid white;
     height: 15vh;
+    width: 100vw;
+    background-color: black;
 }
 
 .apoio_footer__div {

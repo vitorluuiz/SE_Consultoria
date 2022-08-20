@@ -13,8 +13,8 @@ export default function Home() {
       <Header />
 
       <div className="bannerHome column alinhado espacado">
-        <h1>Traga seu imóvel pra cá</h1>
-          <Link to='/CadastrarImovel' className="btnCadastreImovel btnPressionavel alinhado">Cadastrar Imóvel</Link>
+        <h1 id="home">Traga seu imóvel pra cá</h1>
+        <Link to='/CadastrarImovel' className="btnCadastreImovel btnPressionavel alinhado">Cadastrar Imóvel</Link>
       </div>
 
       <div id="fundoRedes" className="row container centrado">
@@ -33,16 +33,18 @@ export default function Home() {
         </div>
       </div>
 
-      <section className="apoioTextos container row alinhado espacado">
-        <article className="blocoTexto">
-          <h2>Como atuamos?</h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        </article>
-        <article className="blocoTexto">
-          <h2>Por que trazer seu imóvel pra cá?</h2>
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        </article>
-      </section>
+      <div className="apoio_section">
+        <section className="apoioTextos container row alinhado espacado">
+          <article className="blocoTexto">
+            <h2 id="home">Como atuamos?</h2>
+            <p id="home">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          </article>
+          <article className="blocoTexto">
+            <h2 id="home">Por que trazer seu imóvel pra cá?</h2>
+            <p id="home">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+          </article>
+        </section>
+      </div>
 
       <Footer />
     </div>

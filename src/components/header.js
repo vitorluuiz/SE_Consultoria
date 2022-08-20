@@ -10,7 +10,9 @@ export default function Header() {
         <header>
             <div className="apoioHeader__div container row alinhado espacado">
                 <div className="infosLeft__div row alinhado espacado">
-                    <img id="logoPrincipal" src={logo} alt="Logo da SE Consultoria de imóveis" />
+                    <Link to="/" id="logoPrincipal">
+                        <img id="logoPrincipal" src={logo} alt="Logo da SE Consultoria de imóveis" />
+                    </Link>
                     <div className="contato__div column espacado">
                         <span>Fale Conosco</span>
                         <span>11 962666205</span>
@@ -18,9 +20,9 @@ export default function Header() {
                 </div>
 
                 <nav className="infosCenter__nav row alinhado espacado">
-                    <Link to='/CatalogoAluguel' className="pressionavel" >Locação</Link>
-                    <hr />
-                    <Link to='/CatalogoVenda' className="pressionavel">Venda</Link>
+                    <Link to='/Catalogo/Aluguel' className="pressionavel" >Locação</Link>
+                    <hr className="linha_vertical" id="header" />
+                    <Link to='/Catalogo/Venda' className="pressionavel">Venda</Link>
                 </nav>
 
                 <nav className="infosRight__nav row alinhado espacado">
