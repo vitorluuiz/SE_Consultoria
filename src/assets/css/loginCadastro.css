@@ -43,7 +43,7 @@ form#cadastro {
     border-radius: 6px;
     margin-bottom: 15px;
     font-size: 1.4vw;
-    padding-left: 1vw;
+    padding-left: 6px;
 }
 
 form#login a {
@@ -163,6 +163,7 @@ form#cadastro {
     font-weight: 500;
     font-size: 2em;
     color: black;
+    margin-bottom: 12px;
 }
 
 .boxInfo#cadastro p {

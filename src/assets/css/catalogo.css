@@ -64,6 +64,7 @@ h2#catalogo {
 
 #localizacao {
     margin-top: 1vh;
+    text-align: start;
 }
 
 .infos_right {

@@ -4,9 +4,15 @@ import {
     React
 } from 'react';
 
-import '../../assets/css/viewItem.css'
+import { Link } from 'react-router-dom'
 
-import banheiro from '../../assets/img/restroom.png'
+import '../../assets/css/viewItem.css'
+import '../../assets/css/catalogo.css'
+
+import sala from '../../assets/img/icones/chair.svg'
+import banheiro from '../../assets/img/icones/shower.svg'
+import quarto from '../../assets/img/icones/bed.svg'
+import garagem from '../../assets/img/icones/garage.svg'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
@@ -28,44 +34,42 @@ export default function ViewItem() {
                     <div className='row apoio_articles'>
                         <article id='feature' className='column alinhado centrado'>
                             <span>Quartos</span>
-                            <div className='row alinhado centrado'>
+                            <div className='row alinhado centrado bloco_icone'>
+                                <img src={quarto} />
+                                <span>2</span>
+                            </div>
+                        </article>
+                        <article id='feature' className='column alinhado centrado'>
+                            <span>Sala</span>
+                            <div className='row alinhado centrado bloco_icone'>
+                                <img src={sala} />
+                                <span>1</span>
+                            </div>
+                        </article>
+                        <article id='feature' className='column alinhado centrado'>
+                            <span>Banheiros</span>
+                            <div className='row alinhado centrado bloco_icone'>
                                 <img src={banheiro} />
                                 <span>1</span>
                             </div>
                         </article>
                         <article id='feature' className='column alinhado centrado'>
-                            <span>Quartos</span>
-                            <div className='row alinhado centrado'>
-                                <img src={banheiro} />
+                            <span>Garagem</span>
+                            <div className='row alinhado centrado bloco_icone'>
+                                <img src={garagem} />
                                 <span>1</span>
                             </div>
                         </article>
                         <article id='feature' className='column alinhado centrado'>
-                            <span>Quartos</span>
-                            <div className='row alinhado centrado'>
-                                <img src={banheiro} />
-                                <span>1</span>
+                            <span>Terreno</span>
+                            <div className='row alinhado centrado bloco_icone'>
+                                <span>120m²</span>
                             </div>
                         </article>
                         <article id='feature' className='column alinhado centrado'>
-                            <span>Quartos</span>
-                            <div className='row alinhado centrado'>
-                                <img src={banheiro} />
-                                <span>1</span>
-                            </div>
-                        </article>
-                        <article id='feature' className='column alinhado centrado'>
-                            <span>Quartos</span>
-                            <div className='row alinhado centrado'>
-                                <img src={banheiro} />
-                                <span>1</span>
-                            </div>
-                        </article>
-                        <article id='feature' className='column alinhado centrado'>
-                            <span>Quartos</span>
-                            <div className='row alinhado centrado'>
-                                <img src={banheiro} />
-                                <span>1</span>
+                            <span>Área total</span>
+                            <div className='row alinhado centrado bloco_icone'>
+                                <span>200m²</span>
                             </div>
                         </article>
 
@@ -83,6 +87,53 @@ export default function ViewItem() {
                     </div>
 
                 </div>
+
+            </section>
+
+            <h2 className='container' id='titulo_lista'>Mais imóveis em Morombi</h2>
+            <section className="apoio_conteudo_catalogo container row">
+
+                <article className="item_conteudo">
+                    {/* Imagem */}
+                    <div>
+                        <img className="item_img" src='https://www.casanovavrb.com.br/wp-content/uploads/2019/08/20190726_133414.jpg' />
+                    </div>
+
+                    {/* Informacoes */}
+                    <div className="item_infos">
+                        <h2 id="catalogo" >Vende-se casa com 3 suites no Morumbi próximo ao metrô</h2>
+                        <div className="row apoio_infos">
+
+                            {/* Esquerda */}
+                            <div className="column infos_left">
+                                <div className="row descricao_imovel">
+                                    <div id="catalogo" className="column">
+                                        <span>1 Dormitório</span>
+                                        <span>1 Cozinha</span>
+                                        <span>1 Banheiro</span>
+                                    </div>
+
+                                    <div id="span_right" className="column">
+                                        <span>200m² de terreno</span>
+                                        <span>110m² construídos</span>
+                                        <span>2 Vagas de garagem</span>
+                                    </div>
+                                </div>
+                                <span id="localizacao" className='span_preto'>Morumbi, São Paulo</span>
+                            </div>
+
+                            {/* Direita */}
+                            <div className="column infos_right">
+                                <span id="valor_catalogo" className='span_preto'>R$1.300.000,00 A vista</span>
+                                <div id="botao_vermais" >
+                                    <Link className="btnPressionavel row alinhado" to='/info'>Ver mais</Link>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </article>
 
             </section>
 

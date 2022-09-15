@@ -14,7 +14,7 @@ export default function Home() {
 
       <div className="bannerHome column alinhado espacado">
         <h1 id="home">Traga seu imóvel pra cá</h1>
-        <Link to='/CadastrarImovel' className="btnCadastreImovel btnPressionavel alinhado">Cadastrar Imóvel</Link>
+        <Link to='/Cadastrar/Imovel' className="btnCadastreImovel btnPressionavel">Cadastrar Imóvel</Link>
       </div>
 
       <div id="fundoRedes" className="row container centrado">

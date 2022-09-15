@@ -5,7 +5,9 @@
   --branco: #FFF;
   --preto: #000;
   --cinza: #464646;
+  --icones: #696868;
   --cinzaClaro: #F4F4F4;
+  --borda: 8px;
 }
 
 * {
@@ -17,36 +19,40 @@
 }
 
 .pressionavel:hover {
-  transition: color ease-in-out 150ms;
+  transition: color ease-in-out 190ms;
   color: #F46D21 !important;
 }
 
 .btnPressionavel{
-  background-color: #F46D21 !important;
+  background-color: var(--laranja);
   display: flex;
   justify-content: center;
-  text-align: center;
-  border-radius: 10px;
+  align-items: center;
+  border-radius: var(--borda);
+  border: 0px;
 }
 
 .btnPressionavel:hover{
-  transition: all linear 150ms;
-  background-color: white !important;
+  transition: all linear 190ms;
+  background-color: var(--cinzaClaro) !important;
   color: #F46D21 !important;
 }
 
 body {
-  background-color: black;
+  background-color: var(--preto);
+}
+
+span{
+  color: var(--branco);
 }
 
 a {
-  font-size: 1.4vw;
-  color: white;
+  color: var(--branco);
   text-decoration: unset;
 }
 
 p {
-  color: white;
+  color: var(--branco);
 }
 
 form{

@@ -24,23 +24,31 @@ h1#view_item {
 
 .desc_suport {
     justify-content: space-between;
-    min-height: 230px;
+    min-height: 200px;
     margin-bottom: 4vh;
 }
 
 .apoio_articles {
     width: 42%;
+    ;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
 #feature {
-    width: 30%;
+    width: 28%;
     margin: 1.1vh 0;
 }
 
-#feature div span, #feature span {
+#feature span {
     color: black;
+}
+
+.bloco_icone span {
+    margin-top: 7px;
+    margin-left: 4px;
+    color: black;
+    font-weight: 600;
 }
 
 .right_side {
@@ -50,20 +58,20 @@ h1#view_item {
     min-height: 300px;
 }
 
-.suport_span{
+.suport_span {
     color: black;
     display: flex;
     font-size: 1.4em;
     padding-bottom: 1vh;
-    justify-content: end;
-    align-items: end;
+    justify-content: flex-end;
+    align-items: flex-end;
     height: 25%;
 }
 
 #valor_botao {
     width: 80%;
     height: 50%;
-    align-items: end;
+    align-items: flex-end;
     margin: 1vh 0;
     justify-content: space-between;
 }
@@ -82,4 +90,13 @@ h1#view_item {
     color: white;
     font-size: 2em;
     font-weight: 700;
+}
+
+#titulo_lista{
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.span_preto{
+    color: black;
 }

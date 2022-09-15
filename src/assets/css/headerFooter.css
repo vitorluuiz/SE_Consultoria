@@ -7,6 +7,10 @@ header {
     height: 100%;
 }
 
+.apoioHeader__div a, nav {
+    font-size: 1.2em;
+}
+
 .infosLeft__div {
     height: 100%;
     width: 20vw;
@@ -34,6 +38,10 @@ header {
     padding-left: 2vw;
 }
 
+#cadastrar{
+    margin-right: 2px;
+}
+
 #botaoEntrar {
     width: 8.8vw;
     height: 40%;
@@ -46,7 +54,7 @@ header {
 footer {
     border-top: 3px solid white;
     height: 15vh;
-    width: 100vw;
+    width: 100%;
     background-color: black;
 }
 
