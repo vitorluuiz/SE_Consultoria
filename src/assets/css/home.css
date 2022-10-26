@@ -6,7 +6,7 @@
     padding: 6vh 7.8125vw;
 }
 
-h1#home {
+#titulo_home {
     color: white;
     font-size: 10vw;
     font-weight: 600;
@@ -14,95 +14,37 @@ h1#home {
     text-align: center;
 }
 
-.btnCadastreImovel {
+#cadastrarBtn {
     width: 20%;
     height: 8vh;
-    font-weight: 600;
+    font-size: 1.3em;
+    font-weight: 500;
     font-style: italic;
 }
 
-#fundoRedes {
-    height: 7vw;
-    border-top: 3px solid white;
+.suport_social_info {
+    width: 100%;
+    height: 75px;
+    padding: 10px 0;
+    background-color: var(--branco);
 }
 
-.apoioRedes {
-    width: 15vw;
-}
-
-.logoRedeSocial {
-    margin: 0 1vw;
-    height: 65%;
-    width: auto;
-}
-
-.blocoTexto {
-    margin-top: 2vw;
-    width: 45%;
+.social_info {
+    width: 10%;
+    min-width: fit-content;
     height: 100%;
-    margin-bottom: 50px;
+    margin: 0 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-h2#home {
-    color: rgb(255, 255, 255);
-    margin-bottom: 1.2vw;
+.social_info img{
+    height: 100%;
+    margin-right: 10px;
 }
 
-@media (max-width: 800px) {
-    .bannerHome {
-        height: 40vh;
-        min-height: 300px;
-    }
-
-    h1 {
-        font-size: 11vw;
-    }
-
-    .btnCadastreImovel {
-        width: 85%;
-        height: 30%;
-        max-width: 350px;
-        max-height: 55px;
-        font-size: larger;
-        font-weight: 700;
-    }
-
-    #fundoRedes {
-        border-top: 2px solid white;
-        height: 15vw;
-        max-height: 65px;
-        width: 90%;
-        justify-content: space-between;
-    }
-
-    .apoioRedes {
-        width: 48%;
-        flex-direction: row;
-    }
-
-    .apoioRedes span {
-        margin: 0 4vw;
-        font-size: 3.2vw;
-    }
-
-    .logoRedeSocial {
-        height: 70%;
-    }
-
-    .apoioTextos {
-        flex-direction: column;
-    }
-
-    .blocoTexto {
-        width: 92%;
-    }
-
-    .blocoTexto h2 {
-        margin: 30px 0 5px 0;
-        font-size: large;
-    }
-
-    .blocoTexto p {
-        font-size: small;
-    }
+.social_info span {
+    color: var(--black);
 }

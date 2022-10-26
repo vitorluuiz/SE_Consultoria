@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import Home from './pages/Home/Home.js';
-import Login from './pages/LoginCadastro/Login.jsx'
-import Cadastro from './pages/LoginCadastro/Cadastro.jsx';
+import Login from './pages/LoginCadastro/Login.js'
+import Cadastro from './pages/LoginCadastro/Cadastro.js';
 import CatalogoVenda from './pages/Catalogo/catalogoVenda';
 import ViewItem from './pages/viewItem/viewItem';
 import CadastroImmo from './pages/CreatePost/immoPost.js';

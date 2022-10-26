@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,600;1,700&display=swap');
 
-:root{
+:root {
   --laranja: #F46D21;
+  --laranjaEscuro: #B55219;
   --branco: #FFF;
   --preto: #000;
   --cinza: #464646;
   --icones: #696868;
   --cinzaClaro: #F4F4F4;
-  --borda: 8px;
+  --corBorda: var(--laranjaEscuro);
+  --borda: 6px;
 }
 
 * {
@@ -18,31 +20,43 @@
   font-weight: 500;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .pressionavel:hover {
   transition: color ease-in-out 190ms;
   color: #F46D21 !important;
 }
 
-.btnPressionavel{
+.hover_cinza:hover {
+  transition: 200ms all;
+  background-color: var(--cinzaClaro);
+  border-radius: 5px;
+}
+
+.btnPressionavel {
   background-color: var(--laranja);
+  color: white;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: var(--borda);
-  border: 0px;
+  border: var(--corBorda);
 }
 
-.btnPressionavel:hover{
-  transition: all linear 190ms;
-  background-color: var(--cinzaClaro) !important;
-  color: #F46D21 !important;
+.btnPressionavel:hover {
+  transition: all linear 100ms;
 }
 
-body {
-  background-color: var(--preto);
+.btnPressionavel:active{
+  transition: all 150ms;
+  transform: scale(0.98);
 }
 
-span{
+
+span {
   color: var(--branco);
 }
 
@@ -55,8 +69,17 @@ p {
   color: var(--branco);
 }
 
-form{
+form {
   width: 76.55334114888629%;
+}
+
+input, .masked_input {
+  min-height: 45px;
+  padding-left: 15px;
+  border: 2px solid #464646;
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  border-radius: var(--borda);
 }
 
 .container {
@@ -64,7 +87,7 @@ form{
   margin: 0 auto;
 }
 
-.containerBox{
+.containerBox {
   width: 45vw;
   margin: 0 auto;
 }
@@ -95,17 +118,17 @@ form{
   flex-direction: column;
 }
 
-.boxInfo{
+.boxInfo {
   background-color: white;
   border-radius: 10px;
 }
 
-.body_page{
+.body_page {
   background-color: white;
 }
 
-@media (max-width: 800px){
-  .container{
+@media (max-width: 800px) {
+  .container {
     width: 95vw;
   }
 }
