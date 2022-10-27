@@ -12,9 +12,9 @@ main#catalogo {
 .item_conteudo {
     width: 49%;
     background-color: var(--cinzaClaro);
-    border: 0.5px solid black;
-    border-radius: 10px;
+    border-radius: var(--borda);
     margin-bottom: 4vh;
+    box-shadow: 0 3px 7px -1px var(--sombra);
 }
 
 .item_img {
@@ -22,6 +22,8 @@ main#catalogo {
     height: auto;
     max-height: 350px;
     object-fit: initial;
+    border-top-left-radius: var(--borda);
+    border-top-right-radius: var(--borda);
 }
 
 .item_infos {
@@ -81,6 +83,7 @@ h2#catalogo {
 #botao_vermais {
     height: 40%;
     width: 80%;
+    box-shadow: 0 3px 7px -1px var(--sombra);
 }
 
 #botao_vermais a {

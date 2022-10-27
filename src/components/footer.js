@@ -14,7 +14,7 @@ export default function Footer() {
                </Link>
                 <nav className="apoioCreditos__nav">
                     <span>Desenvolvido por </span>
-                    <a className="pressionavel" id="creditos__a" href="https://github.com/Vitor3101">Vitor Luiz Gonçalves</a>
+                    <a className="pressionavel" id="creditos__a" href="https://github.com/vitorluuiz">Vitor Luiz Gonçalves</a>
                 </nav>
             </div>
         </footer>

@@ -8,6 +8,7 @@
   --cinza: #464646;
   --icones: #696868;
   --cinzaClaro: #F4F4F4;
+  --sombra: #b0a7a1;
   --corBorda: var(--laranjaEscuro);
   --borda: 6px;
 }
@@ -55,7 +56,6 @@
   transform: scale(0.98);
 }
 
-
 span {
   color: var(--branco);
 }
@@ -75,7 +75,7 @@ form {
 
 input, .masked_input {
   min-height: 45px;
-  padding-left: 15px;
+  padding-left: 10px;
   border: 2px solid #464646;
   margin-bottom: 10px;
   font-size: 1.2em;

@@ -32,7 +32,7 @@ export default function Login() {
                     </div>
 
                     <Link to="/Cadastrar" className="pressionavel">Ainda não tenho conta</Link>
-                    <buttom className="btnPressionavel btnLogin">Entre</buttom>
+                    <button className="btnPressionavel btnLogin">Entre</button>
 
                 </form>
 

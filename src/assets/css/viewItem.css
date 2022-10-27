@@ -90,6 +90,7 @@ h1#view_item {
     color: white;
     font-size: 2em;
     font-weight: 700;
+    box-shadow: 0 3px 7px -1px var(--sombra);
 }
 
 #titulo_lista{
