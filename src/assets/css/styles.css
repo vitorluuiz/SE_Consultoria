@@ -39,19 +39,21 @@
 .btnPressionavel {
   background-color: var(--laranja);
   color: white;
-  padding: 20px;
+  padding: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: var(--borda);
   border: var(--corBorda);
+  font-size: 1.3em;
+  font-weight: 600;
 }
 
 .btnPressionavel:hover {
   transition: all linear 100ms;
 }
 
-.btnPressionavel:active{
+.btnPressionavel:active {
   transition: all 150ms;
   transform: scale(0.98);
 }

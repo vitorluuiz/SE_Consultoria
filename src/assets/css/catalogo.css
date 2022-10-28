@@ -4,7 +4,7 @@ main#catalogo {
     padding-top: 5vh;
 }
 
-.apoio_conteudo_catalogo{
+.apoio_conteudo_catalogo {
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -89,4 +89,29 @@ h2#catalogo {
 #botao_vermais a {
     width: 100%;
     height: 100%;
+}
+
+#filtrar {
+    min-width: 200px;
+}
+
+.filtro {
+    transition: all cubic-bezier(0.215, 0.610, 0.355, 1) 200ms;
+    background-color: white;
+    position: fixed;
+    width: 100vw;
+    height: 30vh;
+    top: -100vh;
+    box-shadow: 0 5px 30px 1px var(--sombra);
+}
+
+.filtro_visivel{
+    transition: all cubic-bezier(0.215, 0.610, 0.355, 1) 400ms;
+    top: 0vh;
+}
+
+#background_modal{
+    padding: 3vh 0;
+    width: 100%;
+    height: 90%;
 }
