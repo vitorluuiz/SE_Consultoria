@@ -75,7 +75,7 @@ form {
   width: 76.55334114888629%;
 }
 
-input, .masked_input {
+input, .masked_input, select {
   min-height: 45px;
   padding-left: 10px;
   border: 2px solid #464646;

@@ -17,11 +17,10 @@
 }
 
 .inputs#filtro .input input {
-    margin-top: 4px;
     width: 100%;
 }
 
-.barra_ordem{
+.barra_ordem {
     height: 6vh;
 }
 
@@ -31,22 +30,37 @@
     font-size: xx-large;
 }
 
-.ordenador {
+#filterBar {
+    height: 50%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ordenar {
+    height: 70%;
+    margin: 0 0.5vw;
+}
+
+.ordenar select {
     height: 100%;
-    width: 48.5%;
+    margin-bottom: 0;
 }
 
-.ordem{
-    height: 100%;
+#closeBar {
+    width: 100%;
+    height: 20%;
+    background-color: var(--cinzaClaro);
 }
 
-.ordens span {
-    color: black;
-}
-
-.ordens img {
-    margin-left: 19px;
-    height: 30px;
+#btn_close_modal {
     width: auto;
-    color: black;
+    height: 50%;
+}
+
+.first_option {
+    margin-left: 0;
+}
+
+.last_option {
+    margin-right: 0;
 }

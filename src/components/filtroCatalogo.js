@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import iconeOrdem from '../assets/img/icone_ordem.png'
+import CloseBar from '../assets/img/icones/close_modal.png'
 import '../assets/css/filtro.css'
-import { wait } from "@testing-library/user-event/dist/utils";
 
 export default function FiltroCatalogo() {
     const [isFilterVisible, setFilterVisible] = useState(false);
@@ -31,8 +30,8 @@ export default function FiltroCatalogo() {
     return (
         <div className="fundo_filtro">
             <div className="apoio_filtro">
-                <div onClick={ChangeFilter} id="filter_bar" className="filtro">
-                    <div id='background_modal'>
+                <div id="filter_bar" className="filtro">
+                    <div id='background_modal' className="column">
 
                         <div className="inputs row alinhado espacado container" id="filtro">
                             <div className="input">
@@ -41,7 +40,11 @@ export default function FiltroCatalogo() {
                             </div>
                             <div className="input">
                                 <label>Tipo de propriedade</label>
-                                <input />
+                                <select>
+                                    <option value='0' disabled selected>Tipo de propriedade</option>
+                                    <option value='1' >Casa</option>
+                                    <option value='2' >Galpão</option>
+                                </select>
                             </div>
                             <div className="input">
                                 <label>Bairro</label>
@@ -51,6 +54,36 @@ export default function FiltroCatalogo() {
                                 <label>CEP</label>
                                 <input />
                             </div>
+                        </div>
+
+                        <div id="filterBar" className="container row">
+
+                            <div id="requisitos" className="row">
+                                <div className="input ordenar first_option">
+                                    <select>
+                                        <option value='0' disabled selected>Minímo de quartos</option>
+                                        <option value='1' >1 Quarto</option>
+                                        <option value='2' >2 Quartos</option>
+                                    </select>
+                                </div>
+
+                                <div className="input ordenar">
+                                    <select>
+                                        <option value='0' disabled selected>Minímo de banheiros</option>
+                                        <option value='1' >1 Banheiro</option>
+                                        <option value='2' >2 Banheiros</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="ordenar" className="row">
+                                <button className="btnPressionavel ordenar">Mais baratos</button>
+                                <button className="btnPressionavel ordenar last_option">Maior terreno</button>
+                            </div>
+                        </div>
+
+                        <div onClick={ChangeFilter} id="closeBar" className="row centrado alinhado">
+                            <img id="btn_close_modal" src={CloseBar} />
                         </div>
                     </div>
                 </div>
