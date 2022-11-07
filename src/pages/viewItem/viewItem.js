@@ -23,7 +23,7 @@ export default function ViewItem() {
             <Header />
 
             <div className='apoio_banner_img'>
-                <img src={'https://www.casanovavrb.com.br/wp-content/uploads/2019/08/20190726_133414.jpg'} />
+                <img src={'https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg'} />
             </div>
 
             <section className="column info_imovel">
@@ -96,7 +96,7 @@ export default function ViewItem() {
                 <article className="item_conteudo">
                     {/* Imagem */}
                     <div>
-                        <img className="item_img" src='https://www.casanovavrb.com.br/wp-content/uploads/2019/08/20190726_133414.jpg' />
+                        <img className="item_img" src='https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg' />
                     </div>
 
                     {/* Informacoes */}

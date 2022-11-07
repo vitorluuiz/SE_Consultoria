@@ -6,7 +6,7 @@ import logo from '../assets/img/logos/pretaSimples.png'
 
 export default function Footer() {
     return (
-        <footer className="flex alinhado">
+        <footer className="row alinhado">
             <div className="apoio_footer__div container row alinhado espacado">
                 <span>Copyright SE consultoria de imóveis 2022</span>
                <Link to="/" id="logo_footer__img">

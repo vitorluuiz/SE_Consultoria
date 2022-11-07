@@ -100,6 +100,7 @@ h2#catalogo {
     background-color: white;
     position: fixed;
     width: 100vw;
+    justify-self: center;
     height: 30vh;
     top: -100vh;
     box-shadow: 0 5px 30px 1px var(--sombra);
