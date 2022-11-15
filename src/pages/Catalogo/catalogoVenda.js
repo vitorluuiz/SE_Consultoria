@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+
 import Header from '../../components/header.js'
 import Footer from '../../components/footer.js'
 import Filtro from "../../components/filtroCatalogo.js";
-import '../../assets/css/catalogo.css'
+
+import '../../assets/css/catalog.css'
 
 export default function CatalogoVenda() {
 
@@ -18,7 +20,7 @@ export default function CatalogoVenda() {
                         <article className="item_conteudo">
                             {/* Imagem */}
                             <div>
-                                <img className="item_img" src='https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg' />
+                                <img className="item_img" alt='foto principal do imóvel' src='https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg' />
                             </div>
 
                             {/* Informacoes */}
@@ -60,7 +62,7 @@ export default function CatalogoVenda() {
                         <article className="item_conteudo">
                             {/* Imagem */}
                             <div>
-                                <img className="item_img" src='https://www.cashme.com.br/blog/wp-content/uploads/2020/03/marco-12.jpg' />
+                                <img className="item_img" alt='foto principal do imóvel' src='https://www.cashme.com.br/blog/wp-content/uploads/2020/03/marco-12.jpg' />
                             </div>
 
                             {/* Informacoes */}
@@ -101,7 +103,7 @@ export default function CatalogoVenda() {
                         <article className="item_conteudo">
                             {/* Imagem */}
                             <div>
-                                <img className="item_img" src='https://queroficarrico.com/blog/wp-content/uploads/2017/05/como_comprar_um_imovel.jpg' />
+                                <img className="item_img" alt='foto principal do imóvel' src='https://queroficarrico.com/blog/wp-content/uploads/2017/05/como_comprar_um_imovel.jpg' />
                             </div>
 
                             {/* Informacoes */}

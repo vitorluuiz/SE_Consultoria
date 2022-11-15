@@ -6,7 +6,7 @@
     padding: 6vh 7.8125vw;
 }
 
-#titulo_home {
+#tittle_home {
     color: white;
     font-size: 10vw;
     font-weight: 600;
@@ -15,7 +15,6 @@
 }
 
 #cadastrarBtn {
-    width: 20%;
     height: 8vh;
     font-size: 1.3em;
     font-weight: 500;

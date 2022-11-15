@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Footer from '../../components/footer.js'
+import React, { useState } from "react";
 import { Link } from 'react-router-dom'
-import '../../assets/css/loginCadastro.css'
-import Logo from '../../assets/img/logos/brancaNegativa.png'
+
+import Footer from '../../components/footer.js'
 import MaskedInput from "../../assets/jsExtentions/MaskedInput/maskedInput.js";
+
+import Logo from '../../assets/img/logos/brancaNegativa.png'
+
+import '../../assets/css/login.css'
 
 export default function Login() {
 

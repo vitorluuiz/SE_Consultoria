@@ -2,76 +2,87 @@ import React from 'react'
 
 import Footer from '../../components/footer.js'
 
-import sala from '../../assets/img/icones/chair.svg'
-import cozinha from '../../assets/img/icones/cooking.svg'
-import banheiro from '../../assets/img/icones/shower.svg'
-import quarto from '../../assets/img/icones/bed.svg'
-import garagem from '../../assets/img/icones/garage.svg'
-import adicionar from '../../assets/img/icones/add.svg'
-import adicionarBranco from '../../assets/img/icones/addWhite.svg'
-import imagem from '../../assets/img/icones/image.svg'
+import salaIcon from '../../assets/img/icones/chair.svg'
+import cozinhaIcon from '../../assets/img/icones/cooking.svg'
+import banheiroIcon from '../../assets/img/icones/shower.svg'
+import quartoIcon from '../../assets/img/icones/bed.svg'
+import garagemIcon from '../../assets/img/icones/garage.svg'
+import adicionarIcon from '../../assets/img/icones/add.svg'
+import adicionarBrancoIcon from '../../assets/img/icones/addWhite.svg'
+import img from '../../assets/img/icones/image.svg'
 
-import '../../assets/css/immoScreen.css'
+import '../../assets/css/immo.css'
 
 export default function CadastroImmo() {
 
     return (
         <div className='background_immo'>
+
             <div className='container row espacado alinhado suport_immo'>
-                <section id='immo' className='column'>
+
+                <section className='column'>
                     <h1 id='immo'>Cadastrar Imóvel</h1>
+
                     <form id='immo'>
-                        <div id='immo' className='input'>
+
+                        <div className='inputBox'>
                             <label>Titulo da publicação</label>
                             <input></input>
                         </div>
-                        <div id='immo' className='input'>
-                            <label>Categoria da publicação</label>
-                            <input></input>
-                        </div>
-                        <div id='immo' className='input'>
-                            <label>Categoria da propriedade</label>
-                            <input></input>
-                        </div>
-                        <div id='immo' className='row espacado'>
-                            <div className='input'>
-                                <label>CEP (opicional)</label>
+
+                        <div className='row espacado'>
+                            <div className='inputBox'>
+                                <label>Categoria da publicação</label>
                                 <input></input>
                             </div>
-                            <div className='input'>
-                                <label>Bairro</label>
+                            <div className='inputBox'>
+                                <label>Categoria da propriedade</label>
                                 <input></input>
                             </div>
                         </div>
+
+                        <div className='inputBox'>
+                            <label>Bairro</label>
+                            <select>
+                                <option value='0' selected>Escolher</option>
+                                <option value='1' >Carrão</option>
+                            </select>
+                        </div>
+
                         <div id='immo' className='row espacado'>
-                            <div className='input'>
+                            <div className='inputBox'>
                                 <label>Aluguel</label>
                                 <input></input>
                             </div>
-                            <div className='input'>
+                            <div className='inputBox'>
                                 <label>IPTU + Condomínio</label>
                                 <input></input>
                             </div>
                         </div>
+
                         <div id='immo' className='row espacado'>
-                            <div className='input'>
+                            <div className='inputBox'>
                                 <label>Preço da venda</label>
                                 <input></input>
                             </div>
-                            <div className='input'>
+                            <div className='inputBox'>
                                 <label>Área contruida</label>
                                 <input></input>
                             </div>
                         </div>
+
                     </form>
+
                 </section>
 
                 <section className='column espacado' id='immo'>
+
                     <div className='row background_immo_rooms espacado'>
+
                         <article className='immo_rooms column alinhado'>
                             <label>Quartos</label>
                             <div className='row alinhado centrado'>
-                                <img alt='Icone de uma cama' src={quarto} />
+                                <img alt='Icone de uma cama' src={quartoIcon} />
                                 <input></input>
                             </div>
                         </article>
@@ -79,54 +90,59 @@ export default function CadastroImmo() {
                         <article className='immo_rooms column alinhado'>
                             <label>Salas</label>
                             <div className='row alinhado centrado'>
-                                <img alt='Icone de uma poltrona' src={sala} />
+                                <img alt='Icone de uma poltrona' src={salaIcon} />
                                 <input></input>
                             </div>
                         </article>
+
                         <article className='immo_rooms column alinhado'>
                             <label>Cozinhas</label>
                             <div className='row alinhado centrado'>
-                                <img alt='icone de um forno' src={cozinha} />
+                                <img alt='icone de um forno' src={cozinhaIcon} />
                                 <input></input>
                             </div>
                         </article>
+
                         <article className='immo_rooms column alinhado'>
                             <label>Banheiros</label>
                             <div className='row alinhado centrado'>
-                                <img alt='Icone de um chuveiro' src={banheiro} />
+                                <img alt='Icone de um chuveiro' src={banheiroIcon} />
                                 <input></input>
                             </div>
                         </article>
+
                         <article className='immo_rooms column alinhado'>
                             <label>Garagem</label>
                             <div className='row alinhado centrado'>
-                                <img alt='Icone de uma garagem' src={garagem} />
+                                <img alt='Icone de uma garagem' src={garagemIcon} />
                                 <input></input>
                             </div>
                         </article>
+
                         <article id='input_terreno' className='immo_rooms column alinhado'>
                             <label>Terreno</label>
                             <div className='row alinhado centrado'>
                                 <input></input>
                             </div>
                         </article>
+
                     </div>
 
                     <div id='img_immo_suport' className='row espacado alinhado'>
                         <div className='suport_img_immo'>
                             <label>Foto principal</label>
                             <div className='flex alinhado centrado background_img_immo'>
-                                <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarBranco} />
+                                <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarBrancoIcon} />
                             </div>
                         </div>
                         <div className='suport_img_immo'>
                             <label>Todas as fotos</label>
                             <div className='flex alinhado centrado background_img_immo'>
-                                <img alt='Icone de ver imagens' id='icone_branco' src={imagem} />
+                                <img alt='Icone de ver imagens' id='icone_branco' src={img} />
                             </div>
                         </div>
                         <div className='addImg_immo'>
-                            <img alt='Icone de adicionar mais imagens' src={adicionar} />
+                            <img alt='Icone de adicionar mais imagens' src={adicionarIcon} />
                             <label>Mais fotos</label>
                         </div>
 

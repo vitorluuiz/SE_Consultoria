@@ -1,21 +1,19 @@
 import {
-    useState,
-    useEffect,
     React
 } from 'react';
 
 import { Link } from 'react-router-dom'
 
-import '../../assets/css/viewItem.css'
-import '../../assets/css/catalogo.css'
-
-import sala from '../../assets/img/icones/chair.svg'
-import banheiro from '../../assets/img/icones/shower.svg'
-import quarto from '../../assets/img/icones/bed.svg'
-import garagem from '../../assets/img/icones/garage.svg'
-
 import Header from '../../components/header'
 import Footer from '../../components/footer'
+
+import '../../assets/css/immo.css'
+import '../../assets/css/catalog.css'
+
+import salaIcon from '../../assets/img/icones/chair.svg'
+import banheiroIcon from '../../assets/img/icones/shower.svg'
+import quartoIcon from '../../assets/img/icones/bed.svg'
+import garagemIcon from '../../assets/img/icones/garage.svg'
 
 export default function ViewItem() {
     return (
@@ -23,7 +21,7 @@ export default function ViewItem() {
             <Header />
 
             <div className='apoio_banner_img'>
-                <img src={'https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg'} />
+                <img alt='foto principal do imóvel' src={'https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg'} />
             </div>
 
             <section className="column info_imovel">
@@ -35,28 +33,28 @@ export default function ViewItem() {
                         <article id='feature' className='column alinhado centrado'>
                             <span>Quartos</span>
                             <div className='row alinhado centrado bloco_icone'>
-                                <img src={quarto} />
+                                <img alt='icone de um quarto' src={quartoIcon} />
                                 <span>2</span>
                             </div>
                         </article>
                         <article id='feature' className='column alinhado centrado'>
                             <span>Sala</span>
                             <div className='row alinhado centrado bloco_icone'>
-                                <img src={sala} />
+                                <img alt='icone de uma sala de estar' src={salaIcon} />
                                 <span>1</span>
                             </div>
                         </article>
                         <article id='feature' className='column alinhado centrado'>
                             <span>Banheiros</span>
                             <div className='row alinhado centrado bloco_icone'>
-                                <img src={banheiro} />
+                                <img alt='icone de um banheiro' src={banheiroIcon} />
                                 <span>1</span>
                             </div>
                         </article>
                         <article id='feature' className='column alinhado centrado'>
                             <span>Garagem</span>
                             <div className='row alinhado centrado bloco_icone'>
-                                <img src={garagem} />
+                                <img alt='icone de uma garagem de carros' src={garagemIcon} />
                                 <span>1</span>
                             </div>
                         </article>
@@ -96,7 +94,7 @@ export default function ViewItem() {
                 <article className="item_conteudo">
                     {/* Imagem */}
                     <div>
-                        <img className="item_img" src='https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg' />
+                        <img className="item_img" alt='foto principal de um imóvel' src='https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg' />
                     </div>
 
                     {/* Informacoes */}

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+
 import Footer from '../../components/footer.js'
-import '../../assets/css/loginCadastro.css'
 import MaskedInput from '../../assets/jsExtentions/MaskedInput/maskedInput.js'
-import axios from 'axios';
+
+import '../../assets/css/login.css'
 
 export default function Cadastro() {
 

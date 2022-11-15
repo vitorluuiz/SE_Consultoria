@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,600;1,700&display=swap');
 
 :root {
+  --fonteClara: #FFF;
   --laranja: #F46D21;
   --laranjaEscuro: #B55219;
   --branco: #FFF;
@@ -49,26 +50,17 @@
   font-weight: 600;
 }
 
-.btnPressionavel:hover {
-  transition: all linear 100ms;
-}
-
 .btnPressionavel:active {
   transition: all 150ms;
   transform: scale(0.98);
 }
 
-span {
-  color: var(--branco);
+span, a, p{
+  color: var(--fonteClara);
 }
 
 a {
-  color: var(--branco);
   text-decoration: unset;
-}
-
-p {
-  color: var(--branco);
 }
 
 form {
