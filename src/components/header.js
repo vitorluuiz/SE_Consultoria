@@ -4,9 +4,6 @@ import '../assets/css/styles.css'
 import '../assets/css/headerFooter.css'
 
 import logo from '../assets/img/logos/pretaSimples.png'
-import Instagram from '../assets/img/logos/instagram_logo.png'
-import Whatsapp from '../assets/img/logos/whatsapp_logo.png'
-import Facebook from '../assets/img/logos/facebook_logo.png'
 
 export default function Header() {
 

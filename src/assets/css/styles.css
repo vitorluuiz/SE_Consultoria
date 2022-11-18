@@ -76,13 +76,22 @@ input, .masked_input, select {
   border-radius: var(--borda);
 }
 
+.labed-input{
+  display: flex;
+  flex-direction: column;
+}
+
+.labed-input label{
+  margin-bottom: 5px;
+}
+
 .container {
   width: 84.375%;
   margin: 0 auto;
 }
 
 .containerBox {
-  width: 45vw;
+  min-width: 35vw;
   margin: 0 auto;
 }
 
@@ -121,8 +130,12 @@ input, .masked_input, select {
   background-color: white;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1100px) {
   .container {
     width: 95vw;
+  }
+
+  .containerBox{
+    width: 85vw;
   }
 }

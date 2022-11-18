@@ -67,9 +67,18 @@ footer {
     height: 92%;
 }
 
+.apoio_footer__div > span, .apoio_footer__div > #logo_footer__Img, .apoio_footer__div > .apoioCreditos__nav{
+    width: 33%;
+}
+
 #logo_footer__img {
     height: 100%;
     width: auto;
+}
+
+.apoioCreditos__nav {
+    display: flex;
+    justify-content: end;
 }
 
 .apoioCreditos__nav span {
