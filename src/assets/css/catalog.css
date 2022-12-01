@@ -70,9 +70,14 @@ h2#catalogo {
 }
 
 .infos_right {
-    width: 40%;
+    width: 38%;
     justify-content: space-around;
     align-items: flex-end;
+}
+
+.infos_right > span{
+    color: black;
+    text-align: end;
 }
 
 #valor_catalogo {
@@ -117,6 +122,16 @@ h2#catalogo {
     height: 100%;
 }
 
+.filtering-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filtering-top > div{
+    width: 24%;
+}
+
 .background_filter {
     /* background-color: whitesmoke; */
     background-color: white;
@@ -125,18 +140,6 @@ h2#catalogo {
 
 .suport_filter {
     padding-top: 2vh;
-}
-
-.inputs#filtro .input {
-    width: 23%;
-}
-
-.inputs#filtro .input label {
-    font-size: 1.3em;
-}
-
-.inputs#filtro .input input {
-    width: 100%;
 }
 
 .barra_ordem {

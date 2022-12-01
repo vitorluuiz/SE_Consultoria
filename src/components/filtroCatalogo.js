@@ -14,6 +14,7 @@ export default function FiltroCatalogo() {
 
         if (states[click.target.id] === 0) {
             states[click.target.id] = 1;
+            clickedFilter.add('ordenarSelected')
         }
         else {
             states[click.target.id] = 0;
@@ -43,9 +44,9 @@ export default function FiltroCatalogo() {
                 <div id="filter_bar" className="filtro">
                     <div id='background_modal' className="column">
 
-                        <div className="inputs row alinhado espacado container" id="filtro">
+                        <div className="filtering-top container">
 
-                            <div className="input">
+                            <div className="labed-input">
                                 <label>Valor máximo</label>
                                 <select>
                                     <option value='0' selected>Indiferente</option>
@@ -53,7 +54,7 @@ export default function FiltroCatalogo() {
                                 </select>
                             </div>
 
-                            <div className="input">
+                            <div className="labed-input">
                                 <label>Tipo de propriedade</label>
                                 <select>
                                     <option value='0' disabled selected>Tipo de propriedade</option>
@@ -62,7 +63,7 @@ export default function FiltroCatalogo() {
                                 </select>
                             </div>
 
-                            <div className="input">
+                            <div className="labed-input">
                                 <label>Bairro</label>
                                 <select>
                                     <option value='0' selected>Indiferente</option>
@@ -70,7 +71,7 @@ export default function FiltroCatalogo() {
                                 </select>
                             </div>
 
-                            <div className="input">
+                            <div className="labed-input">
                                 <label>CEP</label>
                                 <input placeholder="Buscar perto de mim"/>
                             </div>
@@ -81,7 +82,7 @@ export default function FiltroCatalogo() {
                         <div id="filterBar" className="container row">
 
                             <div id="requisitos" className="row">
-                                <div className="input ordenar first_option">
+                                <div className="labed-input ordenar first_option">
                                     <select>
                                         <option value='0' disabled selected>Minímo de quartos</option>
                                         <option value='1' >1 Quarto</option>
@@ -89,7 +90,7 @@ export default function FiltroCatalogo() {
                                     </select>
                                 </div>
 
-                                <div className="input ordenar">
+                                <div className="labed-input ordenar">
                                     <select>
                                         <option value='0' disabled selected>Minímo de banheiros</option>
                                         <option value='1' >1 Banheiro</option>

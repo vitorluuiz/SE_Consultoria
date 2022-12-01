@@ -39,7 +39,6 @@ export default function Cadastro() {
                             <label for="contraSenha">Confirme a senha</label>
                             <input type="password" id="contraSenha" value={ContraSenha} onChange={(e) => setContraSenha(e.target.value)}></input>
                         </div>
-
                     </div>
 
                     <buttom className="btnPressionavel btnLogin">Cadastro</buttom>

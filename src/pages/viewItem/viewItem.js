@@ -94,7 +94,7 @@ export default function ViewItem() {
                 <article className="item_conteudo">
                     {/* Imagem */}
                     <div>
-                        <img className="item_img" alt='foto principal de um imóvel' src='https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg' />
+                        <img className="item_img" alt='foto principal do imóvel' src='https://richtergruppe.com.br/wp-content/uploads/312484-como-escolher-o-momento-certo-para-vender-um-terreno-ou-imovel.jpg' />
                     </div>
 
                     {/* Informacoes */}
@@ -117,12 +117,12 @@ export default function ViewItem() {
                                         <span>2 Vagas de garagem</span>
                                     </div>
                                 </div>
-                                <span id="localizacao" className='span_preto'>Morumbi, São Paulo</span>
+                                <span id="localizacao">Morumbi, São Paulo</span>
                             </div>
 
                             {/* Direita */}
                             <div className="column infos_right">
-                                <span id="valor_catalogo" className='span_preto'>R$1.300.000,00 A vista</span>
+                                <span id="valor_catalogo">R$1.300.000 A vista</span>
                                 <div id="botao_vermais" >
                                     <Link className="btnPressionavel row alinhado" to='/info'>Ver mais</Link>
                                 </div>
@@ -132,7 +132,6 @@ export default function ViewItem() {
                     </div>
 
                 </article>
-
             </section>
 
 

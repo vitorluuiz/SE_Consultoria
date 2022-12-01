@@ -48,7 +48,7 @@ export default function CatalogoVenda() {
 
                                     {/* Direita */}
                                     <div className="column infos_right">
-                                        <span id="valor_catalogo">R$1.300.000,00 A vista</span>
+                                        <span id="valor_catalogo">R$1.300.000 A vista</span>
                                         <div id="botao_vermais" >
                                             <Link className="btnPressionavel row alinhado" to='/info'>Ver mais</Link>
                                         </div>
@@ -90,7 +90,7 @@ export default function CatalogoVenda() {
 
                                     {/* Direita */}
                                     <div className="column infos_right">
-                                        <span id="valor_catalogo">R$1.300.000,00 A vista</span>
+                                        <span id="valor_catalogo">R$1.300.000 A vista</span>
                                         <div id="botao_vermais" >
                                             <Link className="btnPressionavel row alinhado" to='/'>Ver mais</Link>
                                         </div>
@@ -131,7 +131,7 @@ export default function CatalogoVenda() {
 
                                     {/* Direita */}
                                     <div className="column infos_right">
-                                        <span id="valor_catalogo">R$1.300.000,00 A vista</span>
+                                        <span id="valor_catalogo">R$1.300.000 A vista</span>
                                         <div id="botao_vermais" >
                                             <Link className="btnPressionavel row alinhado" to='/'>Ver mais</Link>
                                         </div>

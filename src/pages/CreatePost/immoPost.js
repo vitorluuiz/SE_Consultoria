@@ -25,23 +25,23 @@ export default function CadastroImmo() {
 
                     <form id='immo'>
 
-                        <div className='inputBox'>
+                        <div className='inputBox labed-input'>
                             <label>Titulo da publicação</label>
                             <input></input>
                         </div>
 
-                        <div className='row espacado'>
-                            <div className='inputBox'>
+                        <div className='double-input row espacado'>
+                            <div className='inputBox labed-input'>
                                 <label>Categoria da publicação</label>
                                 <input></input>
                             </div>
-                            <div className='inputBox'>
+                            <div className='inputBox labed-input'>
                                 <label>Categoria da propriedade</label>
                                 <input></input>
                             </div>
                         </div>
 
-                        <div className='inputBox'>
+                        <div className='inputBox labed-input'>
                             <label>Bairro</label>
                             <select>
                                 <option value='0' selected>Escolher</option>
@@ -49,23 +49,23 @@ export default function CadastroImmo() {
                             </select>
                         </div>
 
-                        <div id='immo' className='row espacado'>
-                            <div className='inputBox'>
+                        <div id='immo' className='double-input row espacado'>
+                            <div className='inputBox labed-input'>
                                 <label>Aluguel</label>
                                 <input></input>
                             </div>
-                            <div className='inputBox'>
+                            <div className='inputBox labed-input'>
                                 <label>IPTU + Condomínio</label>
                                 <input></input>
                             </div>
                         </div>
 
-                        <div id='immo' className='row espacado'>
-                            <div className='inputBox'>
+                        <div id='immo' className='double-input row espacado'>
+                            <div className='inputBox labed-input'>
                                 <label>Preço da venda</label>
                                 <input></input>
                             </div>
-                            <div className='inputBox'>
+                            <div className='inputBox labed-input'>
                                 <label>Área contruida</label>
                                 <input></input>
                             </div>

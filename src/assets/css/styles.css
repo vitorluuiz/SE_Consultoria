@@ -85,6 +85,10 @@ input, .masked_input, select {
   margin-bottom: 5px;
 }
 
+.double-input > div{
+width: 49%;
+}
+
 .container {
   width: 84.375%;
   margin: 0 auto;
