@@ -9,41 +9,29 @@
     background-color: white;
     margin-bottom: 2vh;
     padding: 20px 50px;
-    height: 80vh;
+    min-height: 80vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: var(--borda);
 }
 
-h1#immo {
-    margin-bottom: 2.5%;
+.suport_immo>section {
+    width: 47%;
+    height: 100%;
 }
 
-form#immo {
+#post-tittle {
+    margin-bottom: 20px;
+}
+
+.form-post {
     width: 100%;
 }
 
 .inputBox {
     display: flex;
     flex-direction: column;
-}
-
-.input#immo {
-    width: 100% !important;
-}
-
-#immo .input {
-    width: 48%;
-}
-
-#immo .input label {
-    font-size: 1em;
-}
-
-#immo .input input {
-    height: 45px;
-}
-
-section#immo {
-    width: 47%;
-    height: 94%;
 }
 
 .background_immo_rooms {
@@ -57,51 +45,52 @@ section#immo {
     padding: 8px;
 }
 
-.immo_rooms div input {
-    width: 27%;
-    height: 30px;
+.immo_rooms input {
+    width: 100%;
+    height: 25px;
     text-align: center;
-    margin-left: 7px;
+    margin-top: 5px;
 }
 
-#input_terreno div input{
+#input_terreno div input {
     width: 70%;
     margin-top: 4px;
 }
 
-#img_immo_suport{
+#img_immo_suport {
     height: 45%;
 }
 
-.suport_img_immo{
-    width: 38%;
+.suport_img_immo {
+    width: 78%;
     height: 100%;
 }
 
-.background_img_immo{
+.background_img_immo {
     background-color: var(--cinza);
     width: 100%;
-    height: 92%;
+    min-height: 200px;
+    margin-bottom: 20px;
 }
 
-.addImg_immo{
+.addImg_immo {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 20%;
-    height: 100%;
+    min-height: 200px;
 }
 
-.addImg_immo:active{
+.addImg_immo:active {
     transform: scale(0.99);
 }
 
-.addImg_immo:hover{
+.addImg_immo:hover {
     background-color: var(--cinzaClaro);
 }
 
-#btnAprove{
+#btnAprove {
     width: 100%;
     height: 70px;
     color: var(--branco);
@@ -204,11 +193,52 @@ h1#view_item {
     box-shadow: 0 3px 7px -1px var(--sombra);
 }
 
-#titulo_lista{
+#titulo_lista {
     margin-top: 2vh;
     margin-bottom: 2vh;
 }
 
-.span_preto{
+.span_preto {
     color: black;
+}
+
+@media (max-width: 1300px) {
+    .suport_immo {
+        flex-direction: column;
+    }
+
+    .suport_immo>section {
+        width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .suport_immo {
+        padding: 20px 15px;
+    }
+
+    .double-input {
+        flex-direction: column;
+    }
+
+    .double-input>div {
+        width: 100%;
+    }
+
+    #img_immo_suport{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .suport_img_immo, .addImg_immo{
+        width: 100%;
+    }
+
+    .addImg_immo{
+        margin-bottom: 10px;
+    }
+
+    #btnAprove{
+        font-size: 1.25em;
+    }
 }

@@ -18,12 +18,12 @@ export default function CadastroImmo() {
     return (
         <div className='background_immo'>
 
-            <div className='container row espacado alinhado suport_immo'>
+            <div className='suport_immo container'>
 
                 <section className='column'>
-                    <h1 id='immo'>Cadastrar Imóvel</h1>
+                    <h1 id='post-tittle'>Cadastrar Imóvel</h1>
 
-                    <form id='immo'>
+                    <form className='form-post'>
 
                         <div className='inputBox labed-input'>
                             <label>Titulo da publicação</label>
@@ -33,11 +33,16 @@ export default function CadastroImmo() {
                         <div className='double-input row espacado'>
                             <div className='inputBox labed-input'>
                                 <label>Categoria da publicação</label>
-                                <input></input>
+                                <select>
+                                    <option value='0'>Escolher</option>
+                                </select>
                             </div>
+
                             <div className='inputBox labed-input'>
                                 <label>Categoria da propriedade</label>
-                                <input></input>
+                                <select>
+                                    <option value='0'>Escolher</option>
+                                </select>
                             </div>
                         </div>
 
@@ -81,49 +86,32 @@ export default function CadastroImmo() {
 
                         <article className='immo_rooms column alinhado'>
                             <label>Quartos</label>
-                            <div className='row alinhado centrado'>
-                                <img alt='Icone de uma cama' src={quartoIcon} />
-                                <input></input>
-                            </div>
+                            <input></input>
                         </article>
 
                         <article className='immo_rooms column alinhado'>
                             <label>Salas</label>
-                            <div className='row alinhado centrado'>
-                                <img alt='Icone de uma poltrona' src={salaIcon} />
-                                <input></input>
-                            </div>
+                            <input></input>
                         </article>
 
                         <article className='immo_rooms column alinhado'>
                             <label>Cozinhas</label>
-                            <div className='row alinhado centrado'>
-                                <img alt='icone de um forno' src={cozinhaIcon} />
-                                <input></input>
-                            </div>
+                            <input></input>
                         </article>
 
                         <article className='immo_rooms column alinhado'>
                             <label>Banheiros</label>
-                            <div className='row alinhado centrado'>
-                                <img alt='Icone de um chuveiro' src={banheiroIcon} />
-                                <input></input>
-                            </div>
+                            <input></input>
                         </article>
 
                         <article className='immo_rooms column alinhado'>
                             <label>Garagem</label>
-                            <div className='row alinhado centrado'>
-                                <img alt='Icone de uma garagem' src={garagemIcon} />
-                                <input></input>
-                            </div>
+                            <input></input>
                         </article>
 
-                        <article id='input_terreno' className='immo_rooms column alinhado'>
+                        <article className='immo_rooms column alinhado'>
                             <label>Terreno</label>
-                            <div className='row alinhado centrado'>
-                                <input></input>
-                            </div>
+                            <input></input>
                         </article>
 
                     </div>
@@ -133,12 +121,6 @@ export default function CadastroImmo() {
                             <label>Foto principal</label>
                             <div className='flex alinhado centrado background_img_immo'>
                                 <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarBrancoIcon} />
-                            </div>
-                        </div>
-                        <div className='suport_img_immo'>
-                            <label>Todas as fotos</label>
-                            <div className='flex alinhado centrado background_img_immo'>
-                                <img alt='Icone de ver imagens' id='icone_branco' src={img} />
                             </div>
                         </div>
                         <div className='addImg_immo'>

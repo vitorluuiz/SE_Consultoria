@@ -7,7 +7,8 @@ header {
     height: 100%;
 }
 
-.apoioHeader a, nav {
+.apoioHeader a,
+nav {
     font-size: 1.05em;
 }
 
@@ -27,12 +28,12 @@ header {
     margin: 0 auto;
 }
 
-.infosCenter__nav a{
+.infosCenter__nav a {
     width: 40%;
 }
 
-.infosCenter__nav a#aluguel{
-text-align: end;
+.infosCenter__nav a#aluguel {
+    text-align: end;
 }
 
 .linha_vertical#header {
@@ -67,7 +68,9 @@ footer {
     height: 92%;
 }
 
-.apoio_footer__div > span, .apoio_footer__div > #logo_footer__Img, .apoio_footer__div > .apoioCreditos__nav{
+.apoio_footer__div>span,
+.apoio_footer__div>#logo_footer__Img,
+.apoio_footer__div>.apoioCreditos__nav {
     width: 33%;
 }
 
