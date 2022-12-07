@@ -47,3 +47,18 @@
 .social_info span {
     color: var(--black);
 }
+
+@media (max-width: 800px){
+    .bannerHome{
+        height: 50vh;
+    }
+
+    .suport_social_info {
+        flex-wrap: wrap;
+    }
+
+    .social_info {
+        justify-content: center;
+        width: 80%;
+    }
+}

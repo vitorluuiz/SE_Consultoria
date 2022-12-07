@@ -28,12 +28,14 @@ nav {
     margin: 0 auto;
 }
 
-.infosCenter__nav a {
+.infosCenter__nav > a {
     width: 40%;
 }
 
 .infosCenter__nav a#aluguel {
-    text-align: end;
+    display: flex;
+    text-align: flex-end;
+    justify-content: flex-end;
 }
 
 .linha_vertical#header {
@@ -45,7 +47,7 @@ nav {
 .infosRight__nav {
     height: 100%;
     width: 20vw;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 #botaoEntrar {
@@ -81,7 +83,7 @@ footer {
 
 .apoioCreditos__nav {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .apoioCreditos__nav span {
@@ -112,7 +114,7 @@ footer {
         margin: auto;
     }
 
-    .infosCenter__nav a {
+    .infosCenter__nav > a {
         font-size: medium;
     }
 

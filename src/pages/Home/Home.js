@@ -17,10 +17,10 @@ export default function Home() {
       <Header />
 
       <div className="bannerHome column alinhado espacado">
-        
+
         <h1 id="tittle_home">Traga seu imóvel pra cá</h1>
         <Link to='/Cadastrar/Imovel' id="cadastrarBtn" className="btnPressionavel">Cadastrar Imóvel</Link>
-        
+
       </div>
 
       <div className="suport_social_info row centrado">
@@ -46,8 +46,8 @@ export default function Home() {
         </div>
 
       </div>
-
-      <Footer />
+      {/* 
+      <Footer /> */}
     </div>
   );
 }

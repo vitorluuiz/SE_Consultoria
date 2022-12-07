@@ -11,6 +11,7 @@ main#catalogo {
 
 .item_conteudo {
     width: 49%;
+    min-height: 600px;
     background-color: var(--cinzaClaro);
     border-radius: var(--borda);
     margin-bottom: 4vh;
@@ -28,21 +29,37 @@ main#catalogo {
 
 .item_infos {
     width: 100%;
+    min-height: 250px;
     padding: 16px 16px;
 }
 
 .apoio_infos {
     width: 100%;
+    min-height: 160px;
     justify-content: space-between;
 }
 
 .infos_left {
+    justify-content: space-between;
     width: 60%;
 }
 
 .descricao_imovel {
-    margin: 2vh 0;
-    justify-content: space-between;
+    margin: 1vh 0;
+    flex-wrap: wrap;
+}
+
+.labed-img {
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+}
+
+.block-img {
+    display: flex;
+    align-items: center;
 }
 
 h2#catalogo {
@@ -52,9 +69,8 @@ h2#catalogo {
 
 #catalogo span {
     color: var(--preto);
-    font-size: 19px;
+    font-size: 1.3em;
     font-weight: 500;
-    text-align: start;
 }
 
 #span_right span {
@@ -71,23 +87,24 @@ h2#catalogo {
 
 .infos_right {
     width: 38%;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: flex-end;
 }
 
-.infos_right > span{
+.infos_right>span {
     color: black;
     text-align: end;
 }
 
 #valor_catalogo {
     font-weight: 700 !important;
-    font-size: 22px;
+    font-size: 1.5em !important;
+    margin-bottom: 5px;
 }
 
 #botao_vermais {
     height: 40%;
-    width: 80%;
+    width: 100%;
     box-shadow: 0 3px 7px -1px var(--sombra);
 }
 
@@ -111,29 +128,28 @@ h2#catalogo {
     box-shadow: 0 5px 30px 1px var(--sombra);
 }
 
-.filtro_visivel{
+.filtro_visivel {
     transition: all cubic-bezier(0.215, 0.610, 0.355, 1) 400ms;
     top: 0vh;
 }
 
-#background_modal{
+#background_modal {
     padding: 2vh 0 0 0;
     width: 100%;
     height: 100%;
 }
 
-.filtering-top{
+.filtering-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.filtering-top > div{
+.filtering-top>div {
     width: 24%;
 }
 
 .background_filter {
-    /* background-color: whitesmoke; */
     background-color: white;
     padding-bottom: 2vh;
 }
@@ -196,4 +212,90 @@ button.ordenarSelected {
 
 .last_option {
     margin-right: 0;
+}
+
+@media (max-width: 1000px) {
+    .apoio_conteudo_catalogo {
+        flex-direction: column;
+    }
+
+    .item_conteudo {
+        width: 100%;
+    }
+}
+
+@media (max-width: 800px) {
+    .labed-img {
+        width: 48%;
+    }
+
+    .barra_ordem {
+        min-height: min-content;
+        flex-direction: column;
+        margin-bottom: 30px;
+    }
+
+    .barra_ordem>h2 {
+        font-size: 1.8em;
+        margin-bottom: 8px;
+    }
+
+    .barra_ordem>button {
+        width: 100%;
+    }
+
+    #localizacao,
+    #valor_catalogo,
+    #botao_vermais {
+        font-size: 1em !important;
+    }
+}
+
+@media (max-width: 900px) {
+
+    /* Filter COmponent */
+    #filterBar {
+        flex-direction: column;
+    }
+
+    .filtro {
+        min-height: 500px;
+        height: 65vh;
+    }
+
+    #closeBar {
+        height: 10%;
+    }
+
+    .filtering-top {
+        height: 40%;
+        flex-wrap: wrap;
+    }
+
+    .filtering-top>.labed-input {
+        width: 48%;
+    }
+
+    .filtering-top>.labed-input>label {
+        font-size: 0.8em;
+    }
+
+    #requisitos {
+        flex-wrap: wrap;
+    }
+
+    #requisitos>div {
+        width: 100%;
+        max-height: 50px;
+        padding: 5px 0;
+        margin: 0;
+    }
+
+    #ordenar {
+        flex-wrap: wrap;
+    }
+
+    #ordenar>button {
+        width: 48%;
+    }
 }

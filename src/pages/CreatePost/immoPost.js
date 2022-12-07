@@ -2,14 +2,8 @@ import React from 'react'
 
 import Footer from '../../components/footer.js'
 
-import salaIcon from '../../assets/img/icones/chair.svg'
-import cozinhaIcon from '../../assets/img/icones/cooking.svg'
-import banheiroIcon from '../../assets/img/icones/shower.svg'
-import quartoIcon from '../../assets/img/icones/bed.svg'
-import garagemIcon from '../../assets/img/icones/garage.svg'
 import adicionarIcon from '../../assets/img/icones/add.svg'
 import adicionarBrancoIcon from '../../assets/img/icones/addWhite.svg'
-import img from '../../assets/img/icones/image.svg'
 
 import '../../assets/css/immo.css'
 
