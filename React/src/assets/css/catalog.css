@@ -11,7 +11,7 @@ main#catalogo {
 
 .item_conteudo {
     width: 49%;
-    min-height: 600px;
+    min-height: auto;
     background-color: var(--cinzaClaro);
     border-radius: var(--borda);
     margin-bottom: 4vh;
@@ -50,7 +50,8 @@ main#catalogo {
 }
 
 .labed-img {
-    width: 33%;
+    max-width: 48%;
+    min-width: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,15 +63,12 @@ main#catalogo {
     align-items: center;
 }
 
-h2#catalogo {
-    font-weight: 700;
-    font-size: 22px;
+.block-img span{
+    margin-top: 5px;
 }
 
-#catalogo span {
-    color: var(--preto);
-    font-size: 1.3em;
-    font-weight: 500;
+h2#catalogo {
+    font-size: 22px;
 }
 
 #span_right span {
@@ -86,7 +84,7 @@ h2#catalogo {
 }
 
 .infos_right {
-    width: 38%;
+    width: 32%;
     justify-content: flex-end;
     align-items: flex-end;
 }
@@ -103,7 +101,6 @@ h2#catalogo {
 }
 
 #botao_vermais {
-    height: 40%;
     width: 100%;
     box-shadow: 0 3px 7px -1px var(--sombra);
 }
@@ -225,9 +222,6 @@ button.ordenarSelected {
 }
 
 @media (max-width: 800px) {
-    .labed-img {
-        width: 48%;
-    }
 
     .barra_ordem {
         min-height: min-content;

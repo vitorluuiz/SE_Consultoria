@@ -39,6 +39,22 @@ namespace SE_WebAPI.Repositories
                 .ToList();
         }
 
+        public Usuario Login(string celular, string senha)
+        {
+            Usuario tentativaLogin = ctx.Usuarios.FirstOrDefault(u => u.Celular == celular);
+
+            if (tentativaLogin != null)
+            {
+                bool isValidPassword = Criptografia.CompararSenha(senha, tentativaLogin.Senha);
+
+                if (isValidPassword)
+                {
+                    return tentativaLogin;
+                }
+            }
+            return null;
+        }
+
         public void RemoverUsuario(int idUsuario)
         {
             ctx.Usuarios.Remove(ListarPorId(idUsuario));

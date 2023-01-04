@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj": {}
+    "C:\\Users\\vitor\\OneDrive\\Documentos\\Programacao\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj": {
+    "C:\\Users\\vitor\\OneDrive\\Documentos\\Programacao\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\vitor\\OneDrive\\Documentos\\Programacao\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj",
         "projectName": "SE_WebAPI",
-        "projectPath": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj",
+        "projectPath": "C:\\Users\\vitor\\OneDrive\\Documentos\\Programacao\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj",
         "packagesPath": "C:\\Users\\vitor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\SE_Consultoria\\API\\SE_WebAPI\\obj\\",
+        "outputPath": "C:\\Users\\vitor\\OneDrive\\Documentos\\Programacao\\SE_Consultoria\\API\\SE_WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\vitor\\AppData\\Roaming\\NuGet\\NuGet.Config",

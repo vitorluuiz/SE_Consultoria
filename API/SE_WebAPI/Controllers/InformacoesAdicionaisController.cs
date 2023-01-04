@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SE_WebAPI.Domains;
 using SE_WebAPI.Interfaces;
 using SE_WebAPI.Repositories;
+using SE_WebAPI.ViewModels;
 using System;
 using System.Collections.Generic;
 
@@ -53,10 +55,12 @@ namespace SE_WebAPI.Controllers
         }
 
         [HttpPost("Multiplas/{idImovel}")]
-        public IActionResult CadastrarVarias(short idImovel, List<InformacoesAdicionai> newInfos)
+        public IActionResult CadastrarVarias(short idImovel, InformacoesAdicionaisViewmodel json)
         {
             try
             {
+                
+                List<InformacoesAdicionai> newInfos = JsonConvert.DeserializeObject<List<InformacoesAdicionai>>(json.Json);
                 _informacoesAdicionaisRepository.CadastrarInfosDeImovel(idImovel, newInfos);
                 return StatusCode(201, newInfos);
             }

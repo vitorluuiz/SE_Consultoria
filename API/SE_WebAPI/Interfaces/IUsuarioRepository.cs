@@ -9,5 +9,6 @@ namespace SE_WebAPI.Interfaces
         bool CadastrarUsuario(Usuario usuario);
         void RemoverUsuario(int idUsuario);
         Usuario ListarPorId(int idUsuario);
+        Usuario Login(string celular, string senha);
     }
 }

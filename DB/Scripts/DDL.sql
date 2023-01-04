@@ -48,7 +48,8 @@ GO
 
 CREATE TABLE TipoInfo(
 idTipoInfo TINYINT PRIMARY KEY IDENTITY,
-TipoInfo VARCHAR(20)
+TipoInfo VARCHAR(20),
+ImgTipoInfo VARCHAR(255)
 )
 GO
 
@@ -56,6 +57,6 @@ CREATE TABLE InformacoesAdicionais(
 idInfo SMALLINT PRIMARY KEY IDENTITY,
 idTipoInfo TINYINT FOREIGN KEY REFERENCES TipoInfo(idTipoInfo),
 idImovel SMALLINT FOREIGN KEY REFERENCES Imoveis(idImovel),
-Quantidade TINYINT,
+Quantidade TINYINT
 )
 GO

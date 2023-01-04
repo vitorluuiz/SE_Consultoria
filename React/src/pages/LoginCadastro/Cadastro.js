@@ -1,16 +1,42 @@
 import React, { useState } from "react";
+import axios from "axios";
+
+import { FormatCelular, FormatDDD } from '../../services/formater.js';
 
 import Footer from '../../components/footer.js'
 import MaskedInput from '../../assets/jsExtentions/MaskedInput/maskedInput.js'
 
 import '../../assets/css/login.css'
+import { useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
 
+    const navigate = useNavigate();
     const [Nome, setNome] = useState('');
-    const [Telefone, setTelefone] = useState('');
+    const [Celular, setCelular] = useState('');
     const [Senha, setSenha] = useState('');
     const [ContraSenha, setContraSenha] = useState('');
+
+    function CadastrarUsuario(event) {
+        event.preventDefault();
+
+        if (Senha === ContraSenha && Nome != null && Celular != null) {
+            axios.post('Usuarios', {
+                nomeUsuario: Nome,
+                ddd: FormatDDD(Celular),
+                celular: FormatCelular(Celular),
+                senha: Senha
+            })
+                .then(response => {
+                    if (response.status === 201) {
+                        navigate('/');
+                    }
+                    else {
+                        window.alert('Não foi possível concluir o cadastro')
+                    }
+                })
+        }
+    }
 
     return (
         <div className="fundo_login column">
@@ -27,7 +53,7 @@ export default function Cadastro() {
 
                         <div className="labed-input">
                             <label for="telefone">Telefone</label>
-                            <MaskedInput mask="(99) 99999-9999" placeholder="(DDD) 98765-4321" id="telefone" value={Telefone} onChange={(e) => setTelefone(e.target.value)}></MaskedInput>
+                            <MaskedInput mask="(99) 99999-9999" placeholder="(DDD) 98765-4321" id="telefone" value={Celular} onChange={(e) => setCelular(e.target.value)}></MaskedInput>
                         </div>
 
                         <div className="labed-input">
@@ -41,7 +67,7 @@ export default function Cadastro() {
                         </div>
                     </div>
 
-                    <buttom className="btnPressionavel btnLogin">Cadastro</buttom>
+                    <button className="btnPressionavel btnLogin" onClick={CadastrarUsuario}>Cadastro</button>
                 </form>
 
             </div>

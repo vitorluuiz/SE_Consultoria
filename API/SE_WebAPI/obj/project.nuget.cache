@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "D2UASTQ7Pv9kQ2Z1DGNh/F8969V2yF7z2d2E9ESvc5hVmI8Jq4lxUISMwC4WimsVtHjo75HcPT7UpZJUa6MhLA==",
+  "dgSpecHash": "2Sj3b2L3by3auVaaAU3zGV1V37FbkPZhHi9dOSoSWGw63ZKR3iahc6nMSgUftMAsE5q7o5AZQWWSgxFwO6jfBw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\vitor\\OneDrive\\Área de Trabalho\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj",
+  "projectFilePath": "C:\\Users\\vitor\\OneDrive\\Documentos\\Programacao\\SE_Consultoria\\API\\SE_WebAPI\\SE_WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vitor\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\vitor\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
