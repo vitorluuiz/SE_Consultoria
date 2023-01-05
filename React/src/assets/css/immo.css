@@ -134,14 +134,14 @@
     padding: 20px 7.8125vw;
 }
 
-.titulo-immo{
+.titulo-immo {
     color: black;
     font-size: 2em;
     font-weight: 500;
     margin: 3vh 0;
 }
 
-.info-cards{
+.info-cards {
     justify-content: space-between;
 }
 
@@ -155,20 +155,33 @@
     font-weight: 500;
 }
 
-p.desc-immo{
+p.desc-immo {
     color: black;
     margin: 20px 0;
 }
 
-span#local{
+span#local {
     color: black;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: 500;
 }
 
-.right-info-card{
+.right-info-card {
     width: 35%;
-    background-color: rgb(194, 171, 216);
+    justify-content: flex-end;
+}
+
+#assign-btn {
+    width: 100%;
+    min-height: 70px;
+    margin-top: 10px;
+}
+
+span#price {
+    text-align: end;
+    color: black;
+    font-size: 1.8em;
+    width: 100%;
 }
 
 #titulo_lista {
@@ -187,6 +200,24 @@ span#local{
 
     .suport_immo>section {
         width: 100%;
+    }
+
+    .desc-suport{
+        padding: 30px 2.5vw;
+    }
+
+    .info-cards {
+        flex-direction: column;
+    }
+
+    .left-info-card,
+    .right-info-card {
+        width: 100%;
+    }
+
+    span#price {
+        margin-top: 30px;
+        text-align: center;
     }
 }
 

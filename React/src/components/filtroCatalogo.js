@@ -49,7 +49,7 @@ export default function FiltroCatalogo() {
                             <div className="labed-input">
                                 <label>Valor máximo</label>
                                 <select>
-                                    <option value='0' selected>Indiferente</option>
+                                    <option defaultValue='0'>Indiferente</option>
                                     <option value='1'>Menor que R$100.000</option>
                                 </select>
                             </div>
@@ -57,7 +57,7 @@ export default function FiltroCatalogo() {
                             <div className="labed-input">
                                 <label>Tipo de propriedade</label>
                                 <select>
-                                    <option value='0' disabled selected>Tipo de propriedade</option>
+                                    <option value='0' disabled>Tipo de propriedade</option>
                                     <option value='1' >Casa</option>
                                     <option value='2' >Galpão</option>
                                 </select>
@@ -66,7 +66,7 @@ export default function FiltroCatalogo() {
                             <div className="labed-input">
                                 <label>Bairro</label>
                                 <select>
-                                    <option value='0' selected>Indiferente</option>
+                                    <option defaultValue='0'>Indiferente</option>
                                     <option value='1'>Carrão</option>
                                 </select>
                             </div>
@@ -84,7 +84,7 @@ export default function FiltroCatalogo() {
                             <div id="requisitos" className="row">
                                 <div className="labed-input ordenar first_option">
                                     <select>
-                                        <option value='0' disabled selected>Minímo de quartos</option>
+                                        <option value='0' disabled >Minímo de quartos</option>
                                         <option value='1' >1 Quarto</option>
                                         <option value='2' >2 Quartos</option>
                                     </select>
@@ -92,7 +92,7 @@ export default function FiltroCatalogo() {
 
                                 <div className="labed-input ordenar">
                                     <select>
-                                        <option value='0' disabled selected>Minímo de banheiros</option>
+                                        <option value='0' disabled>Minímo de banheiros</option>
                                         <option value='1' >1 Banheiro</option>
                                         <option value='2' >2 Banheiros</option>
                                     </select>

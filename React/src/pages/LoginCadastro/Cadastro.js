@@ -47,22 +47,22 @@ export default function Cadastro() {
 
                     <div className="inputs-apoio" id="cadastro">
                         <div className="labed-input">
-                            <label for="nome">Nome de usuário</label>
+                            <label htmlFor="nome">Nome de usuário</label>
                             <input id="nome" value={Nome} onChange={(e) => setNome(e.target.value)}></input>
                         </div>
 
                         <div className="labed-input">
-                            <label for="telefone">Telefone</label>
+                            <label htmlFor="telefone">Telefone</label>
                             <MaskedInput mask="(99) 99999-9999" placeholder="(DDD) 98765-4321" id="telefone" value={Celular} onChange={(e) => setCelular(e.target.value)}></MaskedInput>
                         </div>
 
                         <div className="labed-input">
-                            <label for="senha">Senha</label>
+                            <label htmlFor="senha">Senha</label>
                             <input type="password" id="senha" value={Senha} onChange={(e) => setSenha(e.target.value)}></input>
                         </div>
 
                         <div className="labed-input">
-                            <label for="contraSenha">Confirme a senha</label>
+                            <label htmlFor="contraSenha">Confirme a senha</label>
                             <input type="password" id="contraSenha" value={ContraSenha} onChange={(e) => setContraSenha(e.target.value)}></input>
                         </div>
                     </div>

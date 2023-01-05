@@ -19,31 +19,30 @@ import Banheiros from '../../assets/img/icones/shower.png'
 
 export default function ViewItem() {
 
+    const [idImovel, setIdImovel] = useState(55)
     const [Imovel, setImovelInfos] = useState([]);
-    const [ImovelList, setImovelList] = useState([])
+    const [ExtraInfos, setExtraInfos] = useState([]);
+    const [ImovelList, setImovelList] = useState([]);
 
     function BuscarImoveis() {
-        axios.get('Imovel')
-            .then(response => {
-                if (response.status === 200) {
-                    setImovelList(response.data);
-                }
-            });
+            axios.get('Imovel')
+                .then(response => {
+                    if (response.status === 200) {
+                        setImovelList(response.data);
+                    }
+                });
 
-        axios.get('Imovel/ListarPorId/54')
-            .then(response => {
-                if (response.status === 200) {
-                    setImovelInfos(response.data)
-                }
-            })
-    }
-
-    var info1 = {
-        idTipoInfo: 1,
-        quantidade: 1
+            axios.get('Imovel/ListarPorId/' + idImovel)
+                .then(response => {
+                    if (response.status === 200) {
+                        setImovelInfos(response.data)
+                        setExtraInfos(response.data.informacoesAdicionais)
+                    }
+                })
     }
 
     useEffect(BuscarImoveis, [])
+
     return (
         <div className='body_page'>
             <Header />
@@ -58,7 +57,7 @@ export default function ViewItem() {
                 <div className='row info-cards'>
                     <div className='left-info-card'>
                         <div className="row descricao_imovel">
-                            {Imovel.informacoesAdicionais.map((info) => {
+                            {ExtraInfos.map((info) => {
                                 return (
                                     info.idTipoInfo === 1 ?
                                         <div key={info.idTipoInfo} className="labed-img">
@@ -120,26 +119,17 @@ export default function ViewItem() {
                         <p className='desc-immo'>
                             Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
 
-                            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                            The standard chunk of Lorem  Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
                         </p>
                         <span id='local'>{Imovel.bairro}</span>
                     </div>
 
-                    <div className='right-info-card'>
-                        <button>Assinalar interesse</button>
+                    <div className='column right-info-card'>
+                        <span id='price'>Valor de venda {Imovel.valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                        <button id='assign-btn' className='btnPressionavel'>Assinalar interesse</button>
                     </div>
                 </div>
             </section >
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -210,14 +200,14 @@ export default function ViewItem() {
                                                     )
                                                 }))}
 
-                                                <div key={imovel.idImovel} className="labed-img">
+                                                <div className="labed-img">
                                                     <label>Terreno</label>
                                                     <div className="block-img">
                                                         <span>{imovel.terreno}m²</span>
                                                     </div>
                                                 </div>
 
-                                                <div key={imovel.idImovel} className="labed-img">
+                                                <div className="labed-img">
                                                     <label>Construído</label>
                                                     <div className="block-img">
                                                         <span>{imovel.construido}m²</span>
@@ -225,7 +215,7 @@ export default function ViewItem() {
                                                 </div>
                                             </div>
 
-                                            <span id="localizacao">{imovel.bairro}</span>
+                                            <span id="local">{imovel.bairro}</span>
                                         </div>
 
                                         {/* Direita */}

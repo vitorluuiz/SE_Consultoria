@@ -43,12 +43,12 @@ export default function Login() {
 
                     <div className="inputs-apoio">
                         <div className="labed-input">
-                            <label for="telefone">Telefone</label>
+                            <label htmlFor="telefone">Telefone</label>
                             <MaskedInput className="masked_input" id="telefone" mask="(99) 99999-9999" placeholder="(DDD) 98765-4321" value={Celular} onChange={(e) => setCelular(e.target.value)} ></MaskedInput>
                         </div>
 
                         <div className="labed-input">
-                            <label for="senha">Senha</label>
+                            <label htmlFor="senha">Senha</label>
                             <input type="password" id="senha" value={Senha} onChange={(e) => setSenha(e.target.value)}></input>
                         </div>
                     </div>

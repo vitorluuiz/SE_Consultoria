@@ -148,10 +148,10 @@ export default function CadastroImmo() {
                         <div className='inputBox labed-input'>
                             <label>Bairro</label>
                             <select value={Bairro} onChange={(e) => setBairro(e.target.value)}>
-                                <option value='0' selected>Escolher</option>
+                                <option defaultValue='0'>Escolher</option>
                                 {ListBairros.map((bairro => {
                                     return (
-                                        <option value={bairro.nome}>{bairro.nome}</option>
+                                        <option key={bairro.id} value={bairro.nome}>{bairro.nome}</option>
                                     )
                                 }))}
                             </select>

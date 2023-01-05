@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import Header from '../../components/header.js'
@@ -15,6 +15,7 @@ import '../../assets/css/catalog.css'
 
 export default function CatalogoVenda() {
 
+    const navigate = useNavigate();
     const [ImovelList, setImovelList] = useState([])
 
     function BuscarImoveis() {
@@ -103,16 +104,17 @@ export default function CatalogoVenda() {
                                                                                 <span>{info.quantidade}</span>
                                                                             </div>
                                                                         </div>
-                                                    )})}
+                                                    )
+                                                })}
 
-                                                <div key={imovel.idImovel} className="labed-img">
+                                                <div className="labed-img">
                                                     <label>Terreno</label>
                                                     <div className="block-img">
                                                         <span>{imovel.terreno}m²</span>
                                                     </div>
                                                 </div>
 
-                                                <div key={imovel.idImovel} className="labed-img">
+                                                <div className="labed-img">
                                                     <label>Construído</label>
                                                     <div className="block-img">
                                                         <span>{imovel.construido}m²</span>
@@ -120,14 +122,14 @@ export default function CatalogoVenda() {
                                                 </div>
                                             </div>
 
-                                            <span id="localizacao">{imovel.bairro}</span>
+                                            <span id="local">{imovel.bairro}</span>
                                         </div>
 
                                         {/* Direita */}
                                         <div className="column infos_right">
-                                            <span id="valor_catalogo">{imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                                            <span id="valor_catalogo">{imovel.valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                                             <div id="botao_vermais" >
-                                                <Link className="btnPressionavel row alinhado" to="/Info">Ver mais</Link>
+                                                <Link className="btnPressionavel row alinhado" to='/Info'>Ver mais</Link>
                                             </div>
                                         </div>
                                     </div>

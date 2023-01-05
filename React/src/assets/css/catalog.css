@@ -63,7 +63,7 @@ main#catalogo {
     align-items: center;
 }
 
-.block-img span{
+.block-img span {
     margin-top: 5px;
 }
 
@@ -95,7 +95,6 @@ h2#catalogo {
 }
 
 #valor_catalogo {
-    font-weight: 700 !important;
     font-size: 1.5em !important;
     margin-bottom: 5px;
 }
@@ -238,7 +237,7 @@ button.ordenarSelected {
         width: 100%;
     }
 
-    #localizacao,
+    #local,
     #valor_catalogo,
     #botao_vermais {
         font-size: 1em !important;
