@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import Header from '../../components/header.js'
@@ -10,12 +10,14 @@ import Quartos from '../../assets/img/icones/bed-room.png'
 import Salas from '../../assets/img/icones/chair.png'
 import Cozinhas from '../../assets/img/icones/cook.png'
 import Banheiros from '../../assets/img/icones/shower.png'
+import Garagem from '../../assets/img/icones/garage.png'
+import Endereco from '../../assets/img/icones/local.png'
 
 import '../../assets/css/catalog.css'
 
-export default function CatalogoVenda() {
+export default function CatalogoVenda({ main }) {
 
-    const navigate = useNavigate();
+    const { idTipoAnuncio } = useParams();
     const [ImovelList, setImovelList] = useState([])
 
     function BuscarImoveis() {
@@ -40,8 +42,14 @@ export default function CatalogoVenda() {
 
     return (
         <div>
-            <Header />
-            <Filtro />
+            {main !== false ?
+                <div>
+                    <Header />
+                    <Filtro />
+                </div>
+                :
+                null
+            }
 
             <main id="catalogo">
 
@@ -98,9 +106,9 @@ export default function CatalogoVenda() {
                                                                             </div>
                                                                         </div>
                                                                         : <div key={info.idTipoInfo} className="labed-img">
-                                                                            <label>Garagem</label>
+                                                                            <label>Vagas</label>
                                                                             <div className="block-img">
-                                                                                <img alt="Icone de um chuveiro" src={Banheiros} />
+                                                                                <img alt="Icone de uma vaga de garagem" src={Garagem} />
                                                                                 <span>{info.quantidade}</span>
                                                                             </div>
                                                                         </div>
@@ -122,14 +130,20 @@ export default function CatalogoVenda() {
                                                 </div>
                                             </div>
 
-                                            <span id="local">{imovel.bairro}</span>
+                                            <div className='row alinhado'>
+                                                <img alt='Icone de local' src={Endereco}></img>
+                                                <span id='local'>{imovel.bairro}</span>
+                                            </div>
                                         </div>
 
                                         {/* Direita */}
                                         <div className="column infos_right">
                                             <span id="valor_catalogo">{imovel.valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                                             <div id="botao_vermais" >
-                                                <Link className="btnPressionavel row alinhado" to='/Info'>Ver mais</Link>
+                                                <Link className="btnPressionavel row alinhado" to={{ pathname: '/Info/' + imovel.idImovel }} onClick={() => {
+                                                    window.location.replace();
+                                                }}>Ver mais
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +154,11 @@ export default function CatalogoVenda() {
 
                 </section>
             </main>
-            <Footer />
+            {main !== false ?
+                <Footer />
+                :
+                null
+            }
         </div>
     );
 }

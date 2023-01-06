@@ -17,9 +17,9 @@ export default function Header() {
                 </div>
 
                 <nav className="infosCenter__nav row alinhado espacado">
-                    <Link to='/Catalogo/Aluguel' id="aluguel" className="pressionavel" >Locação</Link>
+                    <Link to='/Catalogo/2' id="aluguel" className="pressionavel" >Locação</Link>
                     <hr className="linha_vertical" id="header" />
-                    <Link to='/Catalogo/Venda' className="pressionavel">Venda</Link>
+                    <Link to='/Catalogo/1' className="pressionavel">Venda</Link>
                 </nav>
 
                 <nav className="infosRight__nav row alinhado espacado">

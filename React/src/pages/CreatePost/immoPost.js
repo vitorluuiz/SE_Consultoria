@@ -7,6 +7,7 @@ import adicionarBrancoIcon from '../../assets/img/icones/addWhite.svg'
 
 import '../../assets/css/immo.css'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 export default function CadastroImmo() {
 
@@ -30,6 +31,7 @@ export default function CadastroImmo() {
     const [ListCategorias, setListCategorias] = useState([])
     const [ListBairros, setListBairros] = useState([])
     const [hasPulledSelects, setPulled] = useState(false)
+    const navigate = useNavigate();
 
     function PullSelects() {
         if (!hasPulledSelects) {
@@ -72,9 +74,6 @@ export default function CadastroImmo() {
             construido: AreaConstruida,
             terreno: Terreno
         }).then(response => {
-            if (response.status === 201) {
-                window.alert("Sucesso");
-            }
 
             var stringJson = JSON.stringify(
                 [{
@@ -92,6 +91,10 @@ export default function CadastroImmo() {
                 {
                     idTipoInfo: '4',
                     quantidade: Banheiros
+                },
+                {
+                    idTipoInfo: '5',
+                    quantidade: Garagem
                 }
                 ]
             )
@@ -99,6 +102,11 @@ export default function CadastroImmo() {
             axios.post('InformacoesAdicionais/Multiplas/' + response.data.idImovel, {
                 json: stringJson
             })
+                .then(response => {
+                    if (response.status === 201) {
+                        navigate('/');
+                    }
+                })
         })
     }
 

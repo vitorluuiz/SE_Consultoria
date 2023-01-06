@@ -4,10 +4,11 @@ import {
 
 import axios from 'axios'
 
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
+import Catalogo from '../Catalogo/catalogo'
 
 import '../../assets/css/immo.css'
 import '../../assets/css/catalog.css'
@@ -16,37 +17,45 @@ import Quartos from '../../assets/img/icones/bed-room.png'
 import Salas from '../../assets/img/icones/chair.png'
 import Cozinhas from '../../assets/img/icones/cook.png'
 import Banheiros from '../../assets/img/icones/shower.png'
+import Garagens from '../../assets/img/icones/garage.png'
+import Endereco from '../../assets/img/icones/local.png'
+
+import whatsappIcon from '../../assets/img/logos/whatsapp_logo.png'
+import instagramIcon from '../../assets/img/logos/instagram_logo.png'
+import facebookIcon from '../../assets/img/logos/facebook_logo.png'
 
 export default function ViewItem() {
 
-    const [idImovel, setIdImovel] = useState(55)
+    const { id } = useParams();
+    const navigate = useNavigate();
     const [Imovel, setImovelInfos] = useState([]);
     const [ExtraInfos, setExtraInfos] = useState([]);
     const [ImovelList, setImovelList] = useState([]);
+    const [hasError, setError] = useState(false);
+    const [hasPulled, setPulled] = useState(false);
 
     function BuscarImoveis() {
-            axios.get('Imovel')
-                .then(response => {
-                    if (response.status === 200) {
-                        setImovelList(response.data);
-                    }
-                });
+        axios.get('Imovel')
+            .then(response => {
+                if (response.status === 200) {
+                    setImovelList(response.data);
+                }
+            });
 
-            axios.get('Imovel/ListarPorId/' + idImovel)
-                .then(response => {
-                    if (response.status === 200) {
-                        setImovelInfos(response.data)
-                        setExtraInfos(response.data.informacoesAdicionais)
-                    }
-                })
+        axios.get('Imovel/ListarPorId/' + id)
+            .then(response => {
+                if (response.status === 200) {
+                    setImovelInfos(response.data)
+                    setExtraInfos(response.data.informacoesAdicionais)
+                }
+            })
     }
 
-    useEffect(BuscarImoveis, [])
+    useEffect(BuscarImoveis, [id])
 
     return (
         <div className='body_page'>
             <Header />
-
             <div className='apoio_banner'>
                 <img alt='foto principal do imóvel' src={'https://s2.glbimg.com/1M6NNB5hCbd0qGOEbCzyG9_nzzE=/smart/e.glbimg.com/og/ed/f/original/2021/08/04/apartamento-47-m-decoracao-pratica_6.jpg'} />
             </div>
@@ -93,9 +102,9 @@ export default function ViewItem() {
                                                     </div>
                                                     :
                                                     <div key={info.idTipoInfo} className="labed-img">
-                                                        <label>Garagem</label>
+                                                        <label>Vagas</label>
                                                         <div className="block-img">
-                                                            <img alt="Icone de um chuveiro" src={Banheiros} />
+                                                            <img alt="Icone de um chuveiro" src={Garagens} />
                                                             <span>{info.quantidade}</span>
                                                         </div>
                                                     </div>
@@ -121,119 +130,37 @@ export default function ViewItem() {
 
                             The standard chunk of Lorem  Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
                         </p>
-                        <span id='local'>{Imovel.bairro}</span>
+
+                        <div className='row alinhado'>
+                            <img alt='Icone de local' src={Endereco}></img>
+                            <span id='local'>{Imovel.bairro}</span>
+                        </div>
                     </div>
 
                     <div className='column right-info-card'>
+                        <div id='viewImmo' className="suport_social_info row centrado">
+                            <div onClick={() => {
+                                window.location.href = 'http://wa.me/5511962666205'
+                            }} className="social_info hover_cinza">
+                                <img alt='icone do whatsapp' src={whatsappIcon} />
+                                <span>11 96266-6205</span>
+                            </div>
+
+                            <div onClick={() => {
+                                window.location.href = 'http://wa.me/5511962666205'
+                            }} className="social_info hover_cinza">
+                                <img alt='icone do whatsapp' src={whatsappIcon} />
+                                <span>11 96266-6205</span>
+                            </div>
+                        </div>
+
                         <span id='price'>Valor de venda {Imovel.valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
                         <button id='assign-btn' className='btnPressionavel'>Assinalar interesse</button>
                     </div>
                 </div>
             </section >
-
-
-
-
             <h2 className='container' id='titulo_lista'>Mais imóveis em {Imovel.bairro}</h2>
-            <main id="catalogo">
-
-                <section className="apoio_conteudo_catalogo container row">
-
-                    {ImovelList.map((imovel => {
-                        return (
-                            <article key={imovel.idImovel} className="item_conteudo">
-                                {/* Imagem */}
-                                <div>
-                                    <img id={imovel.idImovel} className="item_img" alt='foto principal do imóvel' src='https://s2.glbimg.com/1M6NNB5hCbd0qGOEbCzyG9_nzzE=/smart/e.glbimg.com/og/ed/f/original/2021/08/04/apartamento-47-m-decoracao-pratica_6.jpg' />
-                                </div>
-                                {/* Informacoes */}
-                                <div className="item_infos">
-                                    <h2 id="catalogo" >{imovel.titulo}</h2>
-
-                                    <div className="row apoio_infos">
-                                        {/* Esquerda */}
-                                        <div className="column infos_left">
-
-                                            <div className="row descricao_imovel">
-                                                {imovel.informacoesAdicionais.map((info => {
-                                                    return (
-                                                        info.idTipoInfo === 1 ?
-                                                            <div key={info.idTipoInfo} className="labed-img">
-                                                                <label>Quartos</label>
-                                                                <div className="block-img">
-                                                                    <img alt="Icone de uma cama" src={Quartos} />
-                                                                    <span>{info.quantidade}</span>
-                                                                </div>
-                                                            </div>
-                                                            : info.idTipoInfo === 2 ?
-                                                                <div key={info.idTipoInfo} className="labed-img">
-                                                                    <label>Salas</label>
-                                                                    <div className="block-img">
-                                                                        <img alt="Icone de um sofá" src={Salas} />
-                                                                        <span>{info.quantidade}</span>
-                                                                    </div>
-                                                                </div>
-                                                                : info.idTipoInfo === 3 ?
-                                                                    <div key={info.idTipoInfo} className="labed-img">
-                                                                        <label>Cozinhas</label>
-                                                                        <div className="block-img">
-                                                                            <img alt="Icone de um forno de cozinha" src={Cozinhas} />
-                                                                            <span>{info.quantidade}</span>
-                                                                        </div>
-                                                                    </div>
-                                                                    : info.idTipoInfo === 4 ?
-                                                                        <div key={info.idTipoInfo} className="labed-img">
-                                                                            <label>Banheiros</label>
-                                                                            <div className="block-img">
-                                                                                <img alt="Icone de um chuveiro" src={Banheiros} />
-                                                                                <span>{info.quantidade}</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        :
-                                                                        <div key={info.idTipoInfo} className="labed-img">
-                                                                            <label>Garagem</label>
-                                                                            <div className="block-img">
-                                                                                <img alt="Icone de um chuveiro" src={Banheiros} />
-                                                                                <span>{info.quantidade}</span>
-                                                                            </div>
-                                                                        </div>
-                                                    )
-                                                }))}
-
-                                                <div className="labed-img">
-                                                    <label>Terreno</label>
-                                                    <div className="block-img">
-                                                        <span>{imovel.terreno}m²</span>
-                                                    </div>
-                                                </div>
-
-                                                <div className="labed-img">
-                                                    <label>Construído</label>
-                                                    <div className="block-img">
-                                                        <span>{imovel.construido}m²</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <span id="local">{imovel.bairro}</span>
-                                        </div>
-
-                                        {/* Direita */}
-                                        <div className="column infos_right">
-                                            <span id="valor_catalogo">{imovel.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                                            <div id="botao_vermais" >
-                                                <Link className="btnPressionavel row alinhado" to='/info'>Ver mais</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        )
-                    }))}
-
-                </section>
-            </main>
-
+            <Catalogo main={false} />
             <Footer />
         </div >
     )

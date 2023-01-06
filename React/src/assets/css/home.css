@@ -23,7 +23,10 @@
 
 .suport_social_info {
     width: 100%;
+    min-height: 75px;
     height: 75px;
+    max-height: 100px;
+    flex-wrap: wrap;
     padding: 10px 0;
     background-color: var(--branco);
 }
@@ -42,6 +45,7 @@
 .social_info img {
     height: 100%;
     margin-right: 10px;
+    user-select: none;
 }
 
 .social_info span {

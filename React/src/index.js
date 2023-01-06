@@ -5,7 +5,7 @@ import axios from 'axios';
 import Home from './pages/Home/Home.js';
 import Login from './pages/LoginCadastro/Login.js'
 import Cadastro from './pages/LoginCadastro/Cadastro.js';
-import CatalogoVenda from './pages/Catalogo/catalogoVenda';
+import CatalogoVenda from './pages/Catalogo/catalogo';
 import ViewItem from './pages/viewItem/viewItem';
 import CadastroImmo from './pages/CreatePost/immoPost.js';
 
@@ -26,8 +26,8 @@ root.render(
       <Route exact path="/" element={<Home />} />
       <Route path="Entrar" element={<Login />} />
       <Route path="Cadastrar" element={<Cadastro />} />
-      <Route path="Catalogo/Venda" element={<CatalogoVenda />} />
-      <Route path="Info" element={<ViewItem />} />
+      <Route path="Catalogo/:idTipoAnuncio" element={<CatalogoVenda />} />
+      <Route path="Info/:id" element={<ViewItem />} />
       <Route path="Cadastrar/Imovel" element={<CadastroImmo />} />
     </Routes>
   </BrowserRouter>

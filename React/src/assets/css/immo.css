@@ -71,7 +71,7 @@
     background-color: var(--cinza);
     width: 100%;
     min-height: 200px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .addImg_immo {
@@ -157,12 +157,13 @@
 
 p.desc-immo {
     color: black;
+    text-align: justify;
     margin: 20px 0;
 }
 
 span#local {
     color: black;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: 500;
 }
 
@@ -171,16 +172,28 @@ span#local {
     justify-content: flex-end;
 }
 
+.suport_social_info#viewImmo {
+    background-color: var(--cinzaClaro);
+}
+
+.suport_social_info#viewImmo>.social_info:hover {
+    background-color: antiquewhite;
+}
+
+.suport_social_info#viewImmo>div>a {
+    font-size: 1.2em;
+}
+
 #assign-btn {
     width: 100%;
     min-height: 70px;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 span#price {
-    text-align: end;
+    text-align: center;
     color: black;
-    font-size: 1.8em;
+    font-size: 1.6em;
     width: 100%;
 }
 
@@ -202,8 +215,8 @@ span#price {
         width: 100%;
     }
 
-    .desc-suport{
-        padding: 30px 2.5vw;
+    .desc-suport {
+        padding: 30px 3.5vw;
     }
 
     .info-cards {
@@ -239,6 +252,11 @@ span#price {
         width: 100%;
     }
 
+    .titulo-immo {
+        text-align: justify;
+        font-size: 1.2em;
+    }
+
     .suport_img_immo,
     .addImg_immo {
         width: 100%;
@@ -250,5 +268,13 @@ span#price {
 
     #btnAprove {
         font-size: 1.25em;
+    }
+
+    span#price{
+        font-size: 1.2em;
+    }
+
+    .social_info{
+        width: 45%;
     }
 }
