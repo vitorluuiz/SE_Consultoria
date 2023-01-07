@@ -1,8 +1,10 @@
 import {
-    React, useEffect, useState
+    React, useEffect, useState, useRef
 } from 'react';
+import { imgRoot } from '../../services/api';
 
 import axios from 'axios'
+import { motion } from 'framer-motion'
 
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
@@ -20,15 +22,25 @@ import Banheiros from '../../assets/img/icones/shower.png'
 import Garagens from '../../assets/img/icones/garage.png'
 import Endereco from '../../assets/img/icones/local.png'
 
+import image1 from '../../assets/img/main-immo.png'
+import image2 from '../../assets/img/ap-img1.png'
+import image3 from '../../assets/img/ap-img2.png'
+import image4 from '../../assets/img/ap-img3.png'
+
 import whatsappIcon from '../../assets/img/logos/whatsapp_logo.png'
 import instagramIcon from '../../assets/img/logos/instagram_logo.png'
 import facebookIcon from '../../assets/img/logos/facebook_logo.png'
 
 export default function ViewItem() {
 
+    const images = [image1, image2, image3, image4]
+    const carousel = useRef()
+    const [width, setWidth] = useState(0)
+
     const { id } = useParams();
     const navigate = useNavigate();
     const [Imovel, setImovelInfos] = useState([]);
+    const [ImgsImovel, setImgsImovel] = useState([]);
     const [ExtraInfos, setExtraInfos] = useState([]);
     const [ImovelList, setImovelList] = useState([]);
     const [hasError, setError] = useState(false);
@@ -42,6 +54,13 @@ export default function ViewItem() {
                 }
             });
 
+        axios.get('Img/' + id)
+            .then(response => {
+                if (response.status === 200) {
+                    setImgsImovel(response.data)
+                }
+            })
+
         axios.get('Imovel/ListarPorId/' + id)
             .then(response => {
                 if (response.status === 200) {
@@ -51,13 +70,33 @@ export default function ViewItem() {
             })
     }
 
-    useEffect(BuscarImoveis, [id])
+    useEffect(() => {
+        setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
+        BuscarImoveis()
+    }, [])
 
     return (
         <div className='body_page'>
             <Header />
-            <div className='apoio_banner'>
-                <img alt='foto principal do imóvel' src={'https://s2.glbimg.com/1M6NNB5hCbd0qGOEbCzyG9_nzzE=/smart/e.glbimg.com/og/ed/f/original/2021/08/04/apartamento-47-m-decoracao-pratica_6.jpg'} />
+            <div className='suport-banner'>
+                <motion.div ref={carousel} className='apoio-banner' whileTap={{ cursor: "grabbing" }}>
+                    <motion.div
+                        className='inner-banner'
+                        drag='x'
+                        dragConstraints={{ right: 0, left: -width }}
+                    >
+                        <motion.div className='unique-img'>
+                            <img alt='foto principal do imóvel' src={imgRoot + '/' + Imovel.imgPrincipal} />
+                        </motion.div>
+
+
+                        {ImgsImovel.map(image => (
+                            <motion.div key={image} className='unique-img'>
+                                <img alt='foto principal do imóvel' src={imgRoot + '/' + image} />
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                </motion.div>
             </div>
 
             <section className='column desc-suport'>

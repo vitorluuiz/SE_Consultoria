@@ -20,6 +20,7 @@ namespace SE_WebAPI.Contexts
 
         public virtual DbSet<Aprovacao> Aprovacaos { get; set; }
         public virtual DbSet<Categoria> Categorias { get; set; }
+        public virtual DbSet<DbImg> DbImgs { get; set; }
         public virtual DbSet<Imovei> Imoveis { get; set; }
         public virtual DbSet<InformacoesAdicionai> InformacoesAdicionais { get; set; }
         public virtual DbSet<TipoInfo> TipoInfos { get; set; }
@@ -30,6 +31,7 @@ namespace SE_WebAPI.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Data Source=VITOR-PC; initial catalog=SE_db; user Id=sa; pwd=Senai@132;");
             }
         }
@@ -41,11 +43,11 @@ namespace SE_WebAPI.Contexts
             modelBuilder.Entity<Aprovacao>(entity =>
             {
                 entity.HasKey(e => e.IdAprovacao)
-                    .HasName("PK__Aprovaca__BD65C850A2776651");
+                    .HasName("PK__Aprovaca__BD65C850C227BAD4");
 
                 entity.ToTable("Aprovacao");
 
-                entity.HasIndex(e => e.Estado, "UQ__Aprovaca__36DF552F44390B94")
+                entity.HasIndex(e => e.Estado, "UQ__Aprovaca__36DF552FBB58521A")
                     .IsUnique();
 
                 entity.Property(e => e.IdAprovacao)
@@ -60,9 +62,9 @@ namespace SE_WebAPI.Contexts
             modelBuilder.Entity<Categoria>(entity =>
             {
                 entity.HasKey(e => e.IdCategoria)
-                    .HasName("PK__Categori__8A3D240C28CB0A20");
+                    .HasName("PK__Categori__8A3D240C59014633");
 
-                entity.HasIndex(e => e.Categoria1, "UQ__Categori__08015F8BECBAFA9B")
+                entity.HasIndex(e => e.Categoria1, "UQ__Categori__08015F8B097DBAC2")
                     .IsUnique();
 
                 entity.Property(e => e.IdCategoria)
@@ -76,14 +78,36 @@ namespace SE_WebAPI.Contexts
                     .HasColumnName("Categoria");
             });
 
-            modelBuilder.Entity<Imovei>(entity =>
+            modelBuilder.Entity<DbImg>(entity =>
             {
-                entity.HasKey(e => e.IdImovel)
-                    .HasName("PK__Imoveis__52373898621A5044");
+                entity.HasKey(e => e.IdImg)
+                    .HasName("PK__dbImg__3C3EAB5AD5F78AAF");
+
+                entity.ToTable("dbImg");
+
+                entity.Property(e => e.IdImg).HasColumnName("idImg");
 
                 entity.Property(e => e.IdImovel).HasColumnName("idImovel");
 
-                entity.Property(e => e.Aluguel).HasColumnType("decimal(7, 2)");
+                entity.Property(e => e.Img)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("img");
+
+                entity.HasOne(d => d.IdImovelNavigation)
+                    .WithMany(p => p.DbImgs)
+                    .HasForeignKey(d => d.IdImovel)
+                    .HasConstraintName("FK__dbImg__idImovel__45F365D3");
+            });
+
+            modelBuilder.Entity<Imovei>(entity =>
+            {
+                entity.HasKey(e => e.IdImovel)
+                    .HasName("PK__Imoveis__52373898C703AF67");
+
+                entity.Property(e => e.IdImovel).HasColumnName("idImovel");
+
+                entity.Property(e => e.Aluguel).HasColumnType("decimal(6, 2)");
 
                 entity.Property(e => e.Bairro)
                     .HasMaxLength(35)
@@ -91,7 +115,7 @@ namespace SE_WebAPI.Contexts
 
                 entity.Property(e => e.Construido).HasColumnType("decimal(6, 2)");
 
-                entity.Property(e => e.CustosMensais).HasColumnType("decimal(7, 2)");
+                entity.Property(e => e.CustosMensais).HasColumnType("decimal(6, 2)");
 
                 entity.Property(e => e.Descricao)
                     .HasMaxLength(300)
@@ -113,7 +137,7 @@ namespace SE_WebAPI.Contexts
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Valor).HasColumnType("decimal(9, 2)");
+                entity.Property(e => e.Valor).HasColumnType("decimal(8, 2)");
 
                 entity.HasOne(d => d.IdAprovacaoNavigation)
                     .WithMany(p => p.Imoveis)
@@ -134,7 +158,7 @@ namespace SE_WebAPI.Contexts
             modelBuilder.Entity<InformacoesAdicionai>(entity =>
             {
                 entity.HasKey(e => e.IdInfo)
-                    .HasName("PK__Informac__B0BF47D70A93E131");
+                    .HasName("PK__Informac__B0BF47D7E3542892");
 
                 entity.Property(e => e.IdInfo).HasColumnName("idInfo");
 
@@ -145,18 +169,18 @@ namespace SE_WebAPI.Contexts
                 entity.HasOne(d => d.IdImovelNavigation)
                     .WithMany(p => p.InformacoesAdicionais)
                     .HasForeignKey(d => d.IdImovel)
-                    .HasConstraintName("FK__Informaco__idImo__48CFD27E");
+                    .HasConstraintName("FK__Informaco__idImo__4BAC3F29");
 
                 entity.HasOne(d => d.IdTipoInfoNavigation)
                     .WithMany(p => p.InformacoesAdicionais)
                     .HasForeignKey(d => d.IdTipoInfo)
-                    .HasConstraintName("FK__Informaco__idTip__47DBAE45");
+                    .HasConstraintName("FK__Informaco__idTip__4AB81AF0");
             });
 
             modelBuilder.Entity<TipoInfo>(entity =>
             {
                 entity.HasKey(e => e.IdTipoInfo)
-                    .HasName("PK__TipoInfo__732019378EC358CA");
+                    .HasName("PK__TipoInfo__7320193767170E9E");
 
                 entity.ToTable("TipoInfo");
 
@@ -173,9 +197,9 @@ namespace SE_WebAPI.Contexts
             modelBuilder.Entity<TiposAnuncio>(entity =>
             {
                 entity.HasKey(e => e.IdTipoAnuncio)
-                    .HasName("PK__TiposAnu__B7F72CBF0950E230");
+                    .HasName("PK__TiposAnu__B7F72CBF52367C10");
 
-                entity.HasIndex(e => e.TipoAnuncio, "UQ__TiposAnu__2EF586DEDAD1C9CA")
+                entity.HasIndex(e => e.TipoAnuncio, "UQ__TiposAnu__2EF586DE2FECDA6D")
                     .IsUnique();
 
                 entity.Property(e => e.IdTipoAnuncio)
@@ -191,7 +215,7 @@ namespace SE_WebAPI.Contexts
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__Usuarios__645723A67169BA27");
+                    .HasName("PK__Usuarios__645723A66994B5AE");
 
                 entity.Property(e => e.IdUsuario).HasColumnName("idUsuario");
 

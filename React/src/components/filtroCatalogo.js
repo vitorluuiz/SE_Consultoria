@@ -6,7 +6,7 @@ import '../assets/css/catalog.css'
 
 export default function FiltroCatalogo() {
     const [isFilterVisible, setFilterVisible] = useState(false);
-    const [FiltersStates, setFilterStates] = useState([0, 0]);
+    const [FiltersStates, setFilterStates] = useState([false, false]);
 
     function handleChangeFilter(click) {
         let states = FiltersStates;

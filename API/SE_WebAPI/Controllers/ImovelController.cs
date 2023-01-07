@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using SE_WebAPI.Domains;
 using SE_WebAPI.Interfaces;
 using SE_WebAPI.Repositories;
+using SE_WebAPI.Utils;
 using System;
+using System.Collections.Generic;
 
 namespace SE_WebAPI.Controllers
 {
@@ -16,7 +18,7 @@ namespace SE_WebAPI.Controllers
 
         public ImovelController()
         {
-            _imovelRepository= new ImovelRepository();
+            _imovelRepository = new ImovelRepository();
         }
 
         [HttpGet]
@@ -38,6 +40,61 @@ namespace SE_WebAPI.Controllers
             try
             {
                 return Ok(_imovelRepository.ListarPorAprovacao(idAprovacao));
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error);
+                throw;
+            }
+        }
+
+        [HttpPost("ListarPorEstado")]
+        public IActionResult ListarPorAprovacao([FromForm]
+            short idAprovacao,
+            short idTipoAnuncio
+            )
+        {
+            try
+            {
+                return Ok(_imovelRepository.ListarPorAprovacao(idAprovacao, idTipoAnuncio));
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error);
+                throw;
+            }
+        }
+
+        [HttpGet("ListarPorBairro/{bairro}")]
+        public IActionResult ListarPorBairro(string bairro)
+        {
+            try
+            {
+                return Ok(_imovelRepository.ListarPorBairro(bairro));
+            }
+            catch (Exception error)
+            {
+                return BadRequest(error);
+                throw;
+            }
+        }
+
+        [HttpPost("ListarFiltrado")]
+        public IActionResult FiltrarImoveis([FromForm]
+            short idAprovacao,
+            short idTipoAnuncio,
+            short idTipoPropriedade,
+            string bairro
+            )
+        {
+            try
+            {
+                return Ok(_imovelRepository.ListarPorAprovacao(
+                idAprovacao,
+                idTipoAnuncio,
+                idTipoPropriedade,
+                bairro
+                ));
             }
             catch (Exception error)
             {
@@ -76,10 +133,24 @@ namespace SE_WebAPI.Controllers
         }
 
         [HttpPost("SugerirImovel")]
-        public IActionResult SugerirImovel(Imovei newImovel)
+        public IActionResult SugerirImovel([FromForm] Imovei newImovel, IFormFile imagem)
         {
             try
             {
+                string[] extensoesPermitidas = { "jpg", "png", "jpeg", "gif" };
+                string uploadResultado = Upload.UploadFile(imagem, extensoesPermitidas);
+
+                if (uploadResultado == "Sem arquivo")
+                {
+                    _imovelRepository.SugerirImovel(newImovel);
+                    return BadRequest("Não é possível cadastar um imóvel sem imagens");
+                }
+
+                if (uploadResultado == "Extenção não permitida")
+                {
+                    return BadRequest("Extensão de arquivo não permitida");
+                }
+                newImovel.ImgPrincipal = uploadResultado;
                 _imovelRepository.SugerirImovel(newImovel);
                 return StatusCode(201, newImovel);
             }
@@ -121,8 +192,8 @@ namespace SE_WebAPI.Controllers
         }
 
         [HttpDelete("{idImovel}")]
-        public IActionResult DeletarImovel(int idImovel)
-        {
+        public IActionResult DeletarImovel(short idImovel)
+         {
             try
             {
                 _imovelRepository.DeletarImovel(idImovel);

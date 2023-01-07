@@ -9,6 +9,7 @@ namespace SE_WebAPI.Domains
     {
         public Imovei()
         {
+            DbImgs = new HashSet<DbImg>();
             InformacoesAdicionais = new HashSet<InformacoesAdicionai>();
         }
 
@@ -29,6 +30,7 @@ namespace SE_WebAPI.Domains
         public virtual Aprovacao IdAprovacaoNavigation { get; set; }
         public virtual Categoria IdCategoriaNavigation { get; set; }
         public virtual TiposAnuncio IdTipoAnuncioNavigation { get; set; }
+        public virtual ICollection<DbImg> DbImgs { get; set; }
         public virtual ICollection<InformacoesAdicionai> InformacoesAdicionais { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using SE_WebAPI.Contexts;
 using SE_WebAPI.Domains;
 using SE_WebAPI.Interfaces;
+using SE_WebAPI.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,16 +20,26 @@ namespace SE_WebAPI.Repositories
         }
 
         public void AtualizarImovel(int idImovel, Imovei imovelAtualizado)
-        {
+        { 
             Imovei imovelDesatualizado = ctx.Imoveis.Find(idImovel);
             imovelDesatualizado = imovelAtualizado;
             ctx.Update(imovelDesatualizado);
             ctx.SaveChanges();
         }
 
-        public void DeletarImovel(int imovel)
+        public void DeletarImovel(short imovel)
         {
-            ctx.Imoveis.Remove(ListarPorId(imovel));
+            ImgRepository imgRepository = new ImgRepository();
+
+            foreach(string caminho in imgRepository.ListarCaminhos(imovel))
+            {
+                Upload.RemoverArquivo(caminho);
+
+            }
+            imgRepository.DeletarCaminhos(imovel);
+            Upload.RemoverArquivo(ctx.Imoveis.FirstOrDefault(i => i.IdImovel == imovel).ImgPrincipal);
+            ctx.Imoveis.Remove(ctx.Imoveis.FirstOrDefault(i => i.IdImovel == imovel));
+            ctx.InformacoesAdicionais.RemoveRange(ctx.InformacoesAdicionais.Where(i => i.IdImovel == imovel));
             ctx.SaveChanges();
         }
 
@@ -39,6 +50,7 @@ namespace SE_WebAPI.Repositories
                 .Include(i => i.InformacoesAdicionais)
                 .Include(i => i.IdCategoriaNavigation)
                 .Include(i => i.IdTipoAnuncioNavigation)
+                .Include(i => i.DbImgs)
                 .ToList();
         }
 
@@ -50,6 +62,64 @@ namespace SE_WebAPI.Repositories
                 .Include(i => i.InformacoesAdicionais)
                 .Include(i => i.IdCategoriaNavigation)
                 .Include(i => i.IdTipoAnuncioNavigation)
+                .Include(i => i.DbImgs)
+                .ToList();
+        }
+
+        public List<Imovei> ListarPorAprovacao(
+            short idAprovacao,
+            short idTipoAnuncio,
+            short idTipoPropriedade,
+            string bairro
+            )
+        {
+            if(bairro == null)
+            {
+            return ctx.Imoveis
+                .Where(i =>
+                i.IdAprovacao == idAprovacao && 
+                i.IdTipoAnuncio == idTipoAnuncio || i.IdTipoAnuncio == 3 &&
+                i.IdCategoria == idTipoPropriedade
+                )
+                .AsNoTracking()
+                .Include(i => i.InformacoesAdicionais)
+                .Include(i => i.DbImgs)
+                .ToList();
+            }
+            else
+            {
+                return ctx.Imoveis
+                .Where(i =>
+                i.IdAprovacao == idAprovacao &&
+                i.IdTipoAnuncio == idTipoAnuncio || i.IdTipoAnuncio == 3 &&
+                i.IdCategoria == idTipoPropriedade &&
+                i.Bairro == bairro
+                )
+                .AsNoTracking()
+                .Include(i => i.InformacoesAdicionais)
+                .Include(i => i.DbImgs)
+                .ToList();
+            }   
+        }
+
+        public List<Imovei> ListarPorAprovacao(short idAprovacao, short idTipoAnuncio)
+        {
+            return ctx.Imoveis
+                .Where(i => i.IdAprovacao == idAprovacao && i.IdTipoAnuncio == idTipoAnuncio)
+                .Include(i => i.InformacoesAdicionais)
+                .Include(i => i.DbImgs)
+                .ToList();
+        }
+
+        public List<Imovei> ListarPorBairro(string bairro)
+        {
+            return ctx.Imoveis
+                .Where(i => i.Bairro == bairro)
+                .AsNoTracking()
+                .Include(i => i.InformacoesAdicionais)
+                .Include(i => i.IdCategoriaNavigation)
+                .Include(i => i.IdTipoAnuncioNavigation)
+                .Include(i => i.DbImgs)
                 .ToList();
         }
 
@@ -57,6 +127,7 @@ namespace SE_WebAPI.Repositories
         {
             return ctx.Imoveis
                 .Include(i => i.InformacoesAdicionais)
+                .Include(i => i.DbImgs)
                 .FirstOrDefault(i => i.IdImovel == idImovel);
         }
 

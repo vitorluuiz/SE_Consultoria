@@ -60,19 +60,28 @@ export default function CadastroImmo() {
         }
     }
 
-    function Sugerir() {
-        axios.post('Imovel/SugerirImovel', {
-            idTipoAnuncio: TipoAnuncio,
-            idCategoria: CategoriaPropriedade,
-            // imgPrincipal:
-            titulo: Titulo,
-            // descricao:
-            bairro: Bairro,
-            aluguel: Aluguel,
-            valor: Valor,
-            custosMensais: Custos,
-            construido: AreaConstruida,
-            terreno: Terreno
+    const Sugerir = (event) => {
+        event.preventDefault();
+
+        var formData = new FormData();
+        const element = document.getElementById('imgPrincipal')
+        const imgPrincipal = element.files[0];
+
+        formData.append('imagem', imgPrincipal, imgPrincipal.name)
+        formData.append('idCategoria', TipoAnuncio)
+        formData.append('titulo', Titulo)
+        formData.append('bairro', Bairro)
+        formData.append('aluguel', Aluguel)
+        formData.append('valor', Valor)
+        formData.append('custosMensais', Custos)
+        formData.append('construido', AreaConstruida)
+        formData.append('terreno', Terreno)
+
+        axios({
+            method: "post",
+            url: "Imovel/SugerirImovel",
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" }
         }).then(response => {
 
             var stringJson = JSON.stringify(
@@ -99,6 +108,23 @@ export default function CadastroImmo() {
                 ]
             )
 
+            var idImovel = response.data.idImovel;
+
+            var formImg = new FormData();
+            const element = document.getElementById('moreImgs')
+            const imagens = element.files;
+
+            console.log(imagens)
+            // imagens.forEach(imagem => {formImg.append('imagens[]' , imagem)})
+            // formImg.append('idImovel', idImovel)
+
+            axios({
+                method: "post",
+                url: "Img",
+                data: formImg,
+                headers: { "Content-Type": "multipart/form-data" }
+            })
+
             axios.post('InformacoesAdicionais/Multiplas/' + response.data.idImovel, {
                 json: stringJson
             })
@@ -109,8 +135,9 @@ export default function CadastroImmo() {
                 })
         })
     }
-
-    useEffect(PullSelects, [])
+    useEffect(() => {
+        PullSelects()
+    }, [])
 
     return (
         <div className='background_immo'>
@@ -230,12 +257,13 @@ export default function CadastroImmo() {
                     <div id='img_immo_suport' className='row espacado alinhado'>
                         <div className='suport_img_immo'>
                             <label>Foto principal</label>
-                            <div className='flex alinhado centrado background_img_immo'>
-                                <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarBrancoIcon} />
-                            </div>
+                            <input id='imgPrincipal' type="file" className='flex alinhado centrado background_img_immo'>
+                                {/* <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarBrancoIcon} /> */}
+                            </input>
                         </div>
                         <div className='addImg_immo'>
                             <img alt='Icone de adicionar mais imagens' src={adicionarIcon} />
+                            <input id='moreImgs' type='file' accept="image/png; image/jpeg; image/jpg" multiple></input>
                             <label>Mais fotos</label>
                         </div>
 

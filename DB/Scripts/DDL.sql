@@ -37,19 +37,24 @@ idAprovacao TINYINT FOREIGN KEY REFERENCES Aprovacao(idAprovacao),
 ImgPrincipal VARCHAR(255),
 Titulo VARCHAR(200),
 Descricao VARCHAR(300),
-Bairro VARCHAR(35),
-Aluguel	DECIMAL(7,2),
-Valor DECIMAL(9,2),
-CustosMensais DECIMAL(7,2),
+Bairro VARCHAR(30),
+Aluguel	DECIMAL(6,2),
+Valor DECIMAL(8,2),
+CustosMensais DECIMAL(6,2),
 Construido DECIMAL(6,2),
 Terreno DECIMAL(7,2)
 )
 GO
 
+CREATE TABLE dbImg(
+idImg SMALLINT PRIMARY KEY IDENTITY,
+idImovel SMALLINT FOREIGN KEY REFERENCES Imoveis(idImovel),
+img VARCHAR(255)
+)
+
 CREATE TABLE TipoInfo(
 idTipoInfo TINYINT PRIMARY KEY IDENTITY,
-TipoInfo VARCHAR(20),
-ImgTipoInfo VARCHAR(255)
+TipoInfo VARCHAR(20)
 )
 GO
 

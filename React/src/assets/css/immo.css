@@ -99,15 +99,42 @@
     font-size: 1.8em;
 }
 
-.apoio_banner {
-    width: 100vw;
+.suport-banner {
+    max-width: 100vw;
+    max-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.apoio_banner img {
+.apoio-banner {
+    overflow: hidden;
+    cursor: grab;
+}
+
+.inner-banner {
+    display: flex;
+}
+
+.unique-img {
+    max-height: 100vh;
+    min-width: 95vw;
+    padding: 0 5px;
+    border-radius: var(--borda);
+}
+
+.unique-img:first-child,
+.unique-img:last-child {
+    padding: 0;
+}
+
+.unique-img img {
     width: 100%;
-    height: auto;
-    max-height: 750px;
+    height: 100%;
+    pointer-events: none;
     object-fit: cover;
+    border-radius: var(--borda);
 }
 
 .apoio_articles {
@@ -270,11 +297,11 @@ span#price {
         font-size: 1.25em;
     }
 
-    span#price{
+    span#price {
         font-size: 1.2em;
     }
 
-    .social_info{
+    .social_info {
         width: 45%;
     }
 }

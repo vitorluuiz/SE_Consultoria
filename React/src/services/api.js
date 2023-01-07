@@ -1,0 +1,1 @@
+export const imgRoot = ('http://localhost:5000/img');
