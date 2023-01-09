@@ -102,19 +102,19 @@ namespace SE_WebAPI.Repositories
             }   
         }
 
-        public List<Imovei> ListarPorAprovacao(short idAprovacao, short idTipoAnuncio)
+        public List<Imovei> ListarPorAprovacao(int idAprovacao, int idTipoAnuncio)
         {
             return ctx.Imoveis
-                .Where(i => i.IdAprovacao == idAprovacao && i.IdTipoAnuncio == idTipoAnuncio)
+                .Where(i => i.IdAprovacao == idAprovacao && i.IdTipoAnuncio == idTipoAnuncio || i.IdTipoAnuncio == 3)
                 .Include(i => i.InformacoesAdicionais)
                 .Include(i => i.DbImgs)
                 .ToList();
         }
 
-        public List<Imovei> ListarPorBairro(string bairro)
+        public List<Imovei> ListarPorBairro(string bairro, int idException)
         {
             return ctx.Imoveis
-                .Where(i => i.Bairro == bairro)
+                .Where(i => i.Bairro == bairro && i.IdImovel != idException)
                 .AsNoTracking()
                 .Include(i => i.InformacoesAdicionais)
                 .Include(i => i.IdCategoriaNavigation)

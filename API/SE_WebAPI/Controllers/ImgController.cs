@@ -21,7 +21,7 @@ namespace SE_WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CadastrarImagens([FromForm] List<IFormFile> imagens, short idImovel)
+        public IActionResult CadastrarImagens([FromForm] List<IFormFile> imagens, [FromForm] int idImovel)
         {
             try
             {

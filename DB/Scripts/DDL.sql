@@ -39,7 +39,7 @@ Titulo VARCHAR(200),
 Descricao VARCHAR(300),
 Bairro VARCHAR(30),
 Aluguel	DECIMAL(6,2),
-Valor DECIMAL(8,2),
+Valor DECIMAL(10,2),
 CustosMensais DECIMAL(6,2),
 Construido DECIMAL(6,2),
 Terreno DECIMAL(7,2)

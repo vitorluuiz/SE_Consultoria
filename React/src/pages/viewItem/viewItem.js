@@ -6,7 +6,7 @@ import { imgRoot } from '../../services/api';
 import axios from 'axios'
 import { motion } from 'framer-motion'
 
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
@@ -22,56 +22,42 @@ import Banheiros from '../../assets/img/icones/shower.png'
 import Garagens from '../../assets/img/icones/garage.png'
 import Endereco from '../../assets/img/icones/local.png'
 
-import image1 from '../../assets/img/main-immo.png'
-import image2 from '../../assets/img/ap-img1.png'
-import image3 from '../../assets/img/ap-img2.png'
-import image4 from '../../assets/img/ap-img3.png'
-
 import whatsappIcon from '../../assets/img/logos/whatsapp_logo.png'
-import instagramIcon from '../../assets/img/logos/instagram_logo.png'
-import facebookIcon from '../../assets/img/logos/facebook_logo.png'
 
 export default function ViewItem() {
 
-    const images = [image1, image2, image3, image4]
     const carousel = useRef()
-    const [width, setWidth] = useState(0)
+    const [width, setWidth] = useState(Number)
 
     const { id } = useParams();
-    const navigate = useNavigate();
     const [Imovel, setImovelInfos] = useState([]);
     const [ImgsImovel, setImgsImovel] = useState([]);
     const [ExtraInfos, setExtraInfos] = useState([]);
-    const [ImovelList, setImovelList] = useState([]);
     const [hasError, setError] = useState(false);
     const [hasPulled, setPulled] = useState(false);
 
-    function BuscarImoveis() {
-        axios.get('Imovel')
-            .then(response => {
-                if (response.status === 200) {
-                    setImovelList(response.data);
-                }
-            });
+    async function BuscarImoveis() {
 
-        axios.get('Img/' + id)
+        await axios.get('Img/' + id)
             .then(response => {
                 if (response.status === 200) {
                     setImgsImovel(response.data)
                 }
             })
 
-        axios.get('Imovel/ListarPorId/' + id)
+        await axios.get('Imovel/ListarPorId/' + id)
             .then(response => {
                 if (response.status === 200) {
                     setImovelInfos(response.data)
                     setExtraInfos(response.data.informacoesAdicionais)
                 }
             })
+
+        setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
+        console.log(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
     }
 
     useEffect(() => {
-        setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
         BuscarImoveis()
     }, [])
 
@@ -88,7 +74,6 @@ export default function ViewItem() {
                         <motion.div className='unique-img'>
                             <img alt='foto principal do imóvel' src={imgRoot + '/' + Imovel.imgPrincipal} />
                         </motion.div>
-
 
                         {ImgsImovel.map(image => (
                             <motion.div key={image} className='unique-img'>
@@ -199,7 +184,7 @@ export default function ViewItem() {
                 </div>
             </section >
             <h2 className='container' id='titulo_lista'>Mais imóveis em {Imovel.bairro}</h2>
-            <Catalogo main={false} />
+            <Catalogo main={false} idException={id} bairro={'Campo Grande'} />
             <Footer />
         </div >
     )

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { imgRoot } from "../../services/api.js";
 
@@ -16,18 +16,29 @@ import Endereco from '../../assets/img/icones/local.png'
 
 import '../../assets/css/catalog.css'
 
-export default function CatalogoVenda({ main }) {
+export default function CatalogoVenda({ main, bairro, idException }) {
 
     const { idTipoAnuncio } = useParams();
     const [ImovelList, setImovelList] = useState([])
 
     function BuscarImoveis() {
-        axios.get('Imovel')
-            .then(response => {
-                if (response.status === 200) {
-                    setImovelList(response.data)
-                }
-            });
+
+        if (main == undefined) {
+            axios.get('Imovel')
+                .then(response => {
+                    if (response.status === 200) {
+                        setImovelList(response.data)
+                    }
+                });
+        }
+        else {
+            axios.get('Imovel/ListarPorBairro/' + bairro + '/' + idException)
+                .then(response => {
+                    if (response.status === 200) {
+                        setImovelList(response.data)
+                    }
+                });
+        }
     }
 
     function DeletarImovel(click) {
@@ -39,7 +50,10 @@ export default function CatalogoVenda({ main }) {
             });
     }
 
-    useEffect(BuscarImoveis, [])
+    useEffect(() => {
+        BuscarImoveis()
+        console.log(bairro, idException, main)
+    }, [])
 
     return (
         <div>

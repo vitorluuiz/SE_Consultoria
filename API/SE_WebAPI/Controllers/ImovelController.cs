@@ -35,7 +35,7 @@ namespace SE_WebAPI.Controllers
             }
         }
 
-        [HttpGet("ListarPorEstado/{idAprovacao}")]
+        [HttpGet("ListarPorAprovacao/{idAprovacao}")]
         public IActionResult ListarPorAprovacao(short idAprovacao) {
             try
             {
@@ -48,11 +48,8 @@ namespace SE_WebAPI.Controllers
             }
         }
 
-        [HttpPost("ListarPorEstado")]
-        public IActionResult ListarPorAprovacao([FromForm]
-            short idAprovacao,
-            short idTipoAnuncio
-            )
+        [HttpGet("ListarPorTipoAnuncio/{idAprovacao}/{idTipoAnuncio}")]
+        public IActionResult ListarPorTipoAnuncio(int idAprovacao, int idTipoAnuncio)
         {
             try
             {
@@ -65,12 +62,12 @@ namespace SE_WebAPI.Controllers
             }
         }
 
-        [HttpGet("ListarPorBairro/{bairro}")]
-        public IActionResult ListarPorBairro(string bairro)
+        [HttpGet("ListarPorBairro/{bairro}/{idException}")]
+        public IActionResult ListarPorBairro(string bairro, int idException)
         {
             try
             {
-                return Ok(_imovelRepository.ListarPorBairro(bairro));
+                return Ok(_imovelRepository.ListarPorBairro(bairro, idException));
             }
             catch (Exception error)
             {
@@ -79,8 +76,8 @@ namespace SE_WebAPI.Controllers
             }
         }
 
-        [HttpPost("ListarFiltrado")]
-        public IActionResult FiltrarImoveis([FromForm]
+        [HttpGet("ListarFiltrado")]
+        public IActionResult FiltrarImoveis(
             short idAprovacao,
             short idTipoAnuncio,
             short idTipoPropriedade,

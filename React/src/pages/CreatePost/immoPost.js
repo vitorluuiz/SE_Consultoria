@@ -68,7 +68,8 @@ export default function CadastroImmo() {
         const imgPrincipal = element.files[0];
 
         formData.append('imagem', imgPrincipal, imgPrincipal.name)
-        formData.append('idCategoria', TipoAnuncio)
+        formData.append('idCategoria', CategoriaPropriedade)
+        formData.append('idTipoAnuncio', TipoAnuncio)
         formData.append('titulo', Titulo)
         formData.append('bairro', Bairro)
         formData.append('aluguel', Aluguel)
@@ -114,9 +115,11 @@ export default function CadastroImmo() {
             const element = document.getElementById('moreImgs')
             const imagens = element.files;
 
-            console.log(imagens)
-            // imagens.forEach(imagem => {formImg.append('imagens[]' , imagem)})
-            // formImg.append('idImovel', idImovel)
+            for (let n = 0; n < imagens.length; n++) {
+                formImg.append('imagens', imagens[n], imagens[n].name)
+            }
+
+            formImg.append('idImovel', idImovel)
 
             axios({
                 method: "post",

@@ -7,14 +7,14 @@ namespace SE_WebAPI.Interfaces
     {
         List<Imovei> ListarImoveis();
         List<Imovei> ListarPorAprovacao(short idAprovacao);
-        List<Imovei> ListarPorAprovacao(short idAprovacao, short idTipoAnuncio);
+        List<Imovei> ListarPorAprovacao(int idAprovacao, int idTipoAnuncio);
         List<Imovei> ListarPorAprovacao(
             short idAprovacao,
             short idTipoAnuncio,
             short idTipoPropriedade,
             string bairro
             );
-        List<Imovei> ListarPorBairro(string bairro);
+        List<Imovei> ListarPorBairro(string bairro, int idException);
         void SugerirImovel(Imovei imovel);
         void AprovarImovel(int idImovel);
         void NegarImovel(int idImovel);

@@ -1,6 +1,7 @@
 ﻿using SE_WebAPI.Contexts;
 using SE_WebAPI.Domains;
 using SE_WebAPI.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,14 +11,14 @@ namespace SE_WebAPI.Repositories
     {
         SEContext ctx = new SEContext();
 
-        public void CadastrarCaminhos(short idImovel, List<string> caminhos)
+        public void CadastrarCaminhos(int idImovel, List<string> caminhos)
         {
             List<DbImg> imgsPatchs = new List<DbImg>();
 
             for (int i = 0; i < caminhos.Count; i++)
             {
                 DbImg imgPatch = new DbImg();
-                imgPatch.IdImovel= idImovel;
+                imgPatch.IdImovel= Convert.ToInt16(idImovel);
                 imgPatch.Img = caminhos[i];
                 imgsPatchs.Add(imgPatch);
             }

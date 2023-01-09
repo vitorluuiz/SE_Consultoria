@@ -41,7 +41,7 @@ namespace SE_WebAPI.Utils
             return false;
         }
 
-        public static string UploadFile(List<IFormFile> arquivos, string[] extensoesPermitidas, short idImovel)
+        public static string UploadFile(List<IFormFile> arquivos, string[] extensoesPermitidas, int idImovel)
         {
             try
             {
