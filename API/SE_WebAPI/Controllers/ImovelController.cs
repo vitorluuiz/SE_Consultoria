@@ -53,7 +53,7 @@ namespace SE_WebAPI.Controllers
         {
             try
             {
-                return Ok(_imovelRepository.ListarPorAprovacao(idAprovacao, idTipoAnuncio));
+                return Ok(_imovelRepository.ListarPorAprovacaoETipoAnuncio(idAprovacao, idTipoAnuncio));
             }
             catch (Exception error)
             {

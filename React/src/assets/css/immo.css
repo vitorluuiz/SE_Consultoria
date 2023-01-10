@@ -67,11 +67,29 @@
     height: 100%;
 }
 
+#imgPrincipal{
+    display: none;
+}
+
+#moreImgs{
+    display: none;
+}
+
 .background_img_immo {
-    background-color: var(--cinza);
-    width: 100%;
+    background-color: var(--branco);
     min-height: 200px;
-    margin-bottom: 10px;
+}
+
+.background_img_immo:active {
+    transform: scale(0.99);
+}
+
+.background_img_immo:hover {
+    background-color: var(--cinzaClaro);
+}
+
+.background_img_immo>span{
+    color: black;
 }
 
 .addImg_immo {
@@ -277,6 +295,10 @@ span#price {
     #img_immo_suport {
         flex-direction: column;
         width: 100%;
+    }
+
+    .background_img_immo{
+        margin-bottom: 10px;
     }
 
     .titulo-immo {

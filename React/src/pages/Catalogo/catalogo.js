@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { imgRoot } from "../../services/api.js";
 
+import { getUserId } from "../../services/authUser.js";
+
 import Header from '../../components/header.js'
 import Footer from '../../components/footer.js'
 import Filtro from "../../components/filtroCatalogo.js";
@@ -16,29 +18,48 @@ import Endereco from '../../assets/img/icones/local.png'
 
 import '../../assets/css/catalog.css'
 
-export default function CatalogoVenda({ main, bairro, idException }) {
+export default function CatalogoVenda({ main, auditoria, idException, bairro }) {
 
     const { idTipoAnuncio } = useParams();
     const [ImovelList, setImovelList] = useState([])
+    const [IdUsuario, setidUsuario] = useState(0)
 
-    function BuscarImoveis() {
+    async function BuscarImoveis(idTipoAnuncio) {
 
         if (main == undefined) {
-            axios.get('Imovel')
+            await axios.get('Imovel/ListarPorTipoAnuncio/1/' + idTipoAnuncio)
                 .then(response => {
                     if (response.status === 200) {
                         setImovelList(response.data)
                     }
                 });
         }
-        else {
-            axios.get('Imovel/ListarPorBairro/' + bairro + '/' + idException)
+        else if (auditoria == true) {
+            await axios.get('Imovel/ListarPorAprovacao/3')
                 .then(response => {
                     if (response.status === 200) {
                         setImovelList(response.data)
                     }
                 });
         }
+    }
+
+    function AprovarImovel(click) {
+        axios.patch('Imovel/Aprovar/' + click.target.id)
+            .then(response => {
+                if (response.status === 200) {
+                    window.location.reload()
+                }
+            });
+    }
+
+    function NegarImovel(click) {
+        axios.patch('Imovel/Negar/' + click.target.id)
+            .then(response => {
+                if (response.status === 200) {
+                    window.location.reload()
+                }
+            });
     }
 
     function DeletarImovel(click) {
@@ -51,9 +72,10 @@ export default function CatalogoVenda({ main, bairro, idException }) {
     }
 
     useEffect(() => {
-        BuscarImoveis()
+        BuscarImoveis(idTipoAnuncio)
+        setidUsuario(getUserId())
         console.log(bairro, idException, main)
-    }, [])
+    }, [idTipoAnuncio])
 
     return (
         <div>
@@ -75,11 +97,7 @@ export default function CatalogoVenda({ main, bairro, idException }) {
                             <article key={imovel.idImovel} className="item_conteudo">
                                 {/* Imagem */}
                                 <div>
-                                    {imovel.imgPrincipal !== undefined ?
-                                        <img id={imovel.idImovel} onClick={DeletarImovel} className="item_img" alt='foto principal do imóvel' src={imgRoot + '/' + imovel.imgPrincipal} />
-                                        :
-                                        <img id={imovel.idImovel} onClick={DeletarImovel} className="item_img" alt='foto principal do imóvel' src={'https://s2.glbimg.com/1M6NNB5hCbd0qGOEbCzyG9_nzzE=/smart/e.glbimg.com/og/ed/f/original/2021/08/04/apartamento-47-m-decoracao-pratica_6.jpg'} />
-                                    }
+                                    <img id={imovel.idImovel} className="item_img" alt='foto principal do imóvel' src={imgRoot + '/' + imovel.imgPrincipal} />
                                 </div>
                                 {/* Informacoes */}
                                 <div className="item_infos">
@@ -158,6 +176,22 @@ export default function CatalogoVenda({ main, bairro, idException }) {
                                         {/* Direita */}
                                         <div className="column infos_right">
                                             <span id="valor_catalogo">{imovel.valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                                            {auditoria == true && main == false ?
+                                                <div style={{ width: '100%' }}>
+                                                    <div style={{ margin: '6px 0' }} id="botao_vermais" >
+                                                        <button id={imovel.idImovel} onClick={DeletarImovel} className="btnPressionavel row alinhado">Deletar</button>
+                                                    </div>
+                                                    <div style={{ margin: '6px 0' }} id="botao_vermais" >
+                                                        <button id={imovel.idImovel} onClick={AprovarImovel} className="btnPressionavel row alinhado">Aprovar</button>
+                                                    </div>
+                                                </div>
+                                                : main == undefined && IdUsuario == 1 ?
+                                                    <div style={{ width: '100%', margin: '6px 0' }}>
+                                                        <button id={imovel.idImovel} style={{ width: '100%', margin: '2px 0' }} className="btnPressionavel row alinhado" onClick={() => { NegarImovel() }}>Revisar</button>
+                                                    </div>
+                                                    :
+                                                    null
+                                            }
                                             <div id="botao_vermais" >
                                                 <Link className="btnPressionavel row alinhado" to={{ pathname: '/Info/' + imovel.idImovel }} onClick={() => {
                                                     window.location.replace();
@@ -173,10 +207,11 @@ export default function CatalogoVenda({ main, bairro, idException }) {
 
                 </section>
             </main>
-            {main !== false ?
-                <Footer />
-                :
-                null
+            {
+                main !== false ?
+                    <Footer />
+                    :
+                    null
             }
         </div>
     );

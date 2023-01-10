@@ -258,17 +258,16 @@ export default function CadastroImmo() {
                     </div>
 
                     <div id='img_immo_suport' className='row espacado alinhado'>
-                        <div className='suport_img_immo'>
-                            <label>Foto principal</label>
-                            <input id='imgPrincipal' type="file" className='flex alinhado centrado background_img_immo'>
-                                {/* <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarBrancoIcon} /> */}
-                            </input>
-                        </div>
-                        <div className='addImg_immo'>
+                        <label htmlFor='imgPrincipal' className='suport_img_immo background_img_immo column alinhado centrado'>
+                            <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarIcon} />
+                            <span>Adicionar foto principal</span>
+                            <input id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
+                        </label>
+                        <label htmlFor="moreImgs" className='addImg_immo'>
                             <img alt='Icone de adicionar mais imagens' src={adicionarIcon} />
                             <input id='moreImgs' type='file' accept="image/png; image/jpeg; image/jpg" multiple></input>
                             <label>Mais fotos</label>
-                        </div>
+                        </label>
 
                     </div>
 

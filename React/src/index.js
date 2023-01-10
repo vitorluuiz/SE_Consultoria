@@ -8,6 +8,7 @@ import Cadastro from './pages/LoginCadastro/Cadastro.js';
 import CatalogoVenda from './pages/Catalogo/catalogo';
 import ViewItem from './pages/viewItem/viewItem';
 import CadastroImmo from './pages/CreatePost/immoPost.js';
+import AuditoriaPosts from './pages/Administrativo/auditoriaPosts.js';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -29,6 +30,7 @@ root.render(
       <Route path="Catalogo/:idTipoAnuncio" element={<CatalogoVenda />} />
       <Route path="Info/:id" element={<ViewItem />} />
       <Route path="Cadastrar/Imovel" element={<CadastroImmo />} />
+      <Route path="Auditoria/Posts" element={<AuditoriaPosts />} />
     </Routes>
   </BrowserRouter>
 );

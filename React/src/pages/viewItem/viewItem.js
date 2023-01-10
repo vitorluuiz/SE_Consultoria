@@ -184,7 +184,7 @@ export default function ViewItem() {
                 </div>
             </section >
             <h2 className='container' id='titulo_lista'>Mais imóveis em {Imovel.bairro}</h2>
-            <Catalogo main={false} idException={id} bairro={'Campo Grande'} />
+            <Catalogo main={false} idException={id} />
             <Footer />
         </div >
     )

@@ -25,22 +25,30 @@ export default function Home() {
 
       <div className="suport_social_info row centrado">
 
-        <div className="social_info hover_cinza">
+        <div onClick={() => {
+          window.location.href = ('http://instagram.com/se.lesteimoveis/')
+        }} className="social_info hover_cinza">
           <img alt="icone do facebook" src={facebookIcon} />
           <span>SE Consultoria de imóveis</span>
         </div>
 
-        <div className="social_info hover_cinza">
+        <div onClick={() => {
+          window.location.href = ('http://instagram.com/se.lesteimoveis/')
+        }} className="social_info hover_cinza">
           <img alt="icone do instagram" src={instagramIcon} />
           <span>@se.lesteimoveis</span>
         </div>
 
-        <div className="social_info hover_cinza">
+        <div onClick={() => {
+          window.location.href = ('http://wa.me/5511962666205')
+        }} className="social_info hover_cinza">
           <img alt='icone do whatsapp' src={whatsappIcon} />
           <span>11 98116-2489</span>
         </div>
 
-        <div className="social_info hover_cinza">
+        <div onClick={() => {
+          window.location.href = ('http://wa.me/5511962666205')
+        }} className="social_info hover_cinza">
           <img alt='icone do whatsapp' src={whatsappIcon} />
           <span>11 98116-2489</span>
         </div>

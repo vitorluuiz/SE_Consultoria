@@ -7,7 +7,7 @@ namespace SE_WebAPI.Interfaces
     {
         List<Imovei> ListarImoveis();
         List<Imovei> ListarPorAprovacao(short idAprovacao);
-        List<Imovei> ListarPorAprovacao(int idAprovacao, int idTipoAnuncio);
+        List<Imovei> ListarPorAprovacaoETipoAnuncio(int idAprovacao, int idTipoAnuncio);
         List<Imovei> ListarPorAprovacao(
             short idAprovacao,
             short idTipoAnuncio,

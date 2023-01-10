@@ -102,7 +102,7 @@ namespace SE_WebAPI.Repositories
             }   
         }
 
-        public List<Imovei> ListarPorAprovacao(int idAprovacao, int idTipoAnuncio)
+        public List<Imovei> ListarPorAprovacaoETipoAnuncio(int idAprovacao, int idTipoAnuncio)
         {
             return ctx.Imoveis
                 .Where(i => i.IdAprovacao == idAprovacao && i.IdTipoAnuncio == idTipoAnuncio || i.IdTipoAnuncio == 3)

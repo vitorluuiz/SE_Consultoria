@@ -103,7 +103,7 @@ h2#catalogo {
     box-shadow: 0 3px 7px -1px var(--sombra);
 }
 
-#botao_vermais a {
+#botao_vermais a, #botao_vermais button {
     width: 100%;
     height: 100%;
 }

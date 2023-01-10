@@ -27,7 +27,7 @@ export default function Login() {
         })
             .then(response => {
                 if (response.status === 200) {
-                    setToken(response.data);
+                    setToken(response.data.token);
                     navigate('/')
                 }
             })
