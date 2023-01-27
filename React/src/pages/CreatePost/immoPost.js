@@ -29,7 +29,7 @@ export default function CadastroImmo() {
 
     const [ListTipoAnuncio, setListTipoAnuncios] = useState([])
     const [ListCategorias, setListCategorias] = useState([])
-    const [ListBairros, setListBairros] = useState([])
+    const [BairrosList, setBairrosList] = useState([])
     const [hasPulledSelects, setPulled] = useState(false)
     const navigate = useNavigate();
 
@@ -52,7 +52,7 @@ export default function CadastroImmo() {
             axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/municipios/3550308/distritos')
                 .then(response => {
                     if (response.status) {
-                        setListBairros(response.data)
+                        setBairrosList(response.data)
                     }
                 }
                 )
@@ -159,8 +159,8 @@ export default function CadastroImmo() {
 
                         <div className='double-input row espacado'>
                             <div className='inputBox labed-input'>
-                                <label>Categoria da publicação</label>
-                                <select value={TipoAnuncio} onChange={(e) => setTipoAnuncio(e.target.value)}>
+                                <label>Categoria da publicação*</label>
+                                <select required value={TipoAnuncio} onChange={(e) => setTipoAnuncio(e.target.value)}>
                                     <option key='0' defaultValue='0'>Escolher</option>
                                     {ListTipoAnuncio.map((tipoAnuncio => {
                                         return (
@@ -171,7 +171,7 @@ export default function CadastroImmo() {
                             </div>
 
                             <div className='inputBox labed-input'>
-                                <label>Categoria da propriedade</label>
+                                <label>Categoria da propriedade*</label>
                                 <select value={CategoriaPropriedade} onChange={(e) => setCategoriaPropriedade(e.target.value)}>
                                     <option defaultValue='0'>Escolher</option>
                                     {ListCategorias.map((categoria => {
@@ -184,10 +184,10 @@ export default function CadastroImmo() {
                         </div>
 
                         <div className='inputBox labed-input'>
-                            <label>Bairro</label>
+                            <label>Bairro*</label>
                             <select value={Bairro} onChange={(e) => setBairro(e.target.value)}>
                                 <option defaultValue='0'>Escolher</option>
-                                {ListBairros.map((bairro => {
+                                {BairrosList.map((bairro => {
                                     return (
                                         <option key={bairro.id} value={bairro.nome}>{bairro.nome}</option>
                                     )
@@ -197,11 +197,11 @@ export default function CadastroImmo() {
 
                         <div id='immo' className='double-input row espacado'>
                             <div className='inputBox labed-input'>
-                                <label>Aluguel</label>
-                                <input value={Aluguel} onChange={(e) => setAluguel(e.target.value)}></input>
+                                <label>IPTU</label>
+                                <input value={AreaConstruida} onChange={(e) => setAreaConstruida(e.target.value)}></input>
                             </div>
                             <div className='inputBox labed-input'>
-                                <label>IPTU + Condomínio</label>
+                                <label>Condomínio</label>
                                 <input value={Custos} onChange={(e) => setCustos(e.target.value)}></input>
                             </div>
                         </div>
@@ -209,12 +209,59 @@ export default function CadastroImmo() {
                         <div id='immo' className='double-input row espacado'>
                             <div className='inputBox labed-input'>
                                 <label>Preço da venda</label>
-                                <input value={Valor} onChange={(e) => setValor(e.target.value)}></input>
+                                {TipoAnuncio == 1 || TipoAnuncio == 3 ?
+                                    <input value={Valor} onChange={(e) => setValor(e.target.value)}></input>
+                                    :
+                                    <input disabled placeholder='Não se aplica' style={{ backgroundColor: '#E3E3E3' }}></input>
+                                }
                             </div>
+
                             <div className='inputBox labed-input'>
-                                <label>Área contruida</label>
-                                <input value={AreaConstruida} onChange={(e) => setAreaConstruida(e.target.value)}></input>
+                                <label>Aluguel</label>
+                                {TipoAnuncio == 2 || TipoAnuncio == 3 ?
+                                    <input value={Aluguel} type="text" onChange={(e) => setAluguel(e.target.value)} required></input>
+                                    :
+                                    <input disabled style={{ backgroundColor: '#E3E3E3' }} placeholder="Não se aplica"></input>
+                                }
                             </div>
+                        </div>
+
+                        <div className='row background_immo_rooms espacado'>
+
+                            <article className='immo_rooms column alinhado'>
+                                <label>Quartos</label>
+                                <input value={Quartos} onChange={(e) => setQuartos(e.target.value)}></input>
+                            </article>
+
+                            <article className='immo_rooms column alinhado'>
+                                <label>Salas</label>
+                                <input value={Salas} onChange={(e) => setSalas(e.target.value)}></input>
+                            </article>
+
+                            <article className='immo_rooms column alinhado'>
+                                <label>Cozinhas</label>
+                                <input value={Cozinhas} onChange={(e) => setCozinhas(e.target.value)}></input>
+                            </article>
+
+                            <article className='immo_rooms column alinhado'>
+                                <label>Banheiros</label>
+                                <input value={Banheiros} onChange={(e) => setBanheiros(e.target.value)}></input>
+                            </article>
+
+                            <article className='immo_rooms column alinhado'>
+                                <label>Garagem</label>
+                                <input value={Garagem} onChange={(e) => setGaragem(e.target.value)}></input>
+                            </article>
+
+                            <article className='immo_rooms column alinhado'>
+                                <label>Terreno</label>
+                                <input value={Terreno} onChange={(e) => setTerreno(e.target.value)}></input>
+                            </article>
+                            <article className='immo_rooms column alinhado'>
+                                <label>construido</label>
+                                <input value={AreaConstruida} onChange={(e) => setAreaConstruida(e.target.value)}></input>
+                            </article>
+
                         </div>
 
                     </form>
@@ -224,37 +271,25 @@ export default function CadastroImmo() {
                 <section className='column espacado' id='immo'>
 
                     <div className='row background_immo_rooms espacado'>
+                        
 
-                        <article className='immo_rooms column alinhado'>
-                            <label>Quartos</label>
-                            <input value={Quartos} onChange={(e) => setQuartos(e.target.value)}></input>
-                        </article>
 
-                        <article className='immo_rooms column alinhado'>
-                            <label>Salas</label>
-                            <input value={Salas} onChange={(e) => setSalas(e.target.value)}></input>
-                        </article>
 
-                        <article className='immo_rooms column alinhado'>
-                            <label>Cozinhas</label>
-                            <input value={Cozinhas} onChange={(e) => setCozinhas(e.target.value)}></input>
-                        </article>
 
-                        <article className='immo_rooms column alinhado'>
-                            <label>Banheiros</label>
-                            <input value={Banheiros} onChange={(e) => setBanheiros(e.target.value)}></input>
-                        </article>
 
-                        <article className='immo_rooms column alinhado'>
-                            <label>Garagem</label>
-                            <input value={Garagem} onChange={(e) => setGaragem(e.target.value)}></input>
-                        </article>
 
-                        <article className='immo_rooms column alinhado'>
-                            <label>Terreno</label>
-                            <input value={Terreno} onChange={(e) => setTerreno(e.target.value)}></input>
-                        </article>
 
+
+
+
+
+
+
+
+
+
+
+                        
                     </div>
 
                     <div id='img_immo_suport' className='row espacado alinhado'>
@@ -263,7 +298,7 @@ export default function CadastroImmo() {
                             <span>Adicionar foto principal</span>
                             <input id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
                         </label>
-                        <label htmlFor="moreImgs" className='addImg_immo'>
+                        <label htmlFor="moreImgs" className='addImg_immo background_img_immo'>
                             <img alt='Icone de adicionar mais imagens' src={adicionarIcon} />
                             <input id='moreImgs' type='file' accept="image/png; image/jpeg; image/jpg" multiple></input>
                             <label>Mais fotos</label>

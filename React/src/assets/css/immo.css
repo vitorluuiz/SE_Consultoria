@@ -41,7 +41,7 @@
 }
 
 .immo_rooms {
-    width: 27%;
+    width: 25%;
     padding: 8px;
 }
 
@@ -60,6 +60,8 @@
 
 #img_immo_suport {
     height: 45%;
+    border-radius: var(--borda);
+    margin-bottom: 15px;
 }
 
 .suport_img_immo {
@@ -299,6 +301,7 @@ span#price {
 
     .background_img_immo{
         margin-bottom: 10px;
+        border-radius: var(--borda);
     }
 
     .titulo-immo {

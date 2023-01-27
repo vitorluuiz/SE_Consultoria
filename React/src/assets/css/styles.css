@@ -11,7 +11,7 @@
   --cinzaClaro: #F4F4F4;
   --sombra: #b0a7a1;
   --corBorda: var(--laranjaEscuro);
-  --borda: 6px;
+  --borda: 8px;
 }
 
 * {

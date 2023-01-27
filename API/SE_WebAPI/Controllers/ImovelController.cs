@@ -158,27 +158,12 @@ namespace SE_WebAPI.Controllers
             }
         }
 
-        [HttpPatch("Aprovar/{idImovel}")]
-        public IActionResult AprovarImovel(int idImovel)
+        [HttpPatch("AlterarAprovacao/{idAprovacao}/{idImovel}")]
+        public IActionResult AlterarAprovacao(byte idAprovacao, int idImovel)
         {
             try
             {
-                _imovelRepository.AprovarImovel(idImovel);
-                return Ok();
-            }
-            catch (Exception error)
-            {
-                return BadRequest(error);
-                throw;
-            }
-        }
-
-        [HttpPatch("Negar/{idImovel}")]
-        public IActionResult NegarImovel(int idImovel)
-        {
-            try
-            {
-                _imovelRepository.NegarImovel(idImovel);
+                _imovelRepository.AlterarAprovacao(idAprovacao, idImovel);
                 return Ok();
             }
             catch (Exception error)

@@ -11,11 +11,12 @@ namespace SE_WebAPI.Repositories
     public class ImovelRepository : IImovelRepository
     {
         SEContext ctx = new SEContext();
-        public void AprovarImovel(int idImovel)
+
+        public void AlterarAprovacao(byte idAprovacao, int idImovel)
         {
-            Imovei imovelDesatualizado = ListarPorId(idImovel);
-            imovelDesatualizado.IdAprovacao = 1;
-            ctx.Update(imovelDesatualizado);
+            Imovei imovel = ctx.Imoveis.FirstOrDefault(i => i.IdImovel == idImovel);
+            imovel.IdAprovacao = idAprovacao;
+            ctx.Update(imovel);
             ctx.SaveChanges();
         }
 
@@ -105,7 +106,7 @@ namespace SE_WebAPI.Repositories
         public List<Imovei> ListarPorAprovacaoETipoAnuncio(int idAprovacao, int idTipoAnuncio)
         {
             return ctx.Imoveis
-                .Where(i => i.IdAprovacao == idAprovacao && i.IdTipoAnuncio == idTipoAnuncio || i.IdTipoAnuncio == 3)
+                .Where(i => i.IdAprovacao == idAprovacao && i.IdTipoAnuncio == idTipoAnuncio || i.IdAprovacao == idAprovacao && i.IdTipoAnuncio == 3)
                 .Include(i => i.InformacoesAdicionais)
                 .Include(i => i.DbImgs)
                 .ToList();
@@ -130,15 +131,6 @@ namespace SE_WebAPI.Repositories
                 .Include(i => i.DbImgs)
                 .FirstOrDefault(i => i.IdImovel == idImovel);
         }
-
-        public void NegarImovel(int idImovel)
-        {
-            Imovei imovelDesatualizado = ListarPorId(idImovel);
-            imovelDesatualizado.IdAprovacao = 2;
-            ctx.Update(imovelDesatualizado);
-            ctx.SaveChanges();
-        }
-
         public void SugerirImovel(Imovei imovel)
         {
             imovel.IdAprovacao = 3;

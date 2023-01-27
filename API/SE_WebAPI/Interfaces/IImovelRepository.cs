@@ -16,8 +16,7 @@ namespace SE_WebAPI.Interfaces
             );
         List<Imovei> ListarPorBairro(string bairro, int idException);
         void SugerirImovel(Imovei imovel);
-        void AprovarImovel(int idImovel);
-        void NegarImovel(int idImovel);
+        void AlterarAprovacao(byte idAprovacao, int idImovel);
         void DeletarImovel(short imovel);
         void AtualizarImovel(int idImovel, Imovei imovelAtualizado);
         Imovei ListarPorId(int idImovel);

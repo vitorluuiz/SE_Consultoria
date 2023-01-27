@@ -42,24 +42,35 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
                     }
                 });
         }
+        else if (idException != undefined) {
+            await axios.get('Imovel/ListarPorBairro/' + { bairro } + '/' + idException)
+                .then(response => {
+                    if (response.status === 200) {
+                        setImovelList(response.data)
+                    }
+                });
+        }
+    }
+
+    const AlterarAprovacao = (idAprovacao, idImovel) => {
+        axios.patch('Imovel/AlterarAprovacao/' + idAprovacao + '/' + idImovel)
+            .then(response => {
+                if (response.status === 200) {
+                    window.location.reload()
+                }
+            });
     }
 
     function AprovarImovel(click) {
-        axios.patch('Imovel/Aprovar/' + click.target.id)
-            .then(response => {
-                if (response.status === 200) {
-                    window.location.reload()
-                }
-            });
+        AlterarAprovacao(1, click.target.id)
     }
 
     function NegarImovel(click) {
-        axios.patch('Imovel/Negar/' + click.target.id)
-            .then(response => {
-                if (response.status === 200) {
-                    window.location.reload()
-                }
-            });
+        AlterarAprovacao(2, click.target.id)
+    }
+
+    function RevisarImovel(click) {
+        AlterarAprovacao(3, click.target.id)
     }
 
     function DeletarImovel(click) {
@@ -74,7 +85,6 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
     useEffect(() => {
         BuscarImoveis(idTipoAnuncio)
         setidUsuario(getUserId())
-        console.log(bairro, idException, main)
     }, [idTipoAnuncio])
 
     return (
@@ -187,7 +197,7 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
                                                 </div>
                                                 : main == undefined && IdUsuario == 1 ?
                                                     <div style={{ width: '100%', margin: '6px 0' }}>
-                                                        <button id={imovel.idImovel} style={{ width: '100%', margin: '2px 0' }} className="btnPressionavel row alinhado" onClick={() => { NegarImovel() }}>Revisar</button>
+                                                        <button id={imovel.idImovel} style={{ width: '100%', margin: '2px 0' }} className="btnPressionavel row alinhado" onClick={RevisarImovel}>Revisar</button>
                                                     </div>
                                                     :
                                                     null
