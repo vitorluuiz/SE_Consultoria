@@ -13,7 +13,7 @@ export default function Footer() {
                 <img id="logo_footer__img" src={logo} alt="Logo SE Consultoria de Imóveis"/>
                </Link>
                 <nav className="apoioCreditos__nav">
-                    <span>Desenvolvido por </span>
+                    <span>Desenvolvido por</span>
                     <a className="pressionavel" id="creditos__a" href="https://github.com/vitorluuiz">Vitor Luiz Gonçalves</a>
                 </nav>
             </div>

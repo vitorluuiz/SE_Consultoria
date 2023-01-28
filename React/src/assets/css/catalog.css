@@ -103,7 +103,8 @@ h2#catalogo {
     box-shadow: 0 3px 7px -1px var(--sombra);
 }
 
-#botao_vermais a, #botao_vermais button {
+#botao_vermais a,
+#botao_vermais button {
     width: 100%;
     height: 100%;
 }
@@ -136,7 +137,7 @@ h2#catalogo {
 
 .filtering-top {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -165,8 +166,19 @@ h2#catalogo {
 
 #filterBar {
     height: 50%;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
+}
+
+.qnt-rooms {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.qnt-rooms>div {
+    width: 23%;
 }
 
 .ordenar {
@@ -216,6 +228,14 @@ button.ordenarSelected {
 
     .item_conteudo {
         width: 100%;
+    }
+
+    .qnt-rooms {
+        width: 80%;
+    }
+
+    .qnt-rooms>div {
+        width: 48%;
     }
 }
 
@@ -272,17 +292,6 @@ button.ordenarSelected {
         font-size: 0.8em;
     }
 
-    #requisitos {
-        flex-wrap: wrap;
-    }
-
-    #requisitos>div {
-        width: 100%;
-        max-height: 50px;
-        padding: 5px 0;
-        margin: 0;
-    }
-
     #ordenar {
         flex-wrap: wrap;
     }
@@ -299,7 +308,7 @@ button.ordenarSelected {
         width: 100%;
     }
 
-    .labed-img{
+    .labed-img {
         width: 33%;
     }
 

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { Checkbox, FormControlLabel, FormGroup, FormLabel, MenuItem, Select, FormControl, InputLabel, TextField, Autocomplete } from '@mui/material'
+
 import axios from 'axios';
 
 import CloseBar from '../assets/img/icones/close_modal.png'
@@ -39,7 +41,6 @@ export default function FiltroCatalogo() {
         }
     ])
 
-    // Precisa de aperfeiçoamentos para não alterar o state 6 vezes com o mesmo
     function setFilterStates(stateName, newValue) {
         var statesAtualizados = FilterStates;
         setStates(FilterStates.filter(function (state) {
@@ -61,6 +62,7 @@ export default function FiltroCatalogo() {
                 .then(response => {
                     if (response.status === 200) {
                         setCategoriasList(response.data)
+                        console.log(response.data)
                     }
                 })
 
@@ -117,70 +119,103 @@ export default function FiltroCatalogo() {
                         <div className="filtering-top container">
 
                             <div className="labed-input">
-                                <label>Valor máximo</label>
-                                <select onChange={(e) => setFilterStates('maxValue', e.target.value)}>
-                                    <option defaultValue={null}>Indiferente</option>
-                                    <option value='100000'>Menor que R$100.000</option>
-                                    <option value='150000'>Menor que R$150.000</option>
-                                    <option value='200000'>Menor que R$200.000</option>
-                                    <option value='250000'>Menor que R$250.000</option>
-                                    <option value='300000'>Menor que R$300.000</option>
-                                    <option value='350000'>Menor que R$350.000</option>
-                                    <option value='400000'>Menor que R$400.000</option>
-                                    <option value='500000'>Menor que R$500.000</option>
-                                </select>
+                                <FormControl>
+                                    <InputLabel>Valor máximo</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        label="Cozinhas"
+                                    >
+                                        <MenuItem value={200000}>R$200.000</MenuItem>
+                                        <MenuItem value={300000}>R$300.000</MenuItem>
+                                        <MenuItem value={400000}>R$400.000</MenuItem>
+                                        <MenuItem value={500000}>R$500.000</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </div>
 
                             <div className="labed-input">
-                                <label>Tipo de propriedade</label>
-                                <select onChange={(e) => setFilterStates('tipoImovel', e.target.value)}>
-                                    <option defaultValue={null}>Tipo de propriedade</option>
-                                    {CategoriasList.map((categoria) => {
-                                        return (
-                                            <option key={categoria.idCategoria} value={categoria.categoria1}>{categoria.categoria1}</option>
-                                        )
-                                    })}
-                                </select>
+                                <FormControl>
+                                    <InputLabel>Categoria</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        label="Categoria"
+                                    >
+                                        {CategoriasList.map((tipoAnuncio => {
+                                            return (
+                                                <MenuItem key={tipoAnuncio.idCategoria} value={tipoAnuncio.categoria1}>{tipoAnuncio.categoria1}</MenuItem>
+                                            )
+                                        }))}
+                                    </Select>
+                                </FormControl>
                             </div>
 
                             <div className="labed-input">
-                                <label>Bairro</label>
-                                <select onChange={(e) => setFilterStates('bairro', e.target.value)}>
-                                    <option defaultValue={null}>Indiferente</option>
-                                    {BairrosList.map((bairro) => {
-                                        return (
-                                            <option key={bairro.id} value={bairro.nome}>{bairro.nome}</option>
-                                        )
-                                    })}
-                                </select>
+                                <FormControl>
+                                    <InputLabel>Distrito</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        label="Bairro"
+                                    >
+                                        {BairrosList.map((bairro => {
+                                            return (
+                                                <MenuItem key={bairro.id} value={bairro.nome}>{bairro.nome}</MenuItem>
+                                            )
+                                        }))}
+                                    </Select>
+                                </FormControl>
                             </div>
-
-                            {/* <div className="labed-input">
-                                <label>CEP</label>
-                                <input onChange={(e) => setFilterStates('cep', e.target.innerText)} placeholder="Buscar perto de mim" />
-                            </div> */}
 
                         </div>
 
 
                         <div id="filterBar" className="container row">
 
-                            <div id="requisitos" className="row">
-                                <div className="labed-input ordenar first_option">
-                                    <select onChange={(e) => setFilterStates('minQuartos', e.target.value)}>
-                                        <option defaultValue='99' >Minímo de quartos</option>
-                                        <option value='1' >1 Quarto</option>
-                                        <option value='2' >2 Quartos</option>
-                                    </select>
-                                </div>
+                            <div className="row qnt-rooms">
+                                <FormControl >
+                                    <InputLabel>Quartos</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        label="Quartos"
+                                    >
+                                        <MenuItem value={1}>1</MenuItem>
+                                        <MenuItem value={2}>2</MenuItem>
+                                        <MenuItem value={3}>3</MenuItem>
+                                    </Select>
+                                </FormControl>
 
-                                <div className="labed-input ordenar">
-                                    <select onChange={(e) => setFilterStates('minBanheiros', e.target.value)}>
-                                        <option defaultValue='99'>Minímo de banheiros</option>
-                                        <option value='1' >1 Banheiro</option>
-                                        <option value='2' >2 Banheiros</option>
-                                    </select>
-                                </div>
+                                <FormControl >
+                                    <InputLabel>Salas</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        label="Quartos"
+                                    >
+                                        <MenuItem value={1}>1</MenuItem>
+                                        <MenuItem value={2}>2</MenuItem>
+                                        <MenuItem value={3}>3</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <FormControl >
+                                    <InputLabel>Cozinhas</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        label="Quartos"
+                                    >
+                                        <MenuItem value={1}>1</MenuItem>
+                                        <MenuItem value={2}>2</MenuItem>
+                                        <MenuItem value={3}>3</MenuItem>
+                                    </Select>
+                                </FormControl>
+                                <FormControl >
+                                    <InputLabel>Banheiros</InputLabel>
+                                    <Select
+                                        labelId="demo-simple-select-label"
+                                        label="Quartos"
+                                    >
+                                        <MenuItem value={1}>1</MenuItem>
+                                        <MenuItem value={2}>2</MenuItem>
+                                        <MenuItem value={3}>3</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </div>
 
                             <div id="ordenar" className="row">

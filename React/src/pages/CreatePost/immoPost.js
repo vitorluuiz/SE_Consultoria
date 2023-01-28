@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Checkbox, FormControlLabel, FormGroup, FormLabel, MenuItem, Select, FormControl, InputLabel, TextField, InputAdornment, OutlinedInput } from '@mui/material'
 
 import Footer from '../../components/footer.js'
 
@@ -12,12 +13,14 @@ import { useNavigate } from 'react-router-dom'
 export default function CadastroImmo() {
 
     const [Titulo, setTitulo] = useState('')
+    const [Descricao, setDescricao] = useState('')
     const [TipoAnuncio, setTipoAnuncio] = useState('')
     const [CategoriaPropriedade, setCategoriaPropriedade] = useState('')
     const [Bairro, setBairro] = useState('')
     const [Aluguel, setAluguel] = useState('')
     const [Valor, setValor] = useState('')
-    const [Custos, setCustos] = useState('')
+    const [IPTU, setIPTU] = useState(0)
+    const [Condominio, setCondominio] = useState(0)
     const [AreaConstruida, setAreaConstruida] = useState('')
     const [Terreno, setTerreno] = useState('')
 
@@ -74,9 +77,10 @@ export default function CadastroImmo() {
         formData.append('bairro', Bairro)
         formData.append('aluguel', Aluguel)
         formData.append('valor', Valor)
-        formData.append('custosMensais', Custos)
+        formData.append('custosMensais', IPTU + Condominio)
         formData.append('construido', AreaConstruida)
         formData.append('terreno', Terreno)
+        formData.append('descricao', Descricao)
 
         axios({
             method: "post",
@@ -147,170 +151,157 @@ export default function CadastroImmo() {
 
             <div className='suport_immo container'>
 
-                <section className='column'>
-                    <h1 id='post-tittle'>Cadastrar Imóvel</h1>
+                <form onSubmit={Sugerir} className='form-post'>
+                    <section className='column side-box'>
+                        <h1 id='post-tittle'>Cadastrar Imóvel</h1>
 
-                    <form className='form-post'>
+                        <div className='labed-input'><TextField value={Titulo} onChange={(e) => setTitulo(e.target.value)} label="Título da publicação" variant="outlined" /></div>
+                        <div className='labed-input double-input row espacado'>
 
-                        <div className='inputBox labed-input'>
-                            <label>Titulo da publicação</label>
-                            <input value={Titulo} onChange={(e) => setTitulo(e.target.value)}></input>
-                        </div>
-
-                        <div className='double-input row espacado'>
-                            <div className='inputBox labed-input'>
-                                <label>Categoria da publicação*</label>
-                                <select required value={TipoAnuncio} onChange={(e) => setTipoAnuncio(e.target.value)}>
-                                    <option key='0' defaultValue='0'>Escolher</option>
+                            <FormControl className='immo_rooms'>
+                                <InputLabel required>Categoria</InputLabel>
+                                <Select
+                                    value={TipoAnuncio}
+                                    onChange={(e) => setTipoAnuncio(e.target.value)}
+                                    labelId="demo-simple-select-label"
+                                    label="Categoria"
+                                >
                                     {ListTipoAnuncio.map((tipoAnuncio => {
                                         return (
-                                            <option key={tipoAnuncio.idTipoAnuncio} value={tipoAnuncio.idTipoAnuncio}>{tipoAnuncio.tipoAnuncio}</option>
+                                            <MenuItem key={tipoAnuncio.idTipoAnuncio} value={tipoAnuncio.idTipoAnuncio}>{tipoAnuncio.tipoAnuncio}</MenuItem>
                                         )
                                     }))}
-                                </select>
-                            </div>
+                                </Select>
+                            </FormControl>
 
-                            <div className='inputBox labed-input'>
-                                <label>Categoria da propriedade*</label>
-                                <select value={CategoriaPropriedade} onChange={(e) => setCategoriaPropriedade(e.target.value)}>
-                                    <option defaultValue='0'>Escolher</option>
+                            <FormControl className='immo_rooms'>
+                                <InputLabel required>Tipo de Imóvel</InputLabel>
+                                <Select
+                                    onChange={(e) => setCategoriaPropriedade(e.target.value)}
+                                    labelId="demo-simple-select-label"
+                                    label="Quartos"
+                                >
                                     {ListCategorias.map((categoria => {
                                         return (
-                                            <option key={categoria.idCategoria} value={categoria.idCategoria}>{categoria.categoria1}</option>
+                                            <MenuItem key={categoria.idCategoria} value={categoria.idCategoria}>{categoria.categoria1}</MenuItem>
                                         )
                                     }))}
-                                </select>
-                            </div>
+                                </Select>
+                            </FormControl>
                         </div>
 
                         <div className='inputBox labed-input'>
-                            <label>Bairro*</label>
-                            <select value={Bairro} onChange={(e) => setBairro(e.target.value)}>
-                                <option defaultValue='0'>Escolher</option>
-                                {BairrosList.map((bairro => {
-                                    return (
-                                        <option key={bairro.id} value={bairro.nome}>{bairro.nome}</option>
-                                    )
-                                }))}
-                            </select>
+                            <FormControl>
+                                <InputLabel>Distrito</InputLabel>
+                                <Select
+                                    onChange={(e) => setBairro(e.target.value)}
+                                >
+                                    {BairrosList.map((bairro => {
+                                        return (
+                                            <MenuItem key={bairro.id} value={bairro.nome}>{bairro.nome}</MenuItem>
+                                        )
+                                    }))}
+                                </Select>
+                            </FormControl>
+
                         </div>
 
-                        <div id='immo' className='double-input row espacado'>
-                            <div className='inputBox labed-input'>
-                                <label>IPTU</label>
-                                <input value={AreaConstruida} onChange={(e) => setAreaConstruida(e.target.value)}></input>
-                            </div>
-                            <div className='inputBox labed-input'>
-                                <label>Condomínio</label>
-                                <input value={Custos} onChange={(e) => setCustos(e.target.value)}></input>
-                            </div>
+                        <div id='immo' className='labed-input double-input row espacado'>
+                            <TextField label="IPTU" onChange={(e) => setIPTU(e.target.value)} />
+
+                            <TextField label="Condomínio" onChange={(e) => setCondominio(e.target.value)}/>
                         </div>
 
-                        <div id='immo' className='double-input row espacado'>
-                            <div className='inputBox labed-input'>
-                                <label>Preço da venda</label>
-                                {TipoAnuncio == 1 || TipoAnuncio == 3 ?
-                                    <input value={Valor} onChange={(e) => setValor(e.target.value)}></input>
-                                    :
-                                    <input disabled placeholder='Não se aplica' style={{ backgroundColor: '#E3E3E3' }}></input>
-                                }
-                            </div>
+                        <div id='immo' className='labed-input double-input row espacado'>
+                            <TextField label="Preço" onChange={(e) => setValor(e.target.value)}/>
 
-                            <div className='inputBox labed-input'>
-                                <label>Aluguel</label>
-                                {TipoAnuncio == 2 || TipoAnuncio == 3 ?
-                                    <input value={Aluguel} type="text" onChange={(e) => setAluguel(e.target.value)} required></input>
-                                    :
-                                    <input disabled style={{ backgroundColor: '#E3E3E3' }} placeholder="Não se aplica"></input>
-                                }
-                            </div>
+                            <TextField label="Aluguel" onChange={(e) => setAluguel(e.target.value)}/>
                         </div>
 
                         <div className='row background_immo_rooms espacado'>
 
-                            <article className='immo_rooms column alinhado'>
-                                <label>Quartos</label>
-                                <input value={Quartos} onChange={(e) => setQuartos(e.target.value)}></input>
-                            </article>
+                            <FormControl className='immo_rooms'>
+                                <InputLabel>Quartos</InputLabel>
+                                <Select 
+                                onChange={(e) => setQuartos(e.target.value)}
+                                >
+                                    <MenuItem value={1}>1</MenuItem>
+                                    <MenuItem value={2}>2</MenuItem>
+                                    <MenuItem value={3}>3</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl className='immo_rooms'>
+                                <InputLabel>Salas</InputLabel>
+                                <Select
+                                onChange={(e) => setSalas(e.target.value)}
+                                >
+                                    <MenuItem value={1}>1</MenuItem>
+                                    <MenuItem value={2}>2</MenuItem>
+                                    <MenuItem value={3}>3</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl className='immo_rooms'>
+                                <InputLabel>Cozinhas</InputLabel>
+                                <Select
+                                onChange={(e) => setCozinhas(e.target.value)}
+                                >
+                                    <MenuItem value={1}>1</MenuItem>
+                                    <MenuItem value={2}>2</MenuItem>
+                                    <MenuItem value={3}>3</MenuItem>
+                                </Select>
+                            </FormControl>
+                            <FormControl className='immo_rooms'>
+                                <InputLabel>Banheiros</InputLabel>
+                                <Select
+                                onChange={(e) => setBanheiros(e.target.value)}
+                                >
+                                    <MenuItem value={1}>1</MenuItem>
+                                    <MenuItem value={2}>2</MenuItem>
+                                    <MenuItem value={3}>3</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </div>
 
-                            <article className='immo_rooms column alinhado'>
-                                <label>Salas</label>
-                                <input value={Salas} onChange={(e) => setSalas(e.target.value)}></input>
-                            </article>
+                        <TextField multiline label="Descrição do Imóvel" variant="outlined" onChange={(e) => setDescricao(e.target.value)} />
 
-                            <article className='immo_rooms column alinhado'>
-                                <label>Cozinhas</label>
-                                <input value={Cozinhas} onChange={(e) => setCozinhas(e.target.value)}></input>
-                            </article>
+                    </section>
 
-                            <article className='immo_rooms column alinhado'>
-                                <label>Banheiros</label>
-                                <input value={Banheiros} onChange={(e) => setBanheiros(e.target.value)}></input>
-                            </article>
+                    <section className='column espacado side-box' id='immo'>
 
-                            <article className='immo_rooms column alinhado'>
-                                <label>Garagem</label>
-                                <input value={Garagem} onChange={(e) => setGaragem(e.target.value)}></input>
-                            </article>
+                        <div className='row extra-infos'>
 
-                            <article className='immo_rooms column alinhado'>
-                                <label>Terreno</label>
-                                <input value={Terreno} onChange={(e) => setTerreno(e.target.value)}></input>
-                            </article>
-                            <article className='immo_rooms column alinhado'>
-                                <label>construido</label>
-                                <input value={AreaConstruida} onChange={(e) => setAreaConstruida(e.target.value)}></input>
-                            </article>
+                            <FormGroup >
+                                <FormLabel component='legend'>Características</FormLabel>
+                                <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Academia" />
+                                <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Espaço Kids" />
+                                <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Quadra Esportiva" />
+                                <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Piscina" />
+                            </FormGroup>
+
+                            <FormGroup >
+                                <FormLabel component='legend'>Extras</FormLabel>
+                                <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Aceita Pets" />
+                                <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Silencioso" />
+                            </FormGroup>
+                        </div>
+
+                        <div id='img_immo_suport' className='row espacado alinhado'>
+                            <label htmlFor='imgPrincipal' className='suport_img_immo background_img_immo column alinhado centrado'>
+                                <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarIcon} />
+                                <span>Adicionar foto principal</span>
+                                <input id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
+                            </label>
+                            <label htmlFor="moreImgs" className='addImg_immo background_img_immo'>
+                                <img alt='Icone de adicionar mais imagens' src={adicionarIcon} />
+                                <input id='moreImgs' type='file' accept="image/png; image/jpeg; image/jpg" multiple></input>
+                                <label>Mais fotos</label>
+                            </label>
 
                         </div>
 
-                    </form>
-
-                </section>
-
-                <section className='column espacado' id='immo'>
-
-                    <div className='row background_immo_rooms espacado'>
-                        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        
-                    </div>
-
-                    <div id='img_immo_suport' className='row espacado alinhado'>
-                        <label htmlFor='imgPrincipal' className='suport_img_immo background_img_immo column alinhado centrado'>
-                            <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarIcon} />
-                            <span>Adicionar foto principal</span>
-                            <input id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
-                        </label>
-                        <label htmlFor="moreImgs" className='addImg_immo background_img_immo'>
-                            <img alt='Icone de adicionar mais imagens' src={adicionarIcon} />
-                            <input id='moreImgs' type='file' accept="image/png; image/jpeg; image/jpg" multiple></input>
-                            <label>Mais fotos</label>
-                        </label>
-
-                    </div>
-
-                    <button id='btnAprove' className='btnPressionavel' onClick={Sugerir}>Solicitar aprovação</button>
-
-
-
-                </section>
+                        <button id='btnAprove' type='submit' className='btnPressionavel'>Solicitar aprovação</button>
+                    </section>
+                </form>
             </div>
 
             <div className="boxInfo container column centrado" id="cadastro">
@@ -319,6 +310,6 @@ export default function CadastroImmo() {
             </div>
 
             <Footer />
-        </div>
+        </div >
     )
 }

@@ -55,7 +55,8 @@
   transform: scale(0.98);
 }
 
-span, a, p{
+a,
+p {
   color: var(--fonteClara);
 }
 
@@ -64,29 +65,25 @@ a {
 }
 
 form {
-  width: 85%;
+  width: 90%;
 }
 
-input, .masked_input, select {
-  min-height: 45px;
-  padding-left: 10px;
-  border: 2px solid #464646;
-  margin-bottom: 10px;
-  font-size: 1.2em;
-  border-radius: var(--borda);
+input,
+.masked_input,
+select {
+  border: 1px solid #464646;
+  margin-bottom: 5px;
+  border-radius: 6px;
 }
 
-.labed-input{
+.labed-input {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
-.labed-input label{
-  margin-bottom: 5px;
-}
-
-.double-input > div{
-width: 49%;
+.double-input>div {
+  width: 49%;
 }
 
 .container {
@@ -139,7 +136,7 @@ width: 49%;
     width: 95vw;
   }
 
-  .containerBox{
+  .containerBox {
     width: 85vw;
   }
 }

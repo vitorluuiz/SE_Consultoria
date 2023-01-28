@@ -1,5 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+
+
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { TextField } from '@mui/material'
 
 import { FormatCelular, FormatDDD } from '../../services/formater.js';
 
@@ -10,12 +20,18 @@ import '../../assets/css/login.css'
 import { useNavigate } from "react-router-dom";
 
 export default function Cadastro() {
-
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const [Nome, setNome] = useState('');
     const [Celular, setCelular] = useState('');
     const [Senha, setSenha] = useState('');
     const [ContraSenha, setContraSenha] = useState('');
+
+    const handleClickShowPassword = () => setShowPassword((show => !show))
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     function CadastrarUsuario(event) {
         event.preventDefault();
@@ -38,36 +54,57 @@ export default function Cadastro() {
         }
     }
 
+    useEffect(() => {
+        console.log(Nome, Celular, Senha, ContraSenha)
+    }, [Senha])
+
     return (
         <div className="fundo_login column">
 
             <div className="bloco_login containerBox column alinhado">
 
-                <form className="form_login column alinhado">
+                <form onSubmit={CadastrarUsuario} className="form_login column alinhado">
 
                     <div className="inputs-apoio" id="cadastro">
-                        <div className="labed-input">
-                            <label htmlFor="nome">Nome de usuário</label>
-                            <input id="nome" value={Nome} onChange={(e) => setNome(e.target.value)}></input>
-                        </div>
+                        <div className='labed-input'><TextField onChange={(e) => setNome(e.target.value)} label="Nome completo" variant="outlined" /></div>
 
-                        <div className="labed-input">
-                            <label htmlFor="telefone">Telefone</label>
-                            <MaskedInput mask="(99) 99999-9999" placeholder="(DDD) 98765-4321" id="telefone" value={Celular} onChange={(e) => setCelular(e.target.value)}></MaskedInput>
-                        </div>
+                        <div className='labed-input'><TextField onChange={(e) => setCelular(e.target.value)} label="Telefone" variant="outlined" /></div>
 
-                        <div className="labed-input">
-                            <label htmlFor="senha">Senha</label>
-                            <input type="password" id="senha" value={Senha} onChange={(e) => setSenha(e.target.value)}></input>
-                        </div>
-
-                        <div className="labed-input">
-                            <label htmlFor="contraSenha">Confirme a senha</label>
-                            <input type="password" id="contraSenha" value={ContraSenha} onChange={(e) => setContraSenha(e.target.value)}></input>
+                        <div id='immo' className='labed-input double-input row espacado'>
+                            <FormControl style={{ width: '48%', marginLeft: '0' }} sx={{ m: 1, width: '25ch' }} variant="outlined">
+                                <InputLabel htmlFor="outlined-adornment-password">Senha</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    label="Senha"
+                                    onChange={(e) => setSenha(e.target.value)}
+                                />
+                            </FormControl>
+                            <FormControl style={{ width: '48%', marginLeft: '0' }} sx={{ m: 1, width: '25ch' }} variant="outlined">
+                                <InputLabel htmlFor="outlined-adornment-password">Contra Senha</InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    onChange={(e) => setContraSenha(e.target.value)}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                    label="Confirme a senha"
+                                />
+                            </FormControl>
                         </div>
                     </div>
 
-                    <button className="btnPressionavel btnLogin" onClick={CadastrarUsuario}>Cadastro</button>
+                    <button className="btnPressionavel btnLogin" type="submit">Cadastro</button>
                 </form>
 
             </div>
