@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Checkbox, FormControlLabel, FormGroup, FormLabel, MenuItem, Select, FormControl, InputLabel, TextField, InputAdornment, OutlinedInput } from '@mui/material'
+import { Checkbox, FormControlLabel, FormGroup, FormLabel, MenuItem, Select, FormControl, InputLabel, TextField, ImageList, ImageListItem } from '@mui/material'
 
 import Footer from '../../components/footer.js'
 
 import adicionarIcon from '../../assets/img/icones/add.svg'
-import adicionarBrancoIcon from '../../assets/img/icones/addWhite.svg'
 
 import '../../assets/css/immo.css'
 import axios from 'axios'
@@ -19,10 +18,11 @@ export default function CadastroImmo() {
     const [Bairro, setBairro] = useState('')
     const [Aluguel, setAluguel] = useState('')
     const [Valor, setValor] = useState('')
-    const [IPTU, setIPTU] = useState(0)
-    const [Condominio, setCondominio] = useState(0)
+    const [IPTU, setIPTU] = useState('')
+    const [Condominio, setCondominio] = useState('')
     const [AreaConstruida, setAreaConstruida] = useState('')
     const [Terreno, setTerreno] = useState('')
+
 
     const [Quartos, setQuartos] = useState('')
     const [Salas, setSalas] = useState('')
@@ -30,35 +30,82 @@ export default function CadastroImmo() {
     const [Banheiros, setBanheiros] = useState('')
     const [Garagem, setGaragem] = useState('')
 
+    const [MainImg, setMainImg] = useState('')
+    const [ListImgs, setListImgs] = useState([])
     const [ListTipoAnuncio, setListTipoAnuncios] = useState([])
     const [ListCategorias, setListCategorias] = useState([])
     const [BairrosList, setBairrosList] = useState([])
+    const [isUpdatedImgs, setImgsUpdated] = useState(false)
     const [hasPulledSelects, setPulled] = useState(false)
     const navigate = useNavigate();
 
-    function PullSelects() {
+    const getMainImg = () => {
+        var imgElement = document.getElementById('imgPrincipal');
+        if (imgElement.files.length == 1) {
+            var urlImg = URL.createObjectURL(imgElement.files[0])
+            setMainImg(urlImg);
+        }
+    }
+
+    const getImagesFiles = () => {
+        const imgsElement = document.getElementById('moreImgs');
+        if (imgsElement.files.length != 0) {
+            var fileList = imgsElement.files
+            var urlImages = [];
+            for (let index = 0; index < fileList.length; index++) {
+                var urlImage = {
+                    id: index,
+                    img: URL.createObjectURL(fileList[index])
+                }
+                urlImages.push(urlImage);
+            }
+            if (!isUpdatedImgs) {
+                setListImgs(urlImages);
+                setImgsUpdated(true);
+            }
+        }
+    }
+
+    // Não funcionando
+    const deleteImageInFiles = (click) => {
+        var imgsElement = document.getElementById('moreImgs');
+        if (ListImgs.length != 0) {
+            var urlImages = ListImgs;
+            for (let index = 0; index < ListImgs.length; index++) {
+                if (index == click.target.id) {
+                    urlImages.splice(index, 1)
+                }
+            }
+            console.log(imgsElement.files)
+            imgsElement.fileList = urlImages
+            console.log(imgsElement.fileList)
+            setListImgs(urlImages);
+            setImgsUpdated(false);
+        }
+    }
+
+    async function PullSelects() {
         if (!hasPulledSelects) {
-            axios.get('Categorias')
+            await axios.get('Categorias')
                 .then(response => {
                     if (response.status === 200) {
                         setListCategorias(response.data)
                     }
                 })
 
-            axios.get('TiposAnuncio')
+            await axios.get('TiposAnuncio')
                 .then(response => {
                     if (response.status === 200) {
                         setListTipoAnuncios(response.data)
                     }
                 })
 
-            axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/municipios/3550308/distritos')
+            await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/municipios/3550308/distritos')
                 .then(response => {
                     if (response.status) {
                         setBairrosList(response.data)
                     }
-                }
-                )
+                })
             setPulled();
         }
     }
@@ -142,9 +189,11 @@ export default function CadastroImmo() {
                 })
         })
     }
+
     useEffect(() => {
         PullSelects()
-    }, [])
+        getImagesFiles()
+    }, [ListImgs])
 
     return (
         <div className='background_immo'>
@@ -158,8 +207,8 @@ export default function CadastroImmo() {
                         <div className='labed-input'><TextField value={Titulo} onChange={(e) => setTitulo(e.target.value)} label="Título da publicação" variant="outlined" /></div>
                         <div className='labed-input double-input row espacado'>
 
-                            <FormControl className='immo_rooms'>
-                                <InputLabel required>Categoria</InputLabel>
+                            <FormControl required className='immo_rooms'>
+                                <InputLabel>Categoria</InputLabel>
                                 <Select
                                     value={TipoAnuncio}
                                     onChange={(e) => setTipoAnuncio(e.target.value)}
@@ -174,9 +223,10 @@ export default function CadastroImmo() {
                                 </Select>
                             </FormControl>
 
-                            <FormControl className='immo_rooms'>
-                                <InputLabel required>Tipo de Imóvel</InputLabel>
+                            <FormControl required className='immo_rooms'>
+                                <InputLabel>Tipo de Imóvel</InputLabel>
                                 <Select
+                                    value={CategoriaPropriedade}
                                     onChange={(e) => setCategoriaPropriedade(e.target.value)}
                                     labelId="demo-simple-select-label"
                                     label="Quartos"
@@ -191,9 +241,10 @@ export default function CadastroImmo() {
                         </div>
 
                         <div className='inputBox labed-input'>
-                            <FormControl>
+                            <FormControl required>
                                 <InputLabel>Distrito</InputLabel>
                                 <Select
+                                    value={Bairro}
                                     onChange={(e) => setBairro(e.target.value)}
                                 >
                                     {BairrosList.map((bairro => {
@@ -207,23 +258,42 @@ export default function CadastroImmo() {
                         </div>
 
                         <div id='immo' className='labed-input double-input row espacado'>
-                            <TextField label="IPTU" onChange={(e) => setIPTU(e.target.value)} />
+                            <TextField value={IPTU} label="IPTU" onChange={(e) => setIPTU(e.target.value)} />
 
-                            <TextField label="Condomínio" onChange={(e) => setCondominio(e.target.value)}/>
+                            <TextField value={Condominio} label="Condomínio" onChange={(e) => setCondominio(e.target.value)} />
                         </div>
 
                         <div id='immo' className='labed-input double-input row espacado'>
-                            <TextField label="Preço" onChange={(e) => setValor(e.target.value)}/>
+                            <TextField value={Terreno} required label="Terreno" onChange={(e) => setTerreno(e.target.value)} />
 
-                            <TextField label="Aluguel" onChange={(e) => setAluguel(e.target.value)}/>
+                            <TextField value={AreaConstruida} required label="Construído" onChange={(e) => setAreaConstruida(e.target.value)} />
                         </div>
+
+                        {TipoAnuncio == 1 ?
+                            <div id='immo' className='labed-input double-input row espacado'>
+                                <TextField value={Valor} required label="Preço" onChange={(e) => setValor(e.target.value)} />
+                                <TextField value={Aluguel} disabled label="Não aplicável" onChange={(e) => setAluguel(e.target.value)} />
+                            </div>
+                            : TipoAnuncio == 2 ?
+                                <div id='immo' className='labed-input double-input row espacado'>
+                                    <TextField value={Valor} disabled label="Não aplicável" onChange={(e) => setValor(e.target.value)} />
+                                    <TextField value={Aluguel} required label="Aluguel" onChange={(e) => setAluguel(e.target.value)} />
+                                </div>
+                                :
+                                <div id='immo' className='labed-input double-input row espacado'>
+                                    <TextField value={Valor} required label="Preço" onChange={(e) => setValor(e.target.value)} />
+                                    <TextField value={Aluguel} required label="Aluguel" onChange={(e) => setAluguel(e.target.value)} />
+                                </div>
+                        }
+
 
                         <div className='row background_immo_rooms espacado'>
 
                             <FormControl className='immo_rooms'>
                                 <InputLabel>Quartos</InputLabel>
-                                <Select 
-                                onChange={(e) => setQuartos(e.target.value)}
+                                <Select
+                                    value={Quartos}
+                                    onChange={(e) => setQuartos(e.target.value)}
                                 >
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -233,7 +303,8 @@ export default function CadastroImmo() {
                             <FormControl className='immo_rooms'>
                                 <InputLabel>Salas</InputLabel>
                                 <Select
-                                onChange={(e) => setSalas(e.target.value)}
+                                    value={Salas}
+                                    onChange={(e) => setSalas(e.target.value)}
                                 >
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -243,7 +314,8 @@ export default function CadastroImmo() {
                             <FormControl className='immo_rooms'>
                                 <InputLabel>Cozinhas</InputLabel>
                                 <Select
-                                onChange={(e) => setCozinhas(e.target.value)}
+                                    value={Cozinhas}
+                                    onChange={(e) => setCozinhas(e.target.value)}
                                 >
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -253,7 +325,8 @@ export default function CadastroImmo() {
                             <FormControl className='immo_rooms'>
                                 <InputLabel>Banheiros</InputLabel>
                                 <Select
-                                onChange={(e) => setBanheiros(e.target.value)}
+                                    value={Banheiros}
+                                    onChange={(e) => setBanheiros(e.target.value)}
                                 >
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -262,7 +335,7 @@ export default function CadastroImmo() {
                             </FormControl>
                         </div>
 
-                        <TextField multiline label="Descrição do Imóvel" variant="outlined" onChange={(e) => setDescricao(e.target.value)} />
+                        <TextField value={Descricao} inputProps={{ maxLength: 200 }} type="number" multiline label="Descrição do Imóvel" variant="outlined" onChange={(e) => setDescricao(e.target.value)} />
 
                     </section>
 
@@ -286,18 +359,43 @@ export default function CadastroImmo() {
                         </div>
 
                         <div id='img_immo_suport' className='row espacado alinhado'>
-                            <label htmlFor='imgPrincipal' className='suport_img_immo background_img_immo column alinhado centrado'>
-                                <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarIcon} />
-                                <span>Adicionar foto principal</span>
-                                <input id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
-                            </label>
+                            {MainImg == '' ?
+                                <label htmlFor='imgPrincipal' className='suport_img_immo background_img_immo column alinhado centrado'>
+                                    <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarIcon} />
+                                    <span>Adicionar foto principal*</span>
+                                    <input onInput={getMainImg} required id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
+                                </label>
+                                :
+                                <label htmlFor='imgPrincipal' className='suport_img_immo background_img_immo column alinhado centrado'>
+                                    <img alt='Icone de adicionar imagem principal' className='main-img' id='icone_branco' src={MainImg} />
+                                    <input onInput={getMainImg} required id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
+                                </label>
+                            }
+
                             <label htmlFor="moreImgs" className='addImg_immo background_img_immo'>
                                 <img alt='Icone de adicionar mais imagens' src={adicionarIcon} />
-                                <input id='moreImgs' type='file' accept="image/png; image/jpeg; image/jpg" multiple></input>
+                                <input onInput={getImagesFiles} id='moreImgs' type='file' accept="image/png; image/jpeg; image/jpg" multiple></input>
                                 <label>Mais fotos</label>
                             </label>
 
                         </div>
+                        <ImageList
+                            style={{ marginBottom: '10px' }}
+                            variant="standard"
+                            cols={6}
+                        >
+                            {ListImgs.map((item) => (
+                                <ImageListItem key={item.id} cols={1} rows={1}>
+                                    <img
+                                        onClick={deleteImageInFiles}
+                                        id={item.id}
+                                        src={item.img}
+                                        alt="Exemplar de foto do imóvel"
+                                        loading="lazy"
+                                    />
+                                </ImageListItem>
+                            ))}
+                        </ImageList>
 
                         <button id='btnAprove' type='submit' className='btnPressionavel'>Solicitar aprovação</button>
                     </section>
