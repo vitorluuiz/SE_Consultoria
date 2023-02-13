@@ -26,36 +26,35 @@ import whatsappIcon from '../../assets/img/logos/whatsapp_logo.png'
 
 export default function ViewItem() {
 
-    const carousel = useRef()
-    const [width, setWidth] = useState(Number)
+    const carousel = useRef();
+    const [width, setWidth] = useState(Number);
 
     const { id } = useParams();
     const [Imovel, setImovelInfos] = useState([]);
     const [ImgsImovel, setImgsImovel] = useState([]);
     const [ExtraInfos, setExtraInfos] = useState([]);
-    const [hasError, setError] = useState(false);
     const [hasPulled, setPulled] = useState(false);
 
     async function BuscarImoveis() {
+        if (!hasPulled) {
+            await axios.get('Img/' + id)
+                .then(response => {
+                    if (response.status === 200) {
+                        setImgsImovel(response.data)
+                    }
+                })
 
-        await axios.get('Img/' + id)
-            .then(response => {
-                if (response.status === 200) {
-                    setImgsImovel(response.data)
-                }
-            })
-
-        await axios.get('Imovel/ListarPorId/' + id)
-            .then(response => {
-                if (response.status === 200) {
-                    setImovelInfos(response.data)
-                    setExtraInfos(response.data.informacoesAdicionais)
-                    console.log(response.data)
-                }
-            })
-
-        setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
-        console.log(carousel.current?.scrollWidth - carousel.current?.offsetWidth)
+            await axios.get('Imovel/ListarPorId/' + id)
+                .then(response => {
+                    if (response.status === 200) {
+                        setImovelInfos(response.data)
+                        setExtraInfos(response.data.informacoesAdicionais)
+                        console.log(response.data)
+                    }
+                })
+            setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
+            setPulled(true);
+        }
     }
 
     useEffect(() => {

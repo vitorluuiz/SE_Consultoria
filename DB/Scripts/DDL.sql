@@ -4,7 +4,7 @@ USE SE_db
 
 CREATE TABLE Usuarios(
 idUsuario SMALLINT PRIMARY KEY IDENTITY,
-NomeUsuario VARCHAR(55),
+NomeUsuario VARCHAR(30),
 DDD CHAR(2),
 Celular CHAR(9) NOT NULL,
 Senha CHAR(60) NOT NULL
@@ -13,7 +13,7 @@ GO
 
 CREATE TABLE TiposAnuncios(
 idTipoAnuncio TINYINT PRIMARY KEY IDENTITY,
-TipoAnuncio VARCHAR(7) NOT NULL UNIQUE
+TipoAnuncio VARCHAR(18) NOT NULL UNIQUE
 )
 GO
 
@@ -34,14 +34,14 @@ idImovel SMALLINT PRIMARY KEY IDENTITY,
 idTipoAnuncio TINYINT FOREIGN KEY REFERENCES TiposAnuncios(idTipoAnuncio),
 idCategoria TINYINT FOREIGN KEY REFERENCES Categorias(idCategoria),
 idAprovacao TINYINT FOREIGN KEY REFERENCES Aprovacao(idAprovacao),
-ImgPrincipal VARCHAR(255),
-Titulo VARCHAR(200),
-Descricao VARCHAR(300),
+ImgPrincipal VARCHAR(41),
+Titulo VARCHAR(100),
+Descricao VARCHAR(400),
 Bairro VARCHAR(30),
-Aluguel	DECIMAL(6,2),
+Aluguel	DECIMAL(7,2),
 Valor DECIMAL(10,2),
-CustosMensais DECIMAL(6,2),
-Construido DECIMAL(6,2),
+CustosMensais DECIMAL(7,2),
+Construido DECIMAL(7,2),
 Terreno DECIMAL(7,2)
 )
 GO
@@ -49,12 +49,12 @@ GO
 CREATE TABLE dbImg(
 idImg SMALLINT PRIMARY KEY IDENTITY,
 idImovel SMALLINT FOREIGN KEY REFERENCES Imoveis(idImovel),
-img VARCHAR(255)
+img VARCHAR(41)
 )
 
 CREATE TABLE TipoInfo(
 idTipoInfo TINYINT PRIMARY KEY IDENTITY,
-TipoInfo VARCHAR(20)
+TipoInfo VARCHAR(25)
 )
 GO
 

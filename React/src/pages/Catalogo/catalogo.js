@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useReducer } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { imgRoot } from "../../services/api.js";
+import reducer from "../../services/reducer.js";
 
 import { getUserId } from "../../services/authUser.js";
 
@@ -20,21 +22,18 @@ import '../../assets/css/catalog.css'
 
 export default function CatalogoVenda({ main, auditoria, idException, bairro }) {
 
-    const { idTipoAnuncio } = useParams();
+    const updateStage = {
+        count: 0
+    }
+
+    const [updates, dispatch] = useReducer(reducer, updateStage);
+
+    const Bairro = bairro;
     const [ImovelList, setImovelList] = useState([])
     const [IdUsuario, setidUsuario] = useState(0)
 
-    async function BuscarImoveis(idTipoAnuncio) {
-
-        if (main == undefined) {
-            await axios.get('Imovel/ListarPorTipoAnuncio/1/' + idTipoAnuncio)
-                .then(response => {
-                    if (response.status === 200) {
-                        setImovelList(response.data)
-                    }
-                });
-        }
-        else if (auditoria == true) {
+    async function BuscarImoveis() {
+        if (auditoria === true) {
             await axios.get('Imovel/ListarPorAprovacao/3')
                 .then(response => {
                     if (response.status === 200) {
@@ -42,13 +41,16 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
                     }
                 });
         }
-        else if (idException != undefined) {
-            await axios.get('Imovel/ListarPorBairro/' + { bairro } + '/' + idException)
+        else if (main === false) {
+            await axios.get('Imovel/ListarPorBairro/' + Bairro + '/' + idException)
                 .then(response => {
                     if (response.status === 200) {
                         setImovelList(response.data)
                     }
                 });
+        }
+        else {
+            setImovelList(JSON.parse(localStorage.getItem('immo-list')))
         }
     }
 
@@ -83,23 +85,22 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
     }
 
     useEffect(() => {
-        BuscarImoveis(idTipoAnuncio)
+        BuscarImoveis()
         setidUsuario(getUserId())
-    }, [idTipoAnuncio])
+    }, [Bairro, updates.count])
 
     return (
         <div>
             {main !== false ?
                 <div>
                     <Header />
-                    <Filtro />
+                    <Filtro imovelist={{ ImovelList }} dispatch={dispatch} />
                 </div>
                 :
                 null
             }
 
             <main id="catalogo">
-
                 <section className="apoio_conteudo_catalogo container row">
 
                     {ImovelList.map((imovel => {

@@ -115,7 +115,7 @@ namespace SE_WebAPI.Repositories
         public List<Imovei> ListarPorBairro(string bairro, int idException)
         {
             return ctx.Imoveis
-                .Where(i => i.Bairro == bairro && i.IdImovel != idException)
+                .Where(i => i.Bairro == bairro && i.IdImovel != idException && i.IdAprovacao != 3)
                 .AsNoTracking()
                 .Include(i => i.InformacoesAdicionais)
                 .Include(i => i.IdCategoriaNavigation)

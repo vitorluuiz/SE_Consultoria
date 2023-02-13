@@ -1,59 +1,57 @@
 import React, { useEffect, useState } from "react";
-import { Checkbox, FormControlLabel, FormGroup, FormLabel, MenuItem, Select, FormControl, InputLabel, TextField, Autocomplete } from '@mui/material'
-
+import { useParams } from "react-router-dom";
 import axios from 'axios';
+import { MenuItem, Select, FormControl, InputLabel } from '@mui/material'
 
 import CloseBar from '../assets/img/icones/close_modal.png'
 
 import '../assets/css/catalog.css'
 
-export default function FiltroCatalogo() {
+export default function FiltroCatalogo({ dispatch }) {
+
+    const [maxValue, setMaxValue] = useState(0);
+    const [categoria, setCategoria] = useState(0);
+    const [distrito, setDistrito] = useState('');
+    const [minQuartos, setMinQuartos] = useState(0);
+    const [minBanheiros, setMinBanheiros] = useState(0);
+    const [minSalas, setMinSalas] = useState(0);
+    const [minCozinhas, setMinCozinhas] = useState(0);
+    const [OrderStates, setOrderstates] = useState([0, 0]);
+
+    const [ImovelList, setImovelList] = useState([])
     const [isFilterVisible, setFilterVisible] = useState(false);
     const [hasPulledSelects, setPulled] = useState(false);
-    const [OrderStates, setOrderstates] = useState([0, 0]);
     const [BairrosList, setBairrosList] = useState([]);
     const [CategoriasList, setCategoriasList] = useState([]);
+    const { idTipoAnuncio } = useParams();
 
-    const [FilterStates, setStates] = useState([
-        {
-            name: 'cep',
-            value: ''
-        },
-        {
-            name: 'bairro',
-            value: ''
-        },
-        {
-            name: 'tipoImovel',
-            value: ''
-        },
-        {
-            name: 'maxValue',
-            value: ''
-        },
-        {
-            name: 'minBanheiros',
-            value: ''
-        },
-        {
-            name: 'minQuartos',
-            value: ''
+    function filtrarImoveis() {
+        let data = ImovelList;
+        if (maxValue > 0) {
+            data = data.filter(item => item.valor <= maxValue);
         }
-    ])
-
-    function setFilterStates(stateName, newValue) {
-        var statesAtualizados = FilterStates;
-        setStates(FilterStates.filter(function (state) {
-            if (state.name == stateName) {
-                statesAtualizados.filter(function (e) {
-                    if (e.id == stateName) {
-                        e.value = newValue;
-                    }
-                })
-            }
-            console.log(statesAtualizados)
-            return statesAtualizados;
-        }))
+        if (categoria > 0) {
+            data = data.filter(item => item.idCategoria === categoria);
+        }
+        if (distrito !== '') {
+            data = data.filter(item => item.bairro === distrito);
+        }
+        // if (minQuartos > 0) {
+        //     data = data.filter(item => item.Quartos >= minQuartos);
+        // }
+        // if (minBanheiros > 0) {
+        //     data = data.filter(item => item.banheiros >= minBanheiros);
+        // }
+        // if (minSalas > 0) {
+        //     data = data.filter(item => item.salas >= minSalas);
+        // }
+        // if (minCozinhas > 0) {
+        //     data = data.filter(item => item.cozinhas >= minCozinhas);
+        // }
+        localStorage.setItem('immo-list',
+            JSON.stringify(data)
+        )
+        dispatch({ type: 'update' })
     }
 
     async function PullSelects() {
@@ -62,10 +60,8 @@ export default function FiltroCatalogo() {
                 .then(response => {
                     if (response.status === 200) {
                         setCategoriasList(response.data)
-                        console.log(response.data)
                     }
                 })
-
             await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/municipios/3550308/distritos')
                 .then(response => {
                     if (response.status) {
@@ -74,6 +70,14 @@ export default function FiltroCatalogo() {
                 })
             setPulled(true);
         }
+        await axios.get('Imovel/ListarPorTipoAnuncio/1/' + idTipoAnuncio)
+            .then(response => {
+                if (response.status === 200) {
+                    setImovelList(response.data)
+                    localStorage.setItem('immo-list', JSON.stringify(response.data))
+                }
+            });
+        dispatch({ type: 'update' });
     }
 
     const handleChangeFilter = (click) => {
@@ -105,8 +109,12 @@ export default function FiltroCatalogo() {
     }
 
     useEffect(() => {
+        filtrarImoveis()
+    }, [maxValue, categoria, distrito, minQuartos, minSalas, minCozinhas, minBanheiros])
+
+    useEffect(() => {
         PullSelects()
-    }, [])
+    }, [idTipoAnuncio])
 
     return (
         <div className="background_filter">
@@ -122,9 +130,12 @@ export default function FiltroCatalogo() {
                                 <FormControl>
                                     <InputLabel>Valor máximo</InputLabel>
                                     <Select
+                                        value={maxValue}
+                                        onChange={(e) => setMaxValue(e.target.value)}
                                         labelId="demo-simple-select-label"
                                         label="Cozinhas"
                                     >
+                                        <MenuItem value={0}>Indiferente</MenuItem>
                                         <MenuItem value={200000}>R$200.000</MenuItem>
                                         <MenuItem value={300000}>R$300.000</MenuItem>
                                         <MenuItem value={400000}>R$400.000</MenuItem>
@@ -137,12 +148,16 @@ export default function FiltroCatalogo() {
                                 <FormControl>
                                     <InputLabel>Categoria</InputLabel>
                                     <Select
+                                        defaultValue="Uncontrolled Input"
+                                        value={categoria}
+                                        onChange={(e) => setCategoria(e.target.value)}
                                         labelId="demo-simple-select-label"
                                         label="Categoria"
                                     >
+                                        <MenuItem value={0}>Indiferente</MenuItem>
                                         {CategoriasList.map((tipoAnuncio => {
                                             return (
-                                                <MenuItem key={tipoAnuncio.idCategoria} value={tipoAnuncio.categoria1}>{tipoAnuncio.categoria1}</MenuItem>
+                                                <MenuItem key={tipoAnuncio.idCategoria} value={tipoAnuncio.idCategoria}>{tipoAnuncio.categoria1}</MenuItem>
                                             )
                                         }))}
                                     </Select>
@@ -153,9 +168,13 @@ export default function FiltroCatalogo() {
                                 <FormControl>
                                     <InputLabel>Distrito</InputLabel>
                                     <Select
+                                        value={distrito}
+                                        onChange={(e) => setDistrito(e.target.value)}
                                         labelId="demo-simple-select-label"
                                         label="Bairro"
                                     >
+                                        <MenuItem value=''>Indiferente</MenuItem>
+
                                         {BairrosList.map((bairro => {
                                             return (
                                                 <MenuItem key={bairro.id} value={bairro.nome}>{bairro.nome}</MenuItem>
@@ -174,9 +193,11 @@ export default function FiltroCatalogo() {
                                 <FormControl >
                                     <InputLabel>Quartos</InputLabel>
                                     <Select
+                                        value={minQuartos}
+                                        onChange={(e) => setMinQuartos(e.target.value)}
                                         labelId="demo-simple-select-label"
-                                        label="Quartos"
                                     >
+                                        <MenuItem value={0}>Indiferente</MenuItem>
                                         <MenuItem value={1}>1</MenuItem>
                                         <MenuItem value={2}>2</MenuItem>
                                         <MenuItem value={3}>3</MenuItem>
@@ -186,9 +207,11 @@ export default function FiltroCatalogo() {
                                 <FormControl >
                                     <InputLabel>Salas</InputLabel>
                                     <Select
+                                        value={minSalas}
+                                        onChange={(e) => setMinSalas(e.target.value)}
                                         labelId="demo-simple-select-label"
-                                        label="Quartos"
                                     >
+                                        <MenuItem value={0}>Indiferente</MenuItem>
                                         <MenuItem value={1}>1</MenuItem>
                                         <MenuItem value={2}>2</MenuItem>
                                         <MenuItem value={3}>3</MenuItem>
@@ -197,9 +220,11 @@ export default function FiltroCatalogo() {
                                 <FormControl >
                                     <InputLabel>Cozinhas</InputLabel>
                                     <Select
+                                        value={minCozinhas}
+                                        onChange={(e) => setMinCozinhas(e.target.value)}
                                         labelId="demo-simple-select-label"
-                                        label="Quartos"
                                     >
+                                        <MenuItem value={0}>Indiferente</MenuItem>
                                         <MenuItem value={1}>1</MenuItem>
                                         <MenuItem value={2}>2</MenuItem>
                                         <MenuItem value={3}>3</MenuItem>
@@ -208,9 +233,12 @@ export default function FiltroCatalogo() {
                                 <FormControl >
                                     <InputLabel>Banheiros</InputLabel>
                                     <Select
+                                        value={minBanheiros}
+                                        onChange={(e) => setMinBanheiros(e.target.value)}
                                         labelId="demo-simple-select-label"
                                         label="Quartos"
                                     >
+                                        <MenuItem value={0}>Indiferente</MenuItem>
                                         <MenuItem value={1}>1</MenuItem>
                                         <MenuItem value={2}>2</MenuItem>
                                         <MenuItem value={3}>3</MenuItem>
@@ -225,7 +253,11 @@ export default function FiltroCatalogo() {
 
                         </div>
 
-                        <div onClick={handleChangeBar} id="closeBar" className="row centrado alinhado">
+                        <div onClick={() => {
+                            handleChangeBar()
+                            filtrarImoveis()
+                            dispatch({ type: 'update' })
+                        }} id="closeBar" className="row centrado alinhado">
                             <img id="btn_close_modal" alt='botão de fechamento da barra de filtragem' src={CloseBar} />
                         </div>
 
@@ -236,7 +268,7 @@ export default function FiltroCatalogo() {
                 <div className="barra_ordem row alinhado espacado container">
                     <h2>Imóveis recomendados</h2>
 
-                    <button id="filtrar" onClick={handleChangeBar} className="btnPressionavel">Filtrar</button>
+                    <button id="filtrar" onClick={() => { handleChangeBar() }} className="btnPressionavel">Filtrar</button>
                 </div>
             </div>
         </div>

@@ -23,15 +23,15 @@ axios.defaults.baseURL = 'http://localhost:5000/api/'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
-    <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route path="Entrar" element={<Login />} />
-      <Route path="Cadastrar" element={<Cadastro />} />
-      <Route path="Catalogo/:idTipoAnuncio" element={<CatalogoVenda />} />
-      <Route path="Info/:id" element={<ViewItem />} />
-      <Route path="Cadastrar/Imovel" element={<CadastroImmo />} />
-      <Route path="Auditoria/Posts" element={<AuditoriaPosts />} />
-    </Routes>
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="Entrar" element={<Login />} />
+        <Route path="Cadastrar" element={<Cadastro />} />
+        <Route path="Catalogo/:idTipoAnuncio" element={<CatalogoVenda />} />
+        <Route path="Info/:id" element={<ViewItem />} />
+        <Route path="Cadastrar/Imovel" element={<CadastroImmo />} />
+        <Route path="Auditoria/Posts" element={<AuditoriaPosts />} />
+      </Routes>
   </BrowserRouter>
 );
 

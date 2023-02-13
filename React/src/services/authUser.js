@@ -19,6 +19,6 @@ export function setToken(token) {
     localStorage.setItem('usuario-login', token)
 }
 
-export function deleteToken() {
-    localStorage.clear()
+export function deleteToken() { 
+    localStorage.clear('usuario-login')
 }

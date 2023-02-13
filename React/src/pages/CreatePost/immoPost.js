@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { Checkbox, FormControlLabel, FormGroup, FormLabel, MenuItem, Select, FormControl, InputLabel, TextField, ImageList, ImageListItem } from '@mui/material'
 
 import Footer from '../../components/footer.js'
@@ -38,6 +38,58 @@ export default function CadastroImmo() {
     const [isUpdatedImgs, setImgsUpdated] = useState(false)
     const [hasPulledSelects, setPulled] = useState(false)
     const navigate = useNavigate();
+
+    const [ExtraInfos, setStates] = useState([
+        {
+            name: 'quartos',
+            value: ''
+        },
+        {
+            name: 'salas',
+            value: ''
+        },
+        {
+            name: 'cozinhas',
+            value: ''
+        },
+        {
+            name: 'banheiros',
+            value: ''
+        },
+        {
+            name: 'garagem',
+            value: ''
+        }
+    ])
+
+    function getExtraInfos(stateName) {
+        return (
+            (ExtraInfos.find(function (e) {
+                if (e.name == stateName) {
+                    if (e.value != undefined) {
+                        return (e.value)
+                    }
+                    else {
+                        return (0)
+                    }
+                }
+            }))
+        )
+    }
+
+    function setExtraInfos(stateName, newValue) {
+        var statesAtualizados = ExtraInfos;
+        setStates(ExtraInfos.filter(function (state) {
+            if (state.name == stateName) {
+                statesAtualizados.filter(function (e) {
+                    if (e.name == stateName) {
+                        e.value = newValue;
+                    }
+                })
+            }
+            return statesAtualizados;
+        }))
+    }
 
     const getMainImg = () => {
         var imgElement = document.getElementById('imgPrincipal');
@@ -112,7 +164,6 @@ export default function CadastroImmo() {
 
     const Sugerir = (event) => {
         event.preventDefault();
-
         var formData = new FormData();
         const element = document.getElementById('imgPrincipal')
         const imgPrincipal = element.files[0];
@@ -139,25 +190,20 @@ export default function CadastroImmo() {
             var stringJson = JSON.stringify(
                 [{
                     idTipoInfo: '1',
-                    quantidade: Quartos
+                    quantidade: getExtraInfos('quartos').value
                 },
                 {
                     idTipoInfo: '2',
-                    quantidade: Salas
+                    quantidade: getExtraInfos('salas').value
                 },
                 {
                     idTipoInfo: '3',
-                    quantidade: Cozinhas
+                    quantidade: getExtraInfos('cozinhas').value
                 },
                 {
                     idTipoInfo: '4',
-                    quantidade: Banheiros
-                },
-                {
-                    idTipoInfo: '5',
-                    quantidade: Garagem
-                }
-                ]
+                    quantidade: getExtraInfos('banheiros').value
+                }]
             )
 
             var idImovel = response.data.idImovel;
@@ -193,23 +239,25 @@ export default function CadastroImmo() {
     useEffect(() => {
         PullSelects()
         getImagesFiles()
-    }, [ListImgs])
+    }, [])
 
+    // Verificar ExtraInfos
     return (
         <div className='background_immo'>
 
             <div className='suport_immo container'>
 
-                <form onSubmit={Sugerir} className='form-post'>
+                <form onSubmit={Sugerir} name="Cadastro" className='form-post'>
                     <section className='column side-box'>
                         <h1 id='post-tittle'>Cadastrar Imóvel</h1>
 
-                        <div className='labed-input'><TextField value={Titulo} onChange={(e) => setTitulo(e.target.value)} label="Título da publicação" variant="outlined" /></div>
+                        <div className='labed-input'><TextField name='Título' value={Titulo} onChange={(e) => setTitulo(e.target.value)} label="Título da publicação" variant="outlined" /></div>
                         <div className='labed-input double-input row espacado'>
 
                             <FormControl required className='immo_rooms'>
                                 <InputLabel>Categoria</InputLabel>
                                 <Select
+                                    name='Categoria'
                                     value={TipoAnuncio}
                                     onChange={(e) => setTipoAnuncio(e.target.value)}
                                     labelId="demo-simple-select-label"
@@ -226,6 +274,7 @@ export default function CadastroImmo() {
                             <FormControl required className='immo_rooms'>
                                 <InputLabel>Tipo de Imóvel</InputLabel>
                                 <Select
+                                    name='Tipo de Imóvel'
                                     value={CategoriaPropriedade}
                                     onChange={(e) => setCategoriaPropriedade(e.target.value)}
                                     labelId="demo-simple-select-label"
@@ -244,6 +293,7 @@ export default function CadastroImmo() {
                             <FormControl required>
                                 <InputLabel>Distrito</InputLabel>
                                 <Select
+                                    name='Distrito'
                                     value={Bairro}
                                     onChange={(e) => setBairro(e.target.value)}
                                 >
@@ -258,31 +308,31 @@ export default function CadastroImmo() {
                         </div>
 
                         <div id='immo' className='labed-input double-input row espacado'>
-                            <TextField value={IPTU} label="IPTU" onChange={(e) => setIPTU(e.target.value)} />
+                            <TextField name='IPTU' value={IPTU} label="IPTU" onChange={(e) => setIPTU(e.target.value)} />
 
-                            <TextField value={Condominio} label="Condomínio" onChange={(e) => setCondominio(e.target.value)} />
+                            <TextField name='Condomínio' value={Condominio} label="Condomínio" onChange={(e) => setCondominio(e.target.value)} />
                         </div>
 
                         <div id='immo' className='labed-input double-input row espacado'>
-                            <TextField value={Terreno} required label="Terreno" onChange={(e) => setTerreno(e.target.value)} />
+                            <TextField name='Terreno' value={Terreno} required label="Terreno" onChange={(e) => setTerreno(e.target.value)} />
 
-                            <TextField value={AreaConstruida} required label="Construído" onChange={(e) => setAreaConstruida(e.target.value)} />
+                            <TextField name='Construído' value={AreaConstruida} required label="Construído" onChange={(e) => setAreaConstruida(e.target.value)} />
                         </div>
 
                         {TipoAnuncio == 1 ?
                             <div id='immo' className='labed-input double-input row espacado'>
-                                <TextField value={Valor} required label="Preço" onChange={(e) => setValor(e.target.value)} />
-                                <TextField value={Aluguel} disabled label="Não aplicável" onChange={(e) => setAluguel(e.target.value)} />
+                                <TextField name='Valor' value={Valor} required label="Preço" onChange={(e) => setValor(e.target.value)} />
+                                <TextField name='Aluguel' value={Aluguel} disabled label="Não aplicável" onChange={(e) => setAluguel(e.target.value)} />
                             </div>
                             : TipoAnuncio == 2 ?
                                 <div id='immo' className='labed-input double-input row espacado'>
-                                    <TextField value={Valor} disabled label="Não aplicável" onChange={(e) => setValor(e.target.value)} />
-                                    <TextField value={Aluguel} required label="Aluguel" onChange={(e) => setAluguel(e.target.value)} />
+                                    <TextField name='Valor' value={Valor} disabled label="Não aplicável" onChange={(e) => setValor(e.target.value)} />
+                                    <TextField name='Aluguel' value={Aluguel} required label="Aluguel" onChange={(e) => setAluguel(e.target.value)} />
                                 </div>
                                 :
                                 <div id='immo' className='labed-input double-input row espacado'>
-                                    <TextField value={Valor} required label="Preço" onChange={(e) => setValor(e.target.value)} />
-                                    <TextField value={Aluguel} required label="Aluguel" onChange={(e) => setAluguel(e.target.value)} />
+                                    <TextField name='Valor' value={Valor} required label="Preço" onChange={(e) => setValor(e.target.value)} />
+                                    <TextField name='Aluguel' value={Aluguel} required label="Aluguel" onChange={(e) => setAluguel(e.target.value)} />
                                 </div>
                         }
 
@@ -292,8 +342,9 @@ export default function CadastroImmo() {
                             <FormControl className='immo_rooms'>
                                 <InputLabel>Quartos</InputLabel>
                                 <Select
-                                    value={Quartos}
-                                    onChange={(e) => setQuartos(e.target.value)}
+                                    name='Quartos'
+                                    value={getExtraInfos('quartos')}
+                                    onChange={(e) => setExtraInfos('quartos', e.target.value)}
                                 >
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -303,8 +354,9 @@ export default function CadastroImmo() {
                             <FormControl className='immo_rooms'>
                                 <InputLabel>Salas</InputLabel>
                                 <Select
-                                    value={Salas}
-                                    onChange={(e) => setSalas(e.target.value)}
+                                    name='Salas'
+                                    value={getExtraInfos('salas')}
+                                    onChange={(e) => setExtraInfos('salas', e.target.value)}
                                 >
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -314,8 +366,9 @@ export default function CadastroImmo() {
                             <FormControl className='immo_rooms'>
                                 <InputLabel>Cozinhas</InputLabel>
                                 <Select
-                                    value={Cozinhas}
-                                    onChange={(e) => setCozinhas(e.target.value)}
+                                    name='Cozinhas'
+                                    value={getExtraInfos('cozinhas')}
+                                    onChange={(e) => setExtraInfos('cozinhas', e.target.value)}
                                 >
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -325,8 +378,9 @@ export default function CadastroImmo() {
                             <FormControl className='immo_rooms'>
                                 <InputLabel>Banheiros</InputLabel>
                                 <Select
-                                    value={Banheiros}
-                                    onChange={(e) => setBanheiros(e.target.value)}
+                                    name='Banheiros'
+                                    value={getExtraInfos('banheiros')}
+                                    onChange={(e) => setExtraInfos('banheiros', e.target.value)}
                                 >
                                     <MenuItem value={1}>1</MenuItem>
                                     <MenuItem value={2}>2</MenuItem>
@@ -335,14 +389,13 @@ export default function CadastroImmo() {
                             </FormControl>
                         </div>
 
-                        <TextField value={Descricao} inputProps={{ maxLength: 200 }} type="number" multiline label="Descrição do Imóvel" variant="outlined" onChange={(e) => setDescricao(e.target.value)} />
+                        <TextField name='Descricao' value={Descricao} inputProps={{ maxLength: 200 }} type="number" multiline label="Descrição do Imóvel" variant="outlined" onChange={(e) => setDescricao(e.target.value)} />
 
                     </section>
 
                     <section className='column espacado side-box' id='immo'>
 
-                        <div className='row extra-infos'>
-
+                        {/* <div className='row extra-infos'>
                             <FormGroup >
                                 <FormLabel component='legend'>Características</FormLabel>
                                 <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Academia" />
@@ -356,7 +409,7 @@ export default function CadastroImmo() {
                                 <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Aceita Pets" />
                                 <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Silencioso" />
                             </FormGroup>
-                        </div>
+                        </div> */}
 
                         <div id='img_immo_suport' className='row espacado alinhado'>
                             {MainImg == '' ?
@@ -387,7 +440,7 @@ export default function CadastroImmo() {
                             {ListImgs.map((item) => (
                                 <ImageListItem key={item.id} cols={1} rows={1}>
                                     <img
-                                        onClick={deleteImageInFiles}
+                                        // onClick={deleteImageInFiles}
                                         id={item.id}
                                         src={item.img}
                                         alt="Exemplar de foto do imóvel"
