@@ -21,7 +21,7 @@ main#catalogo {
 .item_img {
     width: 100%;
     height: auto;
-    max-height: 350px;
+    height: 350px;
     object-fit: initial;
     border-top-left-radius: var(--borda);
     border-top-right-radius: var(--borda);
@@ -91,6 +91,12 @@ h2#catalogo {
 .infos_right>span {
     color: black;
     text-align: end;
+}
+
+.suport_valor{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 #valor_catalogo {
@@ -166,8 +172,13 @@ h2#catalogo {
 
 #filterBar {
     height: 50%;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+}
+
+#empty-list{
+    display: flex;
+    justify-content: center;
 }
 
 .qnt-rooms {

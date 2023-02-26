@@ -395,7 +395,7 @@ export default function CadastroImmo() {
 
                     <section className='column espacado side-box' id='immo'>
 
-                        {/* <div className='row extra-infos'>
+                        <div className='row extra-infos'>
                             <FormGroup >
                                 <FormLabel component='legend'>Características</FormLabel>
                                 <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Academia" />
@@ -409,7 +409,7 @@ export default function CadastroImmo() {
                                 <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Aceita Pets" />
                                 <FormControlLabel control={<Checkbox id='checkbox-label' />} label="Silencioso" />
                             </FormGroup>
-                        </div> */}
+                        </div>
 
                         <div id='img_immo_suport' className='row espacado alinhado'>
                             {MainImg == '' ?

@@ -10,48 +10,100 @@ import '../assets/css/catalog.css'
 export default function FiltroCatalogo({ dispatch }) {
 
     const [maxValue, setMaxValue] = useState(0);
+    const [maxAluguel, setMaxAluguel] = useState(0);
     const [categoria, setCategoria] = useState(0);
     const [distrito, setDistrito] = useState('');
     const [minQuartos, setMinQuartos] = useState(0);
     const [minBanheiros, setMinBanheiros] = useState(0);
     const [minSalas, setMinSalas] = useState(0);
     const [minCozinhas, setMinCozinhas] = useState(0);
-    const [OrderStates, setOrderstates] = useState([0, 0]);
+    const [OrderStates, setOrderStates] = useState([1, 1]);
 
-    const [ImovelList, setImovelList] = useState([])
     const [isFilterVisible, setFilterVisible] = useState(false);
     const [hasPulledSelects, setPulled] = useState(false);
     const [BairrosList, setBairrosList] = useState([]);
     const [CategoriasList, setCategoriasList] = useState([]);
     const { idTipoAnuncio } = useParams();
 
-    function filtrarImoveis() {
-        let data = ImovelList;
-        if (maxValue > 0) {
-            data = data.filter(item => item.valor <= maxValue);
+    function filtrarImoveis(immoList) {
+        let states = OrderStates;
+
+        if (immoList !== undefined) {
+            let data = immoList;
+            if (maxValue > 0) {
+                data = data.filter(item => item.valor <= maxValue || item.valor === undefined);
+            }
+            if (maxAluguel > 0) {
+                data = data.filter(item => item.aluguel <= maxAluguel || item.aluguel === undefined);
+            }
+            if (categoria > 0) {
+                data = data.filter(item => item.idCategoria === categoria);
+            }
+            if (distrito !== '') {
+                data = data.filter(item => item.bairro === distrito);
+            }
+
+            // data.forEach(element => {
+            //     element.informacoesAdicionais.forEach(infosList => {
+            //         switch (infosList.idTipoInfo) {
+            //             case 1:
+            //                 data = data.filter(infosList.quantidade >= minQuartos);
+            //                 break;
+            //             case 2:
+            //                 data = data.filter(infosList.quantidade >= minBanheiros);
+            //                 break;
+            //             case 3:
+            //                 data = data.filter(infosList.quantidade >= minSalas);
+            //                 break;
+            //             case 4:
+            //                 data = data.filter(infosList.quantidade >= minCozinhas);
+            //                 break;
+            //             default:
+            //                 break;
+            //         }
+            //     })
+            // });
+
+            
+            if (states[0] === 1) {
+                data = data.sort(function (a, b) {
+                    if (a.valor > b.valor) {
+                        return 1;
+                    }
+                    else if (a.valor < b.valor) {
+                        return -1
+                    }
+                    else {
+                        return 0;
+                    }
+                })
+            }
+            else {
+                data = data.sort();
+            }
+
+            if (states[1] === 1) {
+                data = data.sort(function (a, b) {
+                    if (a.terreno > b.terreno) {
+                        return -1;
+                    }
+                    else if (a.terreno < b.terreno) {
+                        return 1
+                    }
+                    else {
+                        return 0;
+                    }
+                })
+            }
+            else {
+                data = data.sort();
+            }
+
+            localStorage.setItem('immo-list',
+                JSON.stringify(data)
+            )
+            dispatch({ type: 'update' })
         }
-        if (categoria > 0) {
-            data = data.filter(item => item.idCategoria === categoria);
-        }
-        if (distrito !== '') {
-            data = data.filter(item => item.bairro === distrito);
-        }
-        // if (minQuartos > 0) {
-        //     data = data.filter(item => item.Quartos >= minQuartos);
-        // }
-        // if (minBanheiros > 0) {
-        //     data = data.filter(item => item.banheiros >= minBanheiros);
-        // }
-        // if (minSalas > 0) {
-        //     data = data.filter(item => item.salas >= minSalas);
-        // }
-        // if (minCozinhas > 0) {
-        //     data = data.filter(item => item.cozinhas >= minCozinhas);
-        // }
-        localStorage.setItem('immo-list',
-            JSON.stringify(data)
-        )
-        dispatch({ type: 'update' })
     }
 
     async function PullSelects() {
@@ -73,11 +125,9 @@ export default function FiltroCatalogo({ dispatch }) {
         await axios.get('Imovel/ListarPorTipoAnuncio/1/' + idTipoAnuncio)
             .then(response => {
                 if (response.status === 200) {
-                    setImovelList(response.data)
-                    localStorage.setItem('immo-list', JSON.stringify(response.data))
+                    filtrarImoveis(response.data)
                 }
             });
-        dispatch({ type: 'update' });
     }
 
     const handleChangeFilter = (click) => {
@@ -92,7 +142,8 @@ export default function FiltroCatalogo({ dispatch }) {
             states[click.target.id] = 0;
             clickedFilter.remove('ordenarSelected');
         }
-        setOrderstates(states);
+        setOrderStates(states);
+        PullSelects()
     }
 
     const handleChangeBar = () => {
@@ -109,12 +160,8 @@ export default function FiltroCatalogo({ dispatch }) {
     }
 
     useEffect(() => {
-        filtrarImoveis()
-    }, [maxValue, categoria, distrito, minQuartos, minSalas, minCozinhas, minBanheiros])
-
-    useEffect(() => {
         PullSelects()
-    }, [idTipoAnuncio])
+    }, [idTipoAnuncio, maxValue, maxAluguel, categoria, distrito, minQuartos, minSalas, minCozinhas, minBanheiros])
 
     return (
         <div className="background_filter">
@@ -140,6 +187,26 @@ export default function FiltroCatalogo({ dispatch }) {
                                         <MenuItem value={300000}>R$300.000</MenuItem>
                                         <MenuItem value={400000}>R$400.000</MenuItem>
                                         <MenuItem value={500000}>R$500.000</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </div>
+
+                            <div className="labed-input">
+                                <FormControl>
+                                    <InputLabel>Aluguel Máximo</InputLabel>
+                                    <Select
+                                        value={maxAluguel}
+                                        onChange={(e) => setMaxAluguel(e.target.value)}
+                                        labelId="demo-simple-select-label"
+                                        label="Cozinhas"
+                                    >
+                                        <MenuItem value={0}>Indiferente</MenuItem>
+                                        <MenuItem value={1000}>R$1000</MenuItem>
+                                        <MenuItem value={1500}>R$1500</MenuItem>
+                                        <MenuItem value={2000}>R$2000</MenuItem>
+                                        <MenuItem value={2500}>R$2500</MenuItem>
+                                        <MenuItem value={3000}>R$3000</MenuItem>
+                                        <MenuItem value={5000}>R$5000</MenuItem>
                                     </Select>
                                 </FormControl>
                             </div>
@@ -247,8 +314,8 @@ export default function FiltroCatalogo({ dispatch }) {
                             </div>
 
                             <div id="ordenar" className="row">
-                                <button onClick={handleChangeFilter} id="0" className="btnPressionavel ordenar">Mais barato</button>
-                                <button onClick={handleChangeFilter} id="1" className="btnPressionavel ordenar last_option">Maior terreno</button>
+                                <button onClick={handleChangeFilter} id="0" className="btnPressionavel ordenar ordenarSelected">Mais barato</button>
+                                <button onClick={handleChangeFilter} id="1" className="btnPressionavel ordenar ordenarSelected last_option">Maior terreno</button>
                             </div>
 
                         </div>
@@ -266,7 +333,7 @@ export default function FiltroCatalogo({ dispatch }) {
                 </div>
 
                 <div className="barra_ordem row alinhado espacado container">
-                    <h2>Imóveis recomendados</h2>
+                    <h1>Imóveis recomendados</h1>
 
                     <button id="filtrar" onClick={() => { handleChangeBar() }} className="btnPressionavel">Filtrar</button>
                 </div>

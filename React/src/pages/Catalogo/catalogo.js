@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useReducer } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { imgRoot } from "../../services/api.js";
 import reducer from "../../services/reducer.js";
@@ -49,7 +49,7 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
                     }
                 });
         }
-        else {
+        else if (updates.count !== 0) {
             setImovelList(JSON.parse(localStorage.getItem('immo-list')))
         }
     }
@@ -85,8 +85,8 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
     }
 
     useEffect(() => {
-        BuscarImoveis()
         setidUsuario(getUserId())
+        BuscarImoveis()
     }, [Bairro, updates.count])
 
     return (
@@ -101,122 +101,138 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
             }
 
             <main id="catalogo">
-                <section className="apoio_conteudo_catalogo container row">
 
-                    {ImovelList.map((imovel => {
-                        return (
-                            <article key={imovel.idImovel} className="item_conteudo">
-                                {/* Imagem */}
-                                <div>
-                                    <img id={imovel.idImovel} className="item_img" alt='foto principal do imóvel' src={imgRoot + '/' + imovel.imgPrincipal} />
-                                </div>
-                                {/* Informacoes */}
-                                <div className="item_infos">
-                                    <h2 id="catalogo" >{imovel.titulo}</h2>
+                {
+                    ImovelList.length !== 0 ?
+                        <section className="apoio_conteudo_catalogo container row">
+                            {ImovelList.map((imovel => {
+                                return (
+                                    <article key={imovel.idImovel} className="item_conteudo">
+                                        {/* Imagem */}
+                                        <div>
+                                            <img id={imovel.idImovel} className="item_img" alt='foto principal do imóvel' src={imgRoot + '/' + imovel.imgPrincipal} />
+                                        </div>
+                                        {/* Informacoes */}
+                                        <div className="item_infos">
+                                            <h2 id="catalogo" >{imovel.titulo}</h2>
 
-                                    <div className="row apoio_infos">
-                                        {/* Esquerda */}
-                                        <div className="column infos_left">
+                                            <div className="row apoio_infos">
+                                                {/* Esquerda */}
+                                                <div className="column infos_left">
 
-                                            <div className="row descricao_imovel">
-                                                {imovel.informacoesAdicionais.map((info) => {
-                                                    return (
-                                                        info.idTipoInfo === 1 ?
-                                                            <div key={info.idTipoInfo} className="labed-img">
-                                                                <label>Quartos</label>
-                                                                <div className="block-img">
-                                                                    <img alt="Icone de uma cama" src={Quartos} />
-                                                                    <span>{info.quantidade}</span>
-                                                                </div>
-                                                            </div>
-                                                            : info.idTipoInfo === 2 ?
-                                                                <div key={info.idTipoInfo} className="labed-img">
-                                                                    <label>Salas</label>
-                                                                    <div className="block-img">
-                                                                        <img alt="Icone de um sofá" src={Salas} />
-                                                                        <span>{info.quantidade}</span>
-                                                                    </div>
-                                                                </div>
-                                                                : info.idTipoInfo === 3 ?
+                                                    <div className="row descricao_imovel">
+                                                        {imovel.informacoesAdicionais.map((info) => {
+                                                            return (
+                                                                info.idTipoInfo === 1 ?
                                                                     <div key={info.idTipoInfo} className="labed-img">
-                                                                        <label>Cozinhas</label>
+                                                                        <label>Quartos</label>
                                                                         <div className="block-img">
-                                                                            <img alt="Icone de um forno de cozinha" src={Cozinhas} />
+                                                                            <img alt="Icone de uma cama" src={Quartos} />
                                                                             <span>{info.quantidade}</span>
                                                                         </div>
                                                                     </div>
-                                                                    : info.idTipoInfo === 4 ?
+                                                                    : info.idTipoInfo === 2 ?
                                                                         <div key={info.idTipoInfo} className="labed-img">
-                                                                            <label>Banheiros</label>
+                                                                            <label>Salas</label>
                                                                             <div className="block-img">
-                                                                                <img alt="Icone de um chuveiro" src={Banheiros} />
+                                                                                <img alt="Icone de um sofá" src={Salas} />
                                                                                 <span>{info.quantidade}</span>
                                                                             </div>
                                                                         </div>
-                                                                        : <div key={info.idTipoInfo} className="labed-img">
-                                                                            <label>Vagas</label>
-                                                                            <div className="block-img">
-                                                                                <img alt="Icone de uma vaga de garagem" src={Garagem} />
-                                                                                <span>{info.quantidade}</span>
+                                                                        : info.idTipoInfo === 3 ?
+                                                                            <div key={info.idTipoInfo} className="labed-img">
+                                                                                <label>Cozinhas</label>
+                                                                                <div className="block-img">
+                                                                                    <img alt="Icone de um forno de cozinha" src={Cozinhas} />
+                                                                                    <span>{info.quantidade}</span>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                    )
-                                                })}
+                                                                            : info.idTipoInfo === 4 ?
+                                                                                <div key={info.idTipoInfo} className="labed-img">
+                                                                                    <label>Banheiros</label>
+                                                                                    <div className="block-img">
+                                                                                        <img alt="Icone de um chuveiro" src={Banheiros} />
+                                                                                        <span>{info.quantidade}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                : <div key={info.idTipoInfo} className="labed-img">
+                                                                                    <label>Vagas</label>
+                                                                                    <div className="block-img">
+                                                                                        <img alt="Icone de uma vaga de garagem" src={Garagem} />
+                                                                                        <span>{info.quantidade}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                            )
+                                                        })}
 
-                                                <div className="labed-img">
-                                                    <label>Terreno</label>
-                                                    <div className="block-img">
-                                                        <span>{imovel.terreno}m²</span>
+                                                        <div className="labed-img">
+                                                            <label>Terreno</label>
+                                                            <div className="block-img">
+                                                                <span>{imovel.terreno}m²</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="labed-img">
+                                                            <label>Construído</label>
+                                                            <div className="block-img">
+                                                                <span>{imovel.construido}m²</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className='row alinhado'>
+                                                        <img alt='Icone de local' src={Endereco}></img>
+                                                        <span id='local'>{imovel.bairro}</span>
                                                     </div>
                                                 </div>
-
-                                                <div className="labed-img">
-                                                    <label>Construído</label>
-                                                    <div className="block-img">
-                                                        <span>{imovel.construido}m²</span>
+                                                {/* Direita */}
+                                                <div className="column infos_right">
+                                                    {imovel.aluguel !== undefined && imovel.valor !== undefined ?
+                                                        <div className="suport_valor">
+                                                            <span style={{ textAlign: 'end' }} >Aluguel <span id="valor_catalogo">{imovel.aluguel?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}  </span></span>
+                                                            <span >Valor {imovel.valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                                                        </div>
+                                                        : imovel.valor === undefined ?
+                                                            <span id="valor_catalogo">{imovel.aluguel?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                                                            :
+                                                            <span id="valor_catalogo">{imovel.valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                                                    }
+                                                    {auditoria === true && main === false ?
+                                                        <div style={{ width: '100%' }}>
+                                                            <div style={{ margin: '6px 0' }} id="botao_vermais" >
+                                                                <button id={imovel.idImovel} onClick={DeletarImovel} className="btnPressionavel row alinhado">Deletar</button>
+                                                            </div>
+                                                            <div style={{ margin: '6px 0' }} id="botao_vermais" >
+                                                                <button id={imovel.idImovel} onClick={AprovarImovel} className="btnPressionavel row alinhado">Aprovar</button>
+                                                            </div>
+                                                        </div>
+                                                        : main === undefined && IdUsuario === 1 ?
+                                                            <div style={{ width: '100%', margin: '6px 0' }}>
+                                                                <button id={imovel.idImovel} style={{ width: '100%', margin: '2px 0' }} className="btnPressionavel row alinhado" onClick={RevisarImovel}>Revisar</button>
+                                                            </div>
+                                                            :
+                                                            null
+                                                    }
+                                                    <div id="botao_vermais" >
+                                                        <Link className="btnPressionavel row alinhado" to={{ pathname: '/Info/' + imovel.idImovel }} onClick={() => {
+                                                            window.location.replace();
+                                                        }}>Ver mais
+                                                        </Link>
                                                     </div>
                                                 </div>
-                                            </div>
-
-                                            <div className='row alinhado'>
-                                                <img alt='Icone de local' src={Endereco}></img>
-                                                <span id='local'>{imovel.bairro}</span>
                                             </div>
                                         </div>
+                                    </article>
+                                )
+                            }))}
 
-                                        {/* Direita */}
-                                        <div className="column infos_right">
-                                            <span id="valor_catalogo">{imovel.valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                                            {auditoria == true && main == false ?
-                                                <div style={{ width: '100%' }}>
-                                                    <div style={{ margin: '6px 0' }} id="botao_vermais" >
-                                                        <button id={imovel.idImovel} onClick={DeletarImovel} className="btnPressionavel row alinhado">Deletar</button>
-                                                    </div>
-                                                    <div style={{ margin: '6px 0' }} id="botao_vermais" >
-                                                        <button id={imovel.idImovel} onClick={AprovarImovel} className="btnPressionavel row alinhado">Aprovar</button>
-                                                    </div>
-                                                </div>
-                                                : main == undefined && IdUsuario == 1 ?
-                                                    <div style={{ width: '100%', margin: '6px 0' }}>
-                                                        <button id={imovel.idImovel} style={{ width: '100%', margin: '2px 0' }} className="btnPressionavel row alinhado" onClick={RevisarImovel}>Revisar</button>
-                                                    </div>
-                                                    :
-                                                    null
-                                            }
-                                            <div id="botao_vermais" >
-                                                <Link className="btnPressionavel row alinhado" to={{ pathname: '/Info/' + imovel.idImovel }} onClick={() => {
-                                                    window.location.replace();
-                                                }}>Ver mais
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        )
-                    }))}
+                        </section>
+                        :
+                        <section>
+                            <h2 id="empty-list">Não foi possível encontrar imóveis com os filtros aplicados</h2>
+                        </section>
+                }
 
-                </section>
             </main>
             {
                 main !== false ?
