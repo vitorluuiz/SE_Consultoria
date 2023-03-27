@@ -6,7 +6,7 @@ import { imgRoot } from '../../services/api';
 import axios from 'axios'
 import { motion } from 'framer-motion'
 
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import Header from '../../components/header'
 import Footer from '../../components/footer'
@@ -34,7 +34,6 @@ export default function ViewItem() {
     const [ImgsImovel, setImgsImovel] = useState([]);
     const [ExtraInfos, setExtraInfos] = useState([]);
     const [hasPulled, setPulled] = useState(false);
-    const [isAssinalado, setAssinalado] = useState(false);
 
     async function BuscarImoveis() {
         if (!hasPulled) {
@@ -50,42 +49,12 @@ export default function ViewItem() {
                     if (response.status === 200) {
                         setImovelInfos(response.data)
                         setExtraInfos(response.data.informacoesAdicionais)
+                        console.log(response.data)
                     }
                 })
             setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
             setPulled(true);
         }
-    }
-
-    function AssinalarImovel() {
-        if (localStorage.getItem('assinalados') !== null) {
-            let immoList = JSON.parse(localStorage.getItem('assinalados'))
-
-            if (!immoList.includes(Imovel)) {
-                immoList.push(Imovel)
-                localStorage.setItem('assinalados', JSON.stringify(immoList))
-            }
-        }
-        else {
-            localStorage.setItem('assinalados', '[' + JSON.stringify(Imovel) + ']')
-        }
-    }
-
-    function VerificarDuplicidade() {
-        const immoList = JSON.parse(localStorage.getItem('assinalados'))
-
-        if (!immoList.includes(Imovel)) {
-            setAssinalado(true)
-        }
-        else {
-            setAssinalado(false)
-        }
-    }
-
-    function RetirarAssinatura() {
-        let immoList = localStorage.getItem('assinalados')
-        console.log(immoList)
-
     }
 
     useEffect(() => {
@@ -208,12 +177,7 @@ export default function ViewItem() {
                         </div>
 
                         <span id='price'>Valor de venda {Imovel.valor?.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                        {
-                            isAssinalado === true ?
-                            <button id='assign-btn' onClick={AssinalarImovel} className='btnPressionavel'>Assinalar Imóvel</button>
-                            :
-                            <button id='assign-btn' onClick={RetirarAssinatura} className='btnPressionavel'>Remover assinatura</button>
-                        }
+                        <button id='assign-btn' className='btnPressionavel'>Assinalar interesse</button>
                     </div>
                 </div>
             </section >

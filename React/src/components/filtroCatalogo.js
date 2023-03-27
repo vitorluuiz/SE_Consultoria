@@ -64,7 +64,7 @@ export default function FiltroCatalogo({ dispatch }) {
             //     })
             // });
 
-
+            
             if (states[0] === 1) {
                 data = data.sort(function (a, b) {
                     if (a.valor > b.valor) {
@@ -98,7 +98,10 @@ export default function FiltroCatalogo({ dispatch }) {
             else {
                 data = data.sort();
             }
-            localStorage.setItem('immo-list', JSON.stringify(data))
+
+            localStorage.setItem('immo-list',
+                JSON.stringify(data)
+            )
             dispatch({ type: 'update' })
         }
     }
@@ -119,12 +122,12 @@ export default function FiltroCatalogo({ dispatch }) {
                 })
             setPulled(true);
         }
-            await axios.get('Imovel/ListarPorTipoAnuncio/1/' + idTipoAnuncio)
-                .then(response => {
-                    if (response.status === 200) {
-                        filtrarImoveis(response.data)
-                    }
-                });
+        await axios.get('Imovel/ListarPorTipoAnuncio/1/' + idTipoAnuncio)
+            .then(response => {
+                if (response.status === 200) {
+                    filtrarImoveis(response.data)
+                }
+            });
     }
 
     const handleChangeFilter = (click) => {

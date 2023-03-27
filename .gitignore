@@ -1,0 +1,26 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+React/node_modules
+React/.pnp
+React/.pnp.js
+
+# testing
+React/coverage
+
+# production
+React/build
+
+# misc
+React/.DS_Store
+React/.env.local
+React/.env.development.local
+React/.env.test.local
+React/.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+API/SE_WebAPI/StaticFiles/Images/*
+!API/SE_WebAPI/StaticFiles/Images/branca

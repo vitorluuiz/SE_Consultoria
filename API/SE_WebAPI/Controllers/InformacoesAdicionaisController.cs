@@ -59,6 +59,7 @@ namespace SE_WebAPI.Controllers
         {
             try
             {
+                
                 List<InformacoesAdicionai> newInfos = JsonConvert.DeserializeObject<List<InformacoesAdicionai>>(json.Json);
                 _informacoesAdicionaisRepository.CadastrarInfosDeImovel(idImovel, newInfos);
                 return StatusCode(201, newInfos);

@@ -17,7 +17,6 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import Assinalados from './pages/assinalados/assinalados.js';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/'
 
@@ -32,7 +31,6 @@ root.render(
         <Route path="Info/:id" element={<ViewItem />} />
         <Route path="Cadastrar/Imovel" element={<CadastroImmo />} />
         <Route path="Auditoria/Posts" element={<AuditoriaPosts />} />
-        <Route path="Assinalados" element={<Assinalados />} />
       </Routes>
   </BrowserRouter>
 );
