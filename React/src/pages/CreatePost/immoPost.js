@@ -23,13 +23,6 @@ export default function CadastroImmo() {
     const [AreaConstruida, setAreaConstruida] = useState('')
     const [Terreno, setTerreno] = useState('')
 
-
-    const [Quartos, setQuartos] = useState('')
-    const [Salas, setSalas] = useState('')
-    const [Cozinhas, setCozinhas] = useState('')
-    const [Banheiros, setBanheiros] = useState('')
-    const [Garagem, setGaragem] = useState('')
-
     const [MainImg, setMainImg] = useState('')
     const [ListImgs, setListImgs] = useState([])
     const [ListTipoAnuncio, setListTipoAnuncios] = useState([])
@@ -78,7 +71,7 @@ export default function CadastroImmo() {
     }
 
     function setExtraInfos(stateName, newValue) {
-        var statesAtualizados = ExtraInfos;
+        let statesAtualizados = ExtraInfos;
         setStates(ExtraInfos.filter(function (state) {
             if (state.name == stateName) {
                 statesAtualizados.filter(function (e) {
@@ -92,9 +85,9 @@ export default function CadastroImmo() {
     }
 
     const getMainImg = () => {
-        var imgElement = document.getElementById('imgPrincipal');
+        let imgElement = document.getElementById('imgPrincipal');
         if (imgElement.files.length == 1) {
-            var urlImg = URL.createObjectURL(imgElement.files[0])
+            let urlImg = URL.createObjectURL(imgElement.files[0])
             setMainImg(urlImg);
         }
     }
@@ -102,10 +95,10 @@ export default function CadastroImmo() {
     const getImagesFiles = () => {
         const imgsElement = document.getElementById('moreImgs');
         if (imgsElement.files.length != 0) {
-            var fileList = imgsElement.files
-            var urlImages = [];
+            let fileList = imgsElement.files
+            let urlImages = [];
             for (let index = 0; index < fileList.length; index++) {
-                var urlImage = {
+                let urlImage = {
                     id: index,
                     img: URL.createObjectURL(fileList[index])
                 }
@@ -120,9 +113,9 @@ export default function CadastroImmo() {
 
     // Não funcionando
     const deleteImageInFiles = (click) => {
-        var imgsElement = document.getElementById('moreImgs');
+        let imgsElement = document.getElementById('moreImgs');
         if (ListImgs.length != 0) {
-            var urlImages = ListImgs;
+            let urlImages = ListImgs;
             for (let index = 0; index < ListImgs.length; index++) {
                 if (index == click.target.id) {
                     urlImages.splice(index, 1)
@@ -164,7 +157,7 @@ export default function CadastroImmo() {
 
     const Sugerir = (event) => {
         event.preventDefault();
-        var formData = new FormData();
+        let formData = new FormData();
         const element = document.getElementById('imgPrincipal')
         const imgPrincipal = element.files[0];
 
@@ -187,7 +180,7 @@ export default function CadastroImmo() {
             headers: { "Content-Type": "multipart/form-data" }
         }).then(response => {
 
-            var stringJson = JSON.stringify(
+            let stringJson = JSON.stringify(
                 [{
                     idTipoInfo: '1',
                     quantidade: getExtraInfos('quartos').value
@@ -206,9 +199,9 @@ export default function CadastroImmo() {
                 }]
             )
 
-            var idImovel = response.data.idImovel;
+            let idImovel = response.data.idImovel;
 
-            var formImg = new FormData();
+            let formImg = new FormData();
             const element = document.getElementById('moreImgs')
             const imagens = element.files;
 
@@ -416,12 +409,12 @@ export default function CadastroImmo() {
                                 <label htmlFor='imgPrincipal' className='suport_img_immo background_img_immo column alinhado centrado'>
                                     <img alt='Icone de adicionar imagem principal' id='icone_branco' src={adicionarIcon} />
                                     <span>Adicionar foto principal*</span>
-                                    <input onInput={getMainImg} required id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
+                                    <input onInput={getMainImg} id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
                                 </label>
                                 :
                                 <label htmlFor='imgPrincipal' className='suport_img_immo background_img_immo column alinhado centrado'>
                                     <img alt='Icone de adicionar imagem principal' className='main-img' id='icone_branco' src={MainImg} />
-                                    <input onInput={getMainImg} required id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
+                                    <input onInput={getMainImg} id='imgPrincipal' type="file" accept="image/png; image/jpeg; image/jpg" className='flex alinhado centrado'></input>
                                 </label>
                             }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/header.js";
 
-import Catalogo from "../Catalogo/catalogo.js";
+import Catalogo from "../catalogo/catalogo.js";
 
 export default function AuditoriaPosts() {
     return (

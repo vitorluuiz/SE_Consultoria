@@ -1,26 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useReducer } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import React, { useEffect, useReducer, useState } from "react";
+import { Link } from "react-router-dom";
 import { imgRoot } from "../../services/api.js";
 import reducer from "../../services/reducer.js";
 
 import { getUserId } from "../../services/authUser.js";
 
-import Header from '../../components/header.js'
-import Footer from '../../components/footer.js'
 import Filtro from "../../components/filtroCatalogo.js";
+import Footer from '../../components/footer.js';
+import Header from '../../components/header.js';
 
-import Quartos from '../../assets/img/icones/bed-room.png'
-import Salas from '../../assets/img/icones/chair.png'
-import Cozinhas from '../../assets/img/icones/cook.png'
-import Banheiros from '../../assets/img/icones/shower.png'
-import Garagem from '../../assets/img/icones/garage.png'
-import Endereco from '../../assets/img/icones/local.png'
+import Quartos from '../../assets/img/icones/bed-room.png';
+import Salas from '../../assets/img/icones/chair.png';
+import Cozinhas from '../../assets/img/icones/cook.png';
+import Garagem from '../../assets/img/icones/garage.png';
+import Endereco from '../../assets/img/icones/local.png';
+import Banheiros from '../../assets/img/icones/shower.png';
 
-import '../../assets/css/catalog.css'
+import '../../assets/css/catalog.css';
 
-export default function CatalogoVenda({ main, auditoria, idException, bairro }) {
+export default function CatalogoVenda({ main, auditoria, idException, bairro, assinalados }) {
 
     const updateStage = {
         count: 0
@@ -49,7 +48,10 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
                     }
                 });
         }
-        else if (updates.count !== 0) {
+        else if (assinalados === true) {
+            setImovelList(JSON.parse(localStorage.getItem('assinalados')))
+        }
+        else {
             setImovelList(JSON.parse(localStorage.getItem('immo-list')))
         }
     }
@@ -94,14 +96,18 @@ export default function CatalogoVenda({ main, auditoria, idException, bairro }) 
             {main !== false ?
                 <div>
                     <Header />
-                    <Filtro imovelist={{ ImovelList }} dispatch={dispatch} />
+                    {
+                        assinalados === true ?
+                            null
+                            :
+                            <Filtro dispatch={dispatch} />
+                    }
                 </div>
                 :
                 null
             }
 
             <main id="catalogo">
-
                 {
                     ImovelList.length !== 0 ?
                         <section className="apoio_conteudo_catalogo container row">

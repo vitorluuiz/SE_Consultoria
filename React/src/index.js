@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 
-import Home from './pages/Home/Home.js';
-import Login from './pages/LoginCadastro/Login.js'
-import Cadastro from './pages/LoginCadastro/Cadastro.js';
-import CatalogoVenda from './pages/Catalogo/catalogo';
+import Home from './pages/home/home.js';
+import Login from './pages/loginCadastro/login.js'
+import Cadastro from './pages/loginCadastro/cadastro.js';
+import CatalogoVenda from './pages/catalogo/catalogo';
 import ViewItem from './pages/viewItem/viewItem';
-import CadastroImmo from './pages/CreatePost/immoPost.js';
-import AuditoriaPosts from './pages/Administrativo/auditoriaPosts.js';
+import CadastroImmo from './pages/createPost/immoPost.js';
+import AuditoriaPosts from './pages/administrativo/auditoriaPosts.js';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -17,6 +17,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import Assinalados from './pages/assinalados/assinalados.js';
 
 axios.defaults.baseURL = 'http://localhost:5000/api/'
 
@@ -31,6 +32,7 @@ root.render(
         <Route path="Info/:id" element={<ViewItem />} />
         <Route path="Cadastrar/Imovel" element={<CadastroImmo />} />
         <Route path="Auditoria/Posts" element={<AuditoriaPosts />} />
+        <Route path="Assinalados" element={<Assinalados />} />
       </Routes>
   </BrowserRouter>
 );
