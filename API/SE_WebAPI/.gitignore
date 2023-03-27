@@ -1,2 +1,2 @@
-/StaticFiles/Images/*
-!/StaticFiles/Images/brancaSimples.png
+StaticFiles/Images/*
+!StaticFiles/Images/brancaSimples.png
